@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 		else
 
 			flash[:alert] = "Unable to register account, check details and retry!"
-			redirect_to '/sign_up'
+			render :new
 
 		end
 
