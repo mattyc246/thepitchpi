@@ -528,3 +528,12 @@ Processing by Clearance::UsersController#new as HTML
 Completed 200 OK in 19ms (Views: 18.2ms | ActiveRecord: 0.0ms)
 
 
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+Started GET "/sign_up" for 127.0.0.1 at 2018-10-07 16:45:58 +0800
+Processing by Clearance::UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (8.9ms)
+  Rendered users/new.html.erb within layouts/application (11.1ms)
+Completed 200 OK in 50ms (Views: 26.6ms | ActiveRecord: 7.6ms)
+
+

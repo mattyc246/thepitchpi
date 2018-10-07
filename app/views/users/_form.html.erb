@@ -1,6 +1,11 @@
 <div class="text-field">
+  <%= form.label :full_name %>
+  <%= form.text_field :name, placeholder:"John Smith" %>
+</div>
+
+<div class="text-field">
   <%= form.label :email %>
-  <%= form.text_field :email, type: 'email' %>
+  <%= form.text_field :email, type: 'email', placeholder:"john@smith.com" %>
 </div>
 
 <div class="password-field">
