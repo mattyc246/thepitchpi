@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+
   get 'welcome/index'
   root 'welcome#index'
 
-  ##### Clearance Routes - Overwritten #####
 
+  ##### Clearance Routes - Overwritten #####
+  resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]
 
@@ -11,6 +13,7 @@ Rails.application.routes.draw do
     resource :password,
       controller: "clearance/passwords",
       only: [:create, :edit, :update]
+      resources :locks, only: [:new, :create, :show, :edit, :destroy, :index]
   end
 
   get "/sign_in" => "clearance/sessions#new", as: "sign_in"
