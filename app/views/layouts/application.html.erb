@@ -46,13 +46,11 @@
       </div>
     </div>
   </nav>
-  <div class="alert alert-warning" role="alert">
-    <div id="flash">
-      <% flash.each do |key, value| -%>
-        <div id="flash_<%= key %>"><%=h value %></div>
-      <% end %>
-    </div>
+  <% flash.each do |key, value| %>
+    <div class="alert alert-warning" role="alert">
+    <%= value %>
   </div>
+  <% end %>
   
 
   <%= yield %>
