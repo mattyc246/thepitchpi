@@ -24,11 +24,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <% if signed_in? -%>
-          <a class="nav-item nav-link" href="#">Home</a>
-          <a class="nav-item nav-link" href="#">Features</a>
-          <a class="nav-item nav-link" href="#">Pricing</a>
-          <a class="nav-item nav-link" href="#">Disabled</a>
+        <% if signed_in? && current_user.subscription_status? -%>
+          <a class="nav-item nav-link" href="#">Lock Management</a>
+          <a class="nav-item nav-link" href="#">Add New Lock</a>
+          <a class="nav-item nav-link" href="#">View Profile</a>
+          <a class="nav-item nav-link" href="#"></a>
+          <%= button_to t(".sign_out"), sign_out_path, method: :delete, class:"btn btn-outline-dark" %>
+        <% elsif signed_in? -%>
           <%= button_to t(".sign_out"), sign_out_path, method: :delete, class:"btn btn-outline-dark" %>
         <% else -%>
           <%= link_to t(".sign_in"), sign_in_path, class:"btn btn-outline-dark" %>
