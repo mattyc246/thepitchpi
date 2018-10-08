@@ -29,19 +29,23 @@ body {
 }
 
 .sign-up{
-
-	height: 75%; 
+ 
 	width: 50%;
 }
 
 .sign-in{
-
-	height: 75%; 
+ 
 	width: 50%;
 }
 
 .password-reset{
-
-	height: 75%; 
+ 
 	width: 50%;
+}
+
+.child {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
