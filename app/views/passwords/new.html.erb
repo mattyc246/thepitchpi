@@ -1,4 +1,4 @@
-<div id="clearance" class="password-reset">
+<div id="clearance" class="password-reset mx-auto text-center bg-form-custom border rounded shadow-lg p-3">
   <h2><%= t(".title") %></h2>
 
   <p><%= t(".description") %></p>
@@ -6,7 +6,7 @@
   <%= form_for :password, url: passwords_path do |form| %>
     <div class="text-field">
       <%= form.label :email %>
-      <%= form.text_field :email, type: 'email' %>
+      <%= form.text_field :email, type: 'email', class:"form-control mx-auto w-50" %>
     </div>
 
     <div class="submit-field">
