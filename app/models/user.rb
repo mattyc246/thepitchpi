@@ -3,7 +3,7 @@ class User < ApplicationRecord
 
 	validates :email, presence: true, uniqueness: true, format: {with:  /(\w+)@(\w+).(\w{2,})/, message: "Invalid Email Address"}
 	validates :name, presence: true
-	validates :password, presence: true, length: {in: 8..20}
+	validates :password, length: {in: 8..20}
 	after_initialize :set_membership, on: [:create]
 
 

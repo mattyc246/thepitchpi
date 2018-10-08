@@ -1,16 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+  <!-- Bootstrap CDN -->
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+  <!-- Rails JS & CSS Tags -->
+
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tag %>
 </head>
 <body>
+  <!-- Navbar to be used across the app -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+    <a class="navbar-brand" href="#">Lock N Roll</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <% if signed_in? && current_user.subscription_status? -%>
+          <a class="nav-item nav-link" href="#">Lock Management</a>
+          <a class="nav-item nav-link" href="#">Add New Lock</a>
+          <a class="nav-item nav-link" href="#">View Profile</a>
+          <a class="nav-item nav-link" href="#"></a>
+          <%= button_to t(".sign_out"), sign_out_path, method: :delete, class:"btn btn-outline-dark" %>
+        <% elsif signed_in? -%>
+          <%= button_to t(".sign_out"), sign_out_path, method: :delete, class:"btn btn-outline-dark" %>
+        <% else -%>
+          <%= link_to t(".sign_in"), sign_in_path, class:"btn btn-outline-dark" %>
+        <% end -%>
+      </div>
+    </div>
+  </nav>
   <div id="header">
-    <% if signed_in? -%>
-      <%= button_to t(".sign_out"), sign_out_path, method: :delete %>
-    <% else -%>
-      <%= link_to t(".sign_in"), sign_in_path %>
-    <% end -%>
   </div>
   
   <div id="flash">
