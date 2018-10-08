@@ -537,3 +537,76 @@ Processing by Clearance::UsersController#new as HTML
 Completed 200 OK in 50ms (Views: 26.6ms | ActiveRecord: 7.6ms)
 
 
+Started POST "/users" for 127.0.0.1 at 2018-10-07 16:48:24 +0800
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"[FILTERED]", "user"=>{"name"=>"Alice Johnsson", "email"=>"alice@johnsson.com", "password"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:13
+  [1m[36mUser Exists (1.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "alice@johnsson.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:13
+  [1m[36mCACHE User Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "alice@johnsson.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:13
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "name", "email", "subscription_status", "encrypted_password", "remember_token") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["created_at", "2018-10-07 08:48:24.912934"], ["updated_at", "2018-10-07 08:48:24.912934"], ["name", "Alice Johnsson"], ["email", "alice@johnsson.com"], ["subscription_status", false], ["encrypted_password", "$2a$10$0eYbjZB5bdkE219KXJxWo.G8lwgYKvwrykvByBYvUXqBLuPQMaYT6"], ["remember_token", "14d4b4b5a6f3c746e9b5da4709dabfc6dae659bf"]]
+  ↳ app/controllers/users_controller.rb:13
+  [1m[35m (27.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:13
+Redirected to http://localhost:3000/
+Completed 302 Found in 107ms (ActiveRecord: 29.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-10-07 16:48:24 +0800
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 17ms (Views: 15.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/sign_in" for 127.0.0.1 at 2018-10-07 16:48:27 +0800
+Processing by Clearance::SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/_form.html.erb (3.1ms)
+  Rendered sessions/new.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 22ms (Views: 20.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/session" for 127.0.0.1 at 2018-10-07 16:48:36 +0800
+Processing by Clearance::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"[FILTERED]", "session"=>{"email"=>"alice@johnsson.com", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "alice@johnsson.com"], ["LIMIT", 1]]
+  ↳ /home/matthew/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+Redirected to http://localhost:3000/
+Completed 302 Found in 75ms (ActiveRecord: 0.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-10-07 16:48:36 +0800
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (0.5ms)
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."remember_token" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["remember_token", "14d4b4b5a6f3c746e9b5da4709dabfc6dae659bf"], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:9
+Completed 200 OK in 20ms (Views: 17.7ms | ActiveRecord: 0.9ms)
+
+
+Started DELETE "/sign_out" for 127.0.0.1 at 2018-10-07 16:48:38 +0800
+Processing by Clearance::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."remember_token" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["remember_token", "14d4b4b5a6f3c746e9b5da4709dabfc6dae659bf"], ["LIMIT", 1]]
+  ↳ /home/matthew/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ /home/matthew/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Update (0.6ms)[0m  [1m[33mUPDATE "users" SET "remember_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["remember_token", "f84ec2e52ad5234c1949d759a583fc9e1e2fe027"], ["updated_at", "2018-10-07 08:48:38.495871"], ["id", 2]]
+  ↳ /home/matthew/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+  [1m[35m (16.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /home/matthew/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+Redirected to http://localhost:3000/sign_in
+Completed 302 Found in 23ms (ActiveRecord: 17.5ms)
+
+
+Started GET "/sign_in" for 127.0.0.1 at 2018-10-07 16:48:38 +0800
+Processing by Clearance::SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/_form.html.erb (2.1ms)
+  Rendered sessions/new.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 18ms (Views: 17.3ms | ActiveRecord: 0.0ms)
+
+
