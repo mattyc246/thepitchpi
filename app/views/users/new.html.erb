@@ -1,11 +1,11 @@
-<div id="clearance" class="sign-up mx-auto text-center bg-form-custom">
+<div id="clearance" class="sign-up mx-auto text-center bg-form-custom border rounded shadow p-3">
   <h2><%= t(".title") %></h2>
 
   <%= form_for @user do |form| %>
     <%= render partial: '/users/form', object: form %>
 
     <div class="submit-field">
-      <%= form.submit class:"btn btn-outline-sucess" %>
+      <%= form.submit "Sign Up", class:"btn btn-outline-success" %>
     </div>
 
     <div class="other-links">
