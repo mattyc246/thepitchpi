@@ -1,9 +1,21 @@
-<h1> Welcome to the App </h1>
-
-<p>hello it's boon tek</p>
+<% if current_user && @user.subscription_status == true %>
 
 
-<p>This is Note</p>
+<% elsif current_user && @user.subscription_status == false %>
 
-<p>hello it's Kendall</p>
+	<h1 class="text-center text-light">Welcome back <%= @user.name %></h1>
+
+<% else %>
+	
+	<div class="text-center w-50 h-50 my-auto shadow-lg child bg-form-custom border rounded p-3">
+	  <div class="child">
+		<h1 class="text-light">Welcome to Lock N Roll!</h1>
+		<h3 class="text-light">
+			Please login to gain access to your account!
+		</h3>
+		<h1 class="text-light"><i class="fas fa-lock"></i></h1>
+	  </div>
+	</div>
+
+<% end %>
 
