@@ -1,12 +1,12 @@
 <%= form_for :session, url: session_path do |form| %>
   <div class="text-field">
     <%= form.label :email %>
-    <%= form.text_field :email, type: 'email' %>
+    <%= form.text_field :email, type: 'email', placeholder:"johnsmith@example.com" %>
   </div>
 
   <div class="password-field">
     <%= form.label :password %>
-    <%= form.password_field :password %>
+    <%= form.password_field :password, placeholder:"********" %>
   </div>
 
   <div class="submit-field">

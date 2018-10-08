@@ -26,7 +26,13 @@ body {
 	background-color: rgb(81, 90, 78);
 }
 
-.sign-up {
+.sign-up{
+
+	height: 75%; 
+	width: 50%;
+}
+
+.sign-in{
 
 	height: 75%; 
 	width: 50%;
