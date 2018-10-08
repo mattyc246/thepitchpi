@@ -26,7 +26,7 @@
 <body class="text-light">
   <!-- Navbar to be used across the app -->
   <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
-    <a class="navbar-brand text-light" href="#">Lock N Roll</a>
+    <a class="navbar-brand text-light" href="/">Lock N Roll</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -46,15 +46,21 @@
       </div>
     </div>
   </nav>
-  <div id="header">
+  <div class="alert alert-warning" role="alert">
+    <div id="flash">
+      <% flash.each do |key, value| -%>
+        <div id="flash_<%= key %>"><%=h value %></div>
+      <% end %>
+    </div>
   </div>
   
-  <div id="flash">
-    <% flash.each do |key, value| -%>
-      <div id="flash_<%= key %>"><%=h value %></div>
-    <% end %>
-  </div>
 
   <%= yield %>
+
+  <script>
+
+    $('.alert').delay(2000).fadeOut('slow');
+      
+  </script>
 </body>
 </html>
