@@ -7,7 +7,7 @@
             <th>Status</th>
             <th>Group</th>
             <th>Location</th>
-            <th>Action</th>
+            <th>Toggle Lock</th>
         </tr>
         <% @locks.each do |lock| %>
             <tr>
@@ -15,7 +15,12 @@
                 <td><%= lock.status %></td>
                 <td><%= lock.group %></td>
                 <td><%= lock.location %></td>
-                <td>Lock toggle</td>
+                <td><!-- Rounded switch -->
+                    <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                    </label>
+                </td>
             </tr>
         <% end %>
     </table>
