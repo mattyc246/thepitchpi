@@ -1,1 +1,13 @@
-<h2>current_user.name</h2>
+<h2><%= current_user.name %></h2>
+
+<p>remember move payment button to this page</p>
+<div>
+    <h4>Name</h4>
+        <%= current_user.name %>
+    <h4>Email</h4>
+        <%= current_user.email %>
+    <h4>Subscription Status</h4>
+        <%= current_user.subscription_status %>
+    <h4>Registered Phone Number</h4>
+        <%= current_user.phone %>
+</div>
