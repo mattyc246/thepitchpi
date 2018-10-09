@@ -1,16 +1,14 @@
 class BraintreeController < ApplicationController
 
   def new
-
-    @user = User.find(params[:id])
-    @client_token = Braintree::ClientToken.generate
-
+    if current_user
+      @user = User.find(current_user.id)
+      @client_token = Braintree::ClientToken.generate
+    end
   end
 
-
   def checkout
-
-    @user = User.find(params[:id])
+      @user = User.find(current_user.id)
 
     nonce_from_the_client = params[:checkout_form][:payment_method_nonce]
 
