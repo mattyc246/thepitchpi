@@ -36,9 +36,9 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <% if signed_in? && current_user.subscription_status? -%>
-          <a class="nav-item nav-link" href="users/<%= @user.id %>/locks">Lock Management</a>
-          <a class="nav-item nav-link" href="users/<%= @user.id %>/locks/new">Add New Lock</a>
-          <a class="nav-item nav-link" href="users/<%= @user.id %>">View Profile</a>
+          <a class="nav-item nav-link" href="user_locks">Lock Management</a>
+          <a class="nav-item nav-link" href="users/<%= current_user.id %>/locks/new">Add New Lock</a>
+          <a class="nav-item nav-link" href="users/<%= current_user.id %>">View Profile</a>
           <a class="nav-item nav-link" href="#"></a>
           <%= button_to t(".sign_out"), sign_out_path, method: :delete, class:"btn btn-outline-light" %>
         <% elsif signed_in? -%>
