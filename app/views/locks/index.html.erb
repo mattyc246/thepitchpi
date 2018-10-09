@@ -1,2 +1,22 @@
-<h1>Locks#index</h1>
-<p>Find me in app/views/locks/index.html.erb</p>
+<h2>Details of lock</h2>
+
+<div>
+    <table>
+        <tr>
+            <th>Lock Name</th>
+            <th>Status</th>
+            <th>Group</th>
+            <th>Location</th>
+            <th>Action</th>
+        </tr>
+        <% @locks.each do |lock| %>
+            <tr>
+                <td><%= link_to lock.lock_name, user_lock_path(lock.id, current_user.id) %></td>
+                <td><%= lock.status %></td>
+                <td><%= lock.group %></td>
+                <td><%= lock.location %></td>
+                <td>Lock toggle</td>
+            </tr>
+        <% end %>
+    </table>
+</div>

@@ -1,2 +1,19 @@
-<h1>Locks#show</h1>
-<p>Find me in app/views/locks/show.html.erb</p>
+<h2>Details of lock</h2>
+<div>
+<table>
+    <tr>
+        <th>Lock Name</th>
+        <th>Status</th>
+        <th>Group</th>
+        <th>Location</th>
+        <th>Delete Lock</th>
+    </tr>
+    <tr>
+        <td><%= @lock.lock_name %></td>
+        <td><%= @lock.status %></td>
+        <td><%= @lock.group %></td>
+        <td><%= @lock.location %></td>
+        <td>Delete</td>
+   </tr>
+</table>
+</div>
