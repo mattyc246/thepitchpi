@@ -1,0 +1,22 @@
+<%= form_with scope: :locks, url: user_locks_path, local: true do |form| %>
+
+    <div class="text-field">
+    <%= form.label :lock_name %>
+    <%= form.text_field :lock_name %>
+    </div>
+
+    <div class="text-field">
+    <%= form.label :location %>
+    <%= form.text_field :location %>
+    </div>
+
+    <div class="drop-down">
+    <%= form.label :group %>
+    <%= form.text_field :group %>
+    </div>
+
+    <div class="submit-field">
+        <%= form.submit "Register New Lock"%>
+    </div>
+
+<% end %>
