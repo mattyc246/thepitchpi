@@ -11,14 +11,12 @@
         </tr>
         <% @locks.each do |lock| %>
             <tr>
-                <td>lock.name</td>
-                <td>lock.status</td>
-                <td>lock.group</td>
-                <td>lock.location</td>
-                <tr>
-                    <td><%=link_to "Delete", delete_lock_path %></td>
-                    <td><%= # lock toggle %></td>
-                </tr>
+                <td><%= link_to lock.lock_name, user_lock_path(lock.id, current_user.id) %></td>
+                <td><%= lock.status %></td>
+                <td><%= lock.group %></td>
+                <td><%= lock.location %></td>
+                <td>Lock toggle</td>
             </tr>
+        <% end %>
     </table>
 </div>
