@@ -20,3 +20,98 @@
         <% end %>
     </table>
 </div>
+
+
+
+
+
+<div>
+    <meta charset='utf-8' />
+    <title>Locate the user</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0;}
+        #map {width:100%;height:400px }
+    </style>
+</head>
+
+
+
+<div id='map'></div>
+
+<button type="button">Find Location</button>
+
+
+
+
+
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoibG9ja25yb2xscy10ZWFtMSIsImEiOiJjam4xM3FvcDYxYnZuM2ttOThyYTc2cjFwIn0.LXhAvekTPkv8HSJvQd-32w';
+var map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: 'mapbox://styles/mapbox/dark-v9',
+    center: [101.69, 3.13], // starting position
+    zoom: 11 // starting zoom
+});
+
+// existing locks tagged into map
+
+var geojson = {
+  type: 'FeatureCollection',
+  features: [
+    <% @locks.each do |lock| %>
+    {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [<%= lock.longitude %>, <%= lock.latitude %>]
+    },
+    properties: {
+      title: "<%= lock.lock_name %>",
+      group: "<%= lock.group %>",
+      description: "<%= lock.status %>"
+    }
+  },
+
+  <% end %>
+  ]
+};
+
+
+
+
+
+
+// add markers to map
+geojson.features.forEach(function(marker) {
+
+  // create a HTML element for each feature
+  var el = document.createElement('div');
+  el.className = 'marker';
+
+  // make a marker for each feature and add to the map
+  new mapboxgl.Marker(el)
+    .setLngLat(marker.geometry.coordinates)
+    .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+    .setHTML('<h5>' + marker.properties.title + '</h5><small>' + marker.properties.group + '</small><h4>' + marker.properties.description + '</h4>'))
+    .addTo(map);
+});
+
+
+
+
+
+
+
+
+
+// Add geolocate control to the map.
+map.addControl(new mapboxgl.GeolocateControl({
+    positionOptions: {
+        enableHighAccuracy: true
+    },
+    trackUserLocation: true
+}));
+</script>
