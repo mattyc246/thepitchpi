@@ -4,7 +4,7 @@
 
 <div class="demo-frame payment-new">
 
-  <%= form_for :checkout_form, url: braintree_checkout_path(id: @user.id), html: { id: "cardForm"} do |form| %>
+  <%= form_for :checkout_form, url: subscription_checkout_path(id: @user.id), html: { id: "cardForm"} do |form| %>
 
     <%= form.label :card_number, "Credit Card Number", html: {class: "hosted-fields--label"} %>
     <div id="card-number" class="hosted-field"></div>

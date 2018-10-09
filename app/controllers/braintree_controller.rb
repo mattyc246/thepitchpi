@@ -22,6 +22,8 @@ class BraintreeController < ApplicationController
      )
 
     if result.success?
+      @user.subscription_status = true
+      @user.save
       redirect_to root_path, :flash => { :success => "Transaction successful!" }
     else
       redirect_to root_path, :flash => { :error => "Transaction failed. Please try again." }

@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   ## Braintree
-  get 'braintree/new'
+  get 'subscription/new' => "braintree#new", as: "subscription_new"
   post 'braintree/new'
   get 'welcome/index'
-  post 'braintree/checkout'
+  post 'subscription/checkout' => 'braintree#checkout', as: "subscription_checkout"
   root 'welcome#index'
 
 
