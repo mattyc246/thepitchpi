@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'braintree/new'
   get 'welcome/index'
   root 'welcome#index'
 
