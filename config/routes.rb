@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-
+  ## Braintree
   get 'braintree/new'
   get 'welcome/index'
+  post 'braintree/checkout'
   root 'welcome#index'
 
 
