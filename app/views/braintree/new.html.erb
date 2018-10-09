@@ -4,9 +4,14 @@
 
 <div class="demo-frame payment-new">
 
+
+
   <%= form_for :checkout_form, url: subscription_checkout_path(id: @user.id), html: { id: "cardForm"} do |form| %>
 
-    <%= form.label :card_number, "Credit Card Number", html: {class: "hosted-fields--label"} %>
+    <%= form.label :subscription, "Subscription Length", html: {class: "hosted-fields--label"} %></br>
+    <%= form.select :price, options_for_select([["1 Year @ $99.99", 99.99],["2 Years @ $159.99", 159.99],["3 Years @ $209.99", 209.99]]), {prompt: "Select Subscription Period..."}, {class:"form-control"} %></br>
+
+    <%= form.label :card_number, "Credit Card Number", html: {class: "hosted-fields--label m-2"} %>
     <div id="card-number" class="hosted-field"></div>
 
     <%= form.label :expiration_date, "Expiration Date", html: {class: "hosted-fields--label"} %>

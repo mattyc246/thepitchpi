@@ -8,13 +8,13 @@ class BraintreeController < ApplicationController
   end
 
   def checkout
-      @user = User.find(current_user.id)
+  
+    @user = User.find(current_user.id)
 
     nonce_from_the_client = params[:checkout_form][:payment_method_nonce]
 
-
     result = Braintree::Transaction.sale(
-     :amount => "10.00",
+     :amount => "#{braintree_params[:price]}",
      :payment_method_nonce => nonce_from_the_client, #braintree generate token
      :options => {
         :submit_for_settlement => true
@@ -28,6 +28,14 @@ class BraintreeController < ApplicationController
     else
       redirect_to root_path, :flash => { :error => "Transaction failed. Please try again." }
     end
+  end
+
+  private
+
+  def braintree_params
+
+    params.require(:checkout_form).permit(:price)
+
   end
 
 end
