@@ -40,6 +40,7 @@
 
 
 <div id='map'></div>
+<pre id='coordinates' class='coordinates'></pre>
 
 <button type="button">Find Location</button>
 
@@ -48,16 +49,19 @@
 
 
 <script>
+// Script ----------Script ----------Script ----------Script ----------Script ---------
+// initialize map
 mapboxgl.accessToken = 'pk.eyJ1IjoibG9ja25yb2xscy10ZWFtMSIsImEiOiJjam4xM3FvcDYxYnZuM2ttOThyYTc2cjFwIn0.LXhAvekTPkv8HSJvQd-32w';
 var map = new mapboxgl.Map({
     container: 'map', // container id
     style: 'mapbox://styles/mapbox/dark-v9',
-    center: [101.69, 3.13], // starting position
-    zoom: 11 // starting zoom
+    center: [101.63060418023838, 3.1352744737826583], // starting position
+    zoom: 15 // starting zoom
 });
 
-// existing locks tagged into map
 
+
+// existing locks tagged into map
 var geojson = {
   type: 'FeatureCollection',
   features: [
@@ -84,7 +88,7 @@ var geojson = {
 
 
 
-// add markers to map
+// add markers in html to map
 geojson.features.forEach(function(marker) {
 
   // create a HTML element for each feature
@@ -100,14 +104,24 @@ geojson.features.forEach(function(marker) {
 });
 
 
+// draggable
+var marker = new mapboxgl.Marker({
+    draggable: true
+})
+    .setLngLat([101.63060418023838, 3.1352744737826583])
+    .addTo(map);
+
+function onDragEnd() {
+    var lngLat = marker.getLngLat();
+    coordinates.style.display = 'block';
+    coordinates.innerHTML = 'Longitude: ' + lngLat.lng + '<br />Latitude: ' + lngLat.lat;
+}
+
+marker.on('dragend', onDragEnd);
 
 
 
-
-
-
-
-// Add geolocate control to the map.
+// Add geolocate present location control to the map.
 map.addControl(new mapboxgl.GeolocateControl({
     positionOptions: {
         enableHighAccuracy: true

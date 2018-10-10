@@ -2,4 +2,72 @@
 
 
 <%= render partial: '/locks/form_new_lock'%>
-    
+<h1>Locks#new</h1>
+<div>
+    <meta charset='utf-8' />
+    <title>Create a draggable Marker</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0;}
+        #map {width:100%;height:400px }
+    </style>
+</div>
+
+<div id='map'></div>
+<pre id='coordinates' class='coordinates'></pre>
+
+
+<!-- coordinates text field-->
+<%= form_with scope: :locks, url: user_locks_path, local: true do |form| %>
+  <%= form.hidden_field :longitude ,:id =>"longitude_field" %>
+  <%= form.hidden_field :latitude ,:id =>"latitude_field" %>
+<% end %>
+
+
+
+
+
+
+
+
+
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoibG9ja25yb2xscy10ZWFtMSIsImEiOiJjam4xM3FvcDYxYnZuM2ttOThyYTc2cjFwIn0.LXhAvekTPkv8HSJvQd-32w';
+var coordinates = document.getElementById('coordinates');
+var map = new mapboxgl.Map({
+  container: 'map', // container id
+  style: 'mapbox://styles/mapbox/dark-v9',
+  center: [101.69, 3.13], // starting position
+  zoom: 11 // starting zoom
+});
+
+
+
+// dragable marker for new lock-------------------------------------------
+var marker = new mapboxgl.Marker({
+    draggable: true
+})
+    .setLngLat([101.69, 3.13])
+    .addTo(map);
+
+function onDragEnd() {
+    var lngLat = marker.getLngLat();
+    coordinates.style.display = 'block';
+    $("#longitude_field").val(lngLat.lng);
+    $("#latitude_field").val(lngLat.lat);
+    // coordinates.innerHTML = 'Longitude: ' + lngLat.lng + '<br />Latitude: ' + lngLat.lat;
+}
+
+marker.on('dragend', onDragEnd);
+
+// Get map marker by finding maker change. not working
+
+// $('.mapboxgl-marker-anchor.center').change(function(){
+// var a = $('#coordinates')[0].innerHTML
+// console.log(a)
+// })
+// --------------------------------------------------------------------
+
+</script>
