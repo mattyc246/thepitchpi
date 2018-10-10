@@ -8,7 +8,7 @@ class BraintreeController < ApplicationController
   end
 
   def checkout
-  
+
     @user = User.find(current_user.id)
 
     nonce_from_the_client = params[:checkout_form][:payment_method_nonce]
@@ -24,6 +24,11 @@ class BraintreeController < ApplicationController
     if result.success?
       @user.subscription_status = true
       @user.save
+      Twilio::REST::Client.new.messages.create({
+        from: ENV['twilio_phone_number'],
+        to: 'your number',
+        body: 'You have made a successful transaction to LocknRoll.'
+      })
       redirect_to root_path, :flash => { :success => "Transaction successful!" }
     else
       redirect_to root_path, :flash => { :error => "Transaction failed. Please try again." }

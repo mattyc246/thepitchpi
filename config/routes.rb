@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  ## Twilio sms
+  post 'twilio/sms'
   ## Braintree
   get 'subscription/new' => "braintree#new", as: "subscription_new"
   post 'braintree/new'
