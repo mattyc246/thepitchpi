@@ -42,7 +42,7 @@
 <div id='map'></div>
 <pre id='coordinates' class='coordinates'></pre>
 
-<button type="button">Find Location</button>
+<button id='fly'>Fly</button>
 
 
 
@@ -118,6 +118,18 @@ function onDragEnd() {
 }
 
 marker.on('dragend', onDragEnd);
+
+
+
+
+// fly to marker
+document.getElementById('fly').addEventListener('click', function () {
+    // Fly to a random location by offsetting the point -74.50, 40
+    // by up to 5 degrees.
+    map.flyTo({
+        center: [101.63060418023838, 3.1352744737826583]
+    });
+});
 
 
 
