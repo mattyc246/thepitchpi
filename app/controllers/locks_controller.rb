@@ -28,11 +28,11 @@ class LocksController < ApplicationController
 
     @lock_status = ""
 
-    host = '192.168.1.227'
+    host = ENV['RASPBERRY_PI_HOST']
 
-    user = 'pi'
+    user = ENV['RASPBERRY_PI_USER']
 
-    password = 'raspberry'
+    password = ENV['RASPBERRY_PI_PASSWORD']
 
     Net::SSH.start(host, user, password: password) do |ssh|
       
