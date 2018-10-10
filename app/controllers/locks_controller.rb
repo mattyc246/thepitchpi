@@ -24,6 +24,28 @@ class LocksController < ApplicationController
   def destroy
   end
 
+  def status_check
+
+    @lock_status = ""
+
+    host = '192.168.1.227'
+
+    user = 'pi'
+
+    password = 'raspberry'
+
+    Net::SSH.start(host, user, password: password) do |ssh|
+      
+      output = ssh.exec!("cd Desktop; python button_press.py")
+       
+      @lock_status = output.split
+
+    end
+    
+    render :json => {status: @lock_status[0].to_s}
+
+  end
+
   private
   def lock_params
     params.require(:lock).permit(:lock_name, :location, :group)

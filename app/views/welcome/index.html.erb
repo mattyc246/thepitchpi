@@ -1,5 +1,9 @@
 <% if current_user && @user.subscription_status == true %>
+	
+	<button id="testing">Testing</button>
+	<div id="testing-here" class='w-25 h-25 bg-success'>
 
+	</div>	
 
 <% elsif current_user && @user.subscription_status == false %>
 
@@ -29,3 +33,28 @@
 
 <% end %>
 
+<script>
+
+	$('#testing').click(function(){
+
+		$.ajax({
+
+			url: 'locks/status_check',
+			method: 'GET',
+			dataType: 'JSON',
+			success: function(data){
+				var status = data.status;
+				console.log(data)
+				if (status == "Unlocked"){
+					$('#testing-here').removeClass('bg-success');
+					$('#testing-here').addClass('bg-danger');
+				} else if (status == "Locked"){
+					$('#testing-here').removeClass('bg-danger');
+					$('#testing-here').addClass('bg-success');
+				}
+			}
+		})
+
+	})
+
+</script>
