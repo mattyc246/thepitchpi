@@ -46,6 +46,39 @@ class LocksController < ApplicationController
 
   end
 
+  def toggle_lock
+    @locks = Lock.where(user_id: params[:user_id])
+    lock = Lock.find(params[:toggle_id])
+
+    if lock.status == true
+
+      lock.status = false
+
+      if lock.save
+      
+        render json: {notice: "Lock has been unlocked"}
+        
+      
+      else
+
+        render json: {notice: "Error! Please try again!"}
+
+      end
+
+
+    else
+
+      lock.status = true
+
+      if lock.save
+        render json: {notice: "Lock has been locked!"}
+      else
+        render json: {notice: "Error! Please try again!"}
+      end
+
+    end
+  end
+
   private
   def lock_params
     params.require(:lock).permit(:lock_name, :location, :group)

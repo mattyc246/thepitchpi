@@ -20,7 +20,7 @@
                                 <!-- Rounded switch -->
                                 <label class="switch">
                                 <input type="checkbox" name="lock_status">
-                                <span class="slider round"></span>
+                                <span id="slider-<%= lock.id %>" class="slider round"></span>
                                 </label>
                             </div>
                         </div>
@@ -56,17 +56,19 @@
     </div>
 </div>
 <script>
-$("[name='lock_status']").switch();
+
         $(document).ready(function() {
-            $("[name='auto_reply']").on('switchChange.switch',function(){
-                var currentValue = $(this).attr("value");
-                var station = $(this).attr("id");
+            $('.slider').click(function(){
+           var slider_id = event.target.id.split('-')[1]
+
                 $.ajax({
-                    url: 'updateReplyFlag',
-                    method: 'post',
-                    data: {id: currentValue, _token: $('input[name="_token"]').val(), reply_flag: currentValue, station: station},
+                    url: '/locks/toggle_lock',
+                    method: 'GET',
+                    data: {toggle_id: slider_id},
                     success: function(data){
-                        //alert("Auto Reply has been Turned On");
+                        var alert_message = data.notice
+                        $(".navbar").after(`<div class="alert alert-warning w-50 mx-auto" role="alert">${alert_message}</div>`)
+                        $(".alert").delay(2000).fadeOut('slow');
                     },
                     error: function(){}
                 });
