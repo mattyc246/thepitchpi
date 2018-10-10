@@ -7,7 +7,7 @@
             <div class="card text-dark border-light mb-3" style="max-width: 20rem;">
                 <div class="card-header">
                     <div sytle="max-width: 5rem ">
-                        <%= link_to lock.lock_name, user_lock_path(lock.id, current_user.id) %>
+                        <%= lock.location %>lock location description
                     </div>
                     <div class="float-right">
                         <!-- Rounded switch -->
@@ -19,7 +19,7 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Light card title</h5>
-                    <p class="card-text"><%= lock.location %>lock location description</p>
+                    <p class="card-text"><%= link_to lock.lock_name, user_lock_path(lock.id, current_user.id) %></p>
                 </div>
             </div>
         <% end %>
