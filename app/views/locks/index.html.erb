@@ -1,27 +1,52 @@
+<div class="container">
 <h2>Details of lock</h2>
 
-<div>
-    <table>
-        <tr>
-            <th>Lock Name</th>
-            <th>Status</th>
-            <th>Group</th>
-            <th>Location</th>
-            <th>Toggle Lock</th>
-        </tr>
+
+    <div>
         <% @locks.each do |lock| %>
-            <tr>
-                <td><%= link_to lock.lock_name, user_lock_path(lock.id, current_user.id) %></td>
-                <td><%= lock.status %></td>
-                <td><%= lock.group %></td>
-                <td><%= lock.location %></td>
-                <td><!-- Rounded switch -->
-                    <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider round"></span>
-                    </label>
-                </td>
-            </tr>
+            <div class="card text-dark border-light mb-3" style="max-width: 20rem;">
+                <div class="card-header">
+                    <div sytle="max-width: 5rem ">
+                        <%= link_to lock.lock_name, user_lock_path(lock.id, current_user.id) %>
+                    </div>
+                    <div class="float-right">
+                        <!-- Rounded switch -->
+                        <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Light card title</h5>
+                    <p class="card-text"><%= lock.location %>lock location description</p>
+                </div>
+            </div>
         <% end %>
-    </table>
+    </div>
+
+        <table>
+            <tr>
+                <th>Lock Name</th>
+                <th>Status</th>
+                <th>Group</th>
+                <th>Location</th>
+                <th>Toggle Lock</th>
+            </tr>
+            <% @locks.each do |lock| %>
+                <tr>
+                    <td><%= link_to lock.lock_name, user_lock_path(lock.id, current_user.id) %></td>
+                    <td><%= lock.status %></td>
+                    <td><%= lock.group %></td>
+                    <td><%= lock.location %></td>
+                    <td><!-- Rounded switch -->
+                        <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                        </label>
+                    </td>
+                </tr>
+            <% end %>
+        </table>
+    </div>
 </div>
