@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'welcome/index'
   post 'subscription/checkout' => 'braintree#checkout', as: "subscription_checkout"
   root 'welcome#index'
+  get 'locks/status_check' =>  'locks#status_check', as: "status_check"
 
 
   ##### Clearance Routes - Overwritten #####
