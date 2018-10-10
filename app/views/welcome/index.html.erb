@@ -35,26 +35,27 @@
 
 <script>
 
-	$('#testing').click(function(){
+	$(document).ready(function(){
 
-		$.ajax({
+				setInterval(function(){
+					$.ajax({
 
-			url: 'locks/status_check',
-			method: 'GET',
-			dataType: 'JSON',
-			success: function(data){
-				var status = data.status;
-				console.log(data)
-				if (status == "Unlocked"){
-					$('#testing-here').removeClass('bg-success');
-					$('#testing-here').addClass('bg-danger');
-				} else if (status == "Locked"){
-					$('#testing-here').removeClass('bg-danger');
-					$('#testing-here').addClass('bg-success');
-				}
-			}
-		})
+						url: 'locks/status_check',
+						method: 'GET',
+						dataType: 'JSON',
+						success: function(data){
+							var status = data.status;
+							if (status == "Unlocked"){
+								$('#testing-here').removeClass('bg-success');
+								$('#testing-here').addClass('bg-danger');
+							} else if (status == "Locked"){
+								$('#testing-here').removeClass('bg-danger');
+								$('#testing-here').addClass('bg-success');
+							}
+						}
+					})}, 5000);
 
-	})
+			})
+
 
 </script>
