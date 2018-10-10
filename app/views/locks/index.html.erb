@@ -1,22 +1,75 @@
-<h2>Details of lock</h2>
+<div class="container">
+    
+    <div class="mb-3">
+        <h2><%= current_user.name %>'s Locks</h2>
+    </div>
 
-<div>
-    <table>
-        <tr>
-            <th>Lock Name</th>
-            <th>Status</th>
-            <th>Group</th>
-            <th>Location</th>
-            <th>Action</th>
-        </tr>
-        <% @locks.each do |lock| %>
-            <tr>
-                <td><%= link_to lock.lock_name, user_lock_path(lock.id, current_user.id) %></td>
-                <td><%= lock.status %></td>
-                <td><%= lock.group %></td>
-                <td><%= lock.location %></td>
-                <td>Lock toggle</td>
-            </tr>
+    <div>
+        <% @locks.group_by(&:group).each do |group, lock| %>
+            <div class="card text-dark border-light mb-3" style="max-width: 20rem; min-width: 20rem">
+                <div class="card-header">
+                    <div sytle="max-width: 5rem ">
+                        <%= group %>
+                    </div>
+                </div>
+                <% lock.each do |lock| %>
+                    <div class="card-body">
+                        <div>
+                            <h5 class="card-title float-left"><%= link_to lock.lock_name, user_lock_path(current_user.id, lock.id) %></h5>
+                            <div class="float-right">
+                                <!-- Rounded switch -->
+                                <label class="switch">
+                                <input type="checkbox" name="lock_status">
+                                <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
         <% end %>
-    </table>
+    </div>
+
+    <!--    <table>
+            <tr>
+                <th>Lock Name</th>
+                <th>Status</th>
+                <th>Group</th>
+                <th>Location</th>
+                <th>Toggle Lock</th>
+            </tr>
+            <% @locks.each do |lock| %>
+                <tr>
+                    <td><%= link_to lock.lock_name, user_lock_path(lock.id, current_user.id) %></td>
+                    <td><%= lock.status %></td>
+                    <td><%= lock.group %></td>
+                    <td><%= lock.location %></td>
+                    <td>
+                        <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                        </label>
+                    </td>
+                </tr>
+            <% end %>
+        </table> -->
+    </div>
 </div>
+<script>
+$("[name='lock_status']").switch();
+        $(document).ready(function() {
+            $("[name='auto_reply']").on('switchChange.switch',function(){
+                var currentValue = $(this).attr("value");
+                var station = $(this).attr("id");
+                $.ajax({
+                    url: 'updateReplyFlag',
+                    method: 'post',
+                    data: {id: currentValue, _token: $('input[name="_token"]').val(), reply_flag: currentValue, station: station},
+                    success: function(data){
+                        //alert("Auto Reply has been Turned On");
+                    },
+                    error: function(){}
+                });
+            });
+        });
+</script>
