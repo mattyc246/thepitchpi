@@ -1,15 +1,20 @@
-<div>
+<div class="container">
     <h2><%= current_user.name %></h2>
-
     <p>remember move payment button to this page</p>
-    <div class="child">
+
+    <div class="">
         <h4>Name</h4>
             <p><%= current_user.name %></p>
         <h4>Email</h4>
             <p><%= current_user.email %>
-        <h4>Subscription Status</h4>
-            <%= current_user.subscription_status %> <!-- if subscribed then put subscribed, if not put a link to enable users to subscribe -->
+        <h4>Subscription Expiry</h4>
+         <!-- if subscribed then put subscription expiry date, if not put a link to enable users to subscribe -->
+            <% if current_user.subscription_status == true %>
+                <p><%= current_user.subscription_status %>, 19 Oct 2019</p>
+            <% else %>
+               <p>You're not subscribed. <%= link_to "Subscribe Now", braintree_new_path %></p>
+            <% end %>
         <h4>Registered Phone Number</h4>
-            <%= current_user.phone %> <!-- mask phone number -->
+            <p><%= current_user.phone %></p> <!-- mask phone number -->
     </div>
 </div>
