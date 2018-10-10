@@ -24,6 +24,17 @@ class LocksController < ApplicationController
   def destroy
   end
 
+  def group_points
+    p params
+    @lock = Lock.find(params[:id])
+    coordinates = []
+    # @locks.where(group: params[:group]).pluck(:longitude).max
+    # @locks.where(group: params[:group]).pluck(:longitude).minlocks
+
+
+
+  end
+
   private
   def lock_params
     params.require(:lock).permit(:lock_name, :location, :group)

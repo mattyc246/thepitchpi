@@ -11,11 +11,14 @@
         </tr>
         <% @locks.each do |lock| %>
             <tr>
+
                 <td><%= link_to lock.lock_name, user_lock_path(lock.id, current_user.id) %></td>
+
                 <td><%= lock.status %></td>
                 <td><%= lock.group %></td>
                 <td><%= lock.location %></td>
-                <td>Lock toggle</td>
+                <td><button class='fly' value='<%=lock.longitude%>' name='<%=lock.latitude%>'>Find</button></td>
+                <td><button id="<%= lock.id %>" class='flygroup' value='<%=lock.group%>'><%= lock.group %></button></td>
             </tr>
         <% end %>
     </table>
@@ -42,7 +45,7 @@
 <div id='map'></div>
 <pre id='coordinates' class='coordinates'></pre>
 
-<button id='fly'>Fly</button>
+<button class='fly'>Fly</button>
 
 
 
@@ -122,14 +125,68 @@ marker.on('dragend', onDragEnd);
 
 
 
-// fly to marker
-document.getElementById('fly').addEventListener('click', function () {
+// fly to individual marker
+$(".fly").click(function() {
     // Fly to a random location by offsetting the point -74.50, 40
     // by up to 5 degrees.
     map.flyTo({
-        center: [101.63060418023838, 3.1352744737826583]
+        center: [this.value, this.name],
+        zoom: 19.5
     });
 });
+
+
+
+
+
+// fly to group
+
+
+
+// $(".flygroup").click(function() {
+//   var bbox = [
+//     [<%= @locks.where(group: "Home").pluck(:longitude).max %>,
+//     <%= @locks.where(group: "Home").pluck(:latitude).max %>],
+//     [<%= @locks.where(group: "Home").pluck(:longitude).min %>,
+//     <%= @locks.where(group: "Home").pluck(:latitude).min %>]
+//   ];
+//   map.fitBounds(bbox, {
+//     padding: {top: 100, bottom:100, left: 100, right: 100}
+//   });
+// });
+
+
+
+
+$(".flygroup").click(function(e) {
+  var place = this.value
+    $.ajax({
+      url: '/locks/group_points',
+      type: 'POST',
+      data: {
+        id: e.target.id
+      },
+
+      success: function(points) {
+
+        console.log(points)
+        // $(".flygroup").click(function() {
+        //   var bbox = [
+        //     [points[0],points[1]],
+        //     [points[2],points[3]]
+        //   ];
+        //   map.fitBounds(bbox, {
+        //     padding: {top: 100, bottom:100, left: 100, right: 100}
+        //   });
+        // });
+      },
+      error: function(error) {
+        console.log(error);
+      }
+    });
+  })
+
+
 
 
 
