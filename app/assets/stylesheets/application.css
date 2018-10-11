@@ -29,17 +29,17 @@ body {
 }
 
 .sign-up{
- 
+
 	width: 50%;
 }
 
 .sign-in{
- 
+
 	width: 50%;
 }
 
 .password-reset{
- 
+
 	width: 50%;
 }
 
@@ -50,6 +50,8 @@ body {
   transform: translate(-50%, -50%);
 }
 
+
 .container {
 	margin-top: 1rem;
 }
+=======

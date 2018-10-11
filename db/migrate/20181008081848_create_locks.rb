@@ -2,7 +2,7 @@ class CreateLocks < ActiveRecord::Migration[5.2]
   def change
     create_table :locks do |t|
       t.string :lock_name, null: false, :default => "New Lock"
-      t.boolean :status , null: false, :default => true
+      t.string :status , null: false, :default => "Unlocked"
       t.decimal :location
       t.string :group
       t.timestamps null: false

@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get 'locks/status_check' =>  'locks#status_check', as: "status_check"
   get 'locks/toggle_lock' => 'locks#toggle_lock', as: "toggle_lock"
 
+  get 'locks/group_points' => 'locks#group_points', as: "group_points"
+
 
   ##### Clearance Routes - Overwritten #####
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
