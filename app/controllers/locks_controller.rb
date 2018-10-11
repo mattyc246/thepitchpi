@@ -9,7 +9,6 @@ class LocksController < ApplicationController
   end
 
   def create
-    byebug
     @lock = Lock.new(lock_params)
     @lock.user_id = current_user.id
     @lock.save

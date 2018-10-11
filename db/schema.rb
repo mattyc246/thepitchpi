@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2018_10_11_031056) do
 
   create_table "locks", force: :cascade do |t|
     t.string "lock_name", default: "New Lock", null: false
-    t.string "status", default: "true", null: false
+    t.string "status", default: "Unlocked", null: false
     t.string "location"
     t.string "group"
     t.datetime "created_at", null: false
