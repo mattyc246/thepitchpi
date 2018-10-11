@@ -77,13 +77,13 @@ class LocksController < ApplicationController
         host = ENV['RASPBERRY_PI_HOST']
         user = ENV['RASPBERRY_PI_USER']
         password = ENV['RASPBERRY_PI_PASSWORD']
-
+        
         Net::SSH.start(host, user, password: password) do |ssh|
           output = ssh.exec!("cd Desktop; python button_press.py")
           @lock_status = output.split
           if @lock_status[0].to_s == "Locked"
             ssh.exec!("cd Desktop; python lock_on.py")
-            render json: {notice: "Lock has been unlocked"}
+            render json: { notice: "#{lock.group}'s #{lock.name} has been unlocked" }
           else
             render json: {notice: "Error! Unable to unlock door!"}
           end
@@ -91,10 +91,11 @@ class LocksController < ApplicationController
       else
         render json: {notice: "Error! Please try again!"}
       end
+      console.log("#{lock.group}'s #{lock.name} has been unlocked")
     else
       lock.status = true
       if lock.save
-        render json: {notice: "Lock has been locked!"}
+        render json: {notice: "#{lock.group}'s #{lock.lock_name} has been locked!"}
       else
         render json: {notice: "Error! Please try again!"}
       end

@@ -33,7 +33,7 @@
                             <button class='fly' value='<%=lock.longitude%>' name='<%=lock.latitude%>'>Find</button>
                             <div class="float-right">
                                 <!-- Rounded switch -->
-                                <label class="switch" id="lock_status">
+                                <label class="switch">
                                     <input type="checkbox" name="lock_status" <%= lock.status ? "checked" : nil %> >
                                     <span id="slider-<%= lock.id %>" class="slider round"></span>
                                 </label>
