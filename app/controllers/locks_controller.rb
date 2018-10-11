@@ -47,8 +47,10 @@ class LocksController < ApplicationController
   end
 
   def toggle_lock
+
     @locks = Lock.where(user_id: params[:user_id])
     lock = Lock.find(params[:toggle_id])
+    @lock_status = ""
 
     if lock.status == true
 
@@ -56,7 +58,32 @@ class LocksController < ApplicationController
 
       if lock.save
       
-        render json: {notice: "Lock has been unlocked"}
+        host = ENV['RASPBERRY_PI_HOST']
+
+        user = ENV['RASPBERRY_PI_USER']
+
+        password = ENV['RASPBERRY_PI_PASSWORD']
+
+        Net::SSH.start(host, user, password: password) do |ssh|
+
+          output = ssh.exec!("cd Desktop; python button_press.py")
+           
+          @lock_status = output.split
+
+          if @lock_status[0].to_s == "Locked"
+          
+            ssh.exec!("cd Desktop; python lock_on.py")
+
+            render json: {notice: "Lock has been unlocked"}
+
+          else
+
+            render json: {notice: "Error! Unable to unlock door!"}
+
+          end
+
+        end
+      
         
       
       else
