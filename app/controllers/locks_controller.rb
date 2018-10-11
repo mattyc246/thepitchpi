@@ -105,7 +105,7 @@ class LocksController < ApplicationController
   private
   def lock_params
     byebug
-    params.require(:lock).permit(:lock_name, :location, :group, :longitude, :latitude)
+    params.require(:locks).permit(:lock_name, :location, :group, :longitude, :latitude)
   end
 
 end
