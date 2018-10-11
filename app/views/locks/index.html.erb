@@ -58,6 +58,25 @@
 
 
 <script>
+
+  $(document).ready(function() {
+      $('.slider').click(function(){
+      var slider_id = event.target.id.split('-')[1]
+
+          $.ajax({
+              url: '/locks/toggle_lock',
+              method: 'GET',
+              data: {toggle_id: slider_id},
+              success: function(data){
+                  var alert_message = data.notice
+                  $(".navbar").after(`<div class="alert alert-warning w-50 mx-auto" role="alert">${alert_message}</div>`)
+                  $(".alert").delay(2000).fadeOut('slow');
+              },
+              error: function(){}
+          });
+      });
+  })
+  
 // Script ----------Script ----------Script ----------Script ----------Script ---------
 
 // initialize map---------------------------------------------------------------------
