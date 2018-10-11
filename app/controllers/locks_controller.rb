@@ -77,7 +77,7 @@ class LocksController < ApplicationController
         host = ENV['RASPBERRY_PI_HOST']
         user = ENV['RASPBERRY_PI_USER']
         password = ENV['RASPBERRY_PI_PASSWORD']
-
+        
         Net::SSH.start(host, user, password: password) do |ssh|
           output = ssh.exec!("cd Desktop; python button_press.py")
           @lock_status = output.split
@@ -91,6 +91,7 @@ class LocksController < ApplicationController
       else
         render json: {notice: "Error! Please try again!"}
       end
+      console.log("#{lock.group}'s #{lock.name} has been unlocked")
     else
       lock.status = "Locked"
       if lock.save
@@ -103,8 +104,7 @@ class LocksController < ApplicationController
 
   private
   def lock_params
-    byebug
-    params.require(:lock).permit(:lock_name, :location, :group, :longitude, :latitude)
+    params.require(:locks).permit(:lock_name, :location, :group, :longitude, :latitude)
   end
 
 end
