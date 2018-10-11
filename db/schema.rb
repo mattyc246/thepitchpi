@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_09_063013) do
+ActiveRecord::Schema.define(version: 2018_10_11_031056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "locks", force: :cascade do |t|
     t.string "lock_name", default: "New Lock", null: false
-    t.boolean "status", default: true, null: false
+    t.string "status", default: "true", null: false
     t.string "location"
     t.string "group"
     t.datetime "created_at", null: false
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2018_10_09_063013) do
     t.bigint "user_id"
     t.float "longitude"
     t.float "latitude"
+    t.boolean "tracking", default: false, null: false
     t.index ["user_id"], name: "index_locks_on_user_id"
   end
 

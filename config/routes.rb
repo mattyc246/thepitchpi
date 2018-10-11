@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   post 'subscription/checkout' => 'braintree#checkout', as: "subscription_checkout"
   root 'welcome#index'
 
-  post 'locks/group_points' => 'locks#group_points', as: "group_points"
+  get 'locks/group_points' => 'locks#group_points', as: "group_points"
 
 
   ##### Clearance Routes - Overwritten #####

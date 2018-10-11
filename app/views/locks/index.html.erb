@@ -1,28 +1,39 @@
 <h2>Details of lock</h2>
 
+
 <div>
-    <table>
-        <tr>
-            <th>Lock Name</th>
-            <th>Status</th>
-            <th>Group</th>
-            <th>Location</th>
-            <th>Action</th>
-        </tr>
-        <% @locks.each do |lock| %>
-            <tr>
-
-                <td><%= link_to lock.lock_name, user_lock_path(lock.id, current_user.id) %></td>
-
-                <td><%= lock.status %></td>
-                <td><%= lock.group %></td>
-                <td><%= lock.location %></td>
-                <td><button class='fly' value='<%=lock.longitude%>' name='<%=lock.latitude%>'>Find</button></td>
-                <td><button id="<%= lock.id %>" class='flygroup' value='<%=lock.group%>'><%= lock.group %></button></td>
-            </tr>
-        <% end %>
-    </table>
+    <% @locks.group_by(&:group).each do |group, lock| %>
+        <div class="card text-dark border-light mb-3" style="max-width: 20rem; min-width: 20rem">
+            <div class="card-header">
+                <div sytle="max-width: 5rem ">
+                    <%= group %>
+                    <button id="<%= lock.first.user_id %>" value= "<%= group %>" class='flygroup'>zoom</button>
+                </div>
+            </div>
+            <% lock.each do |lock| %>
+                <div class="card-body">
+                    <div>
+                        <h5 class="card-title float-left"><%= link_to lock.lock_name, user_lock_path(current_user.id, lock.id) %></h5>
+                        <button class='fly' value='<%=lock.longitude%>' name='<%=lock.latitude%>'>Find</button>
+                        <div class="float-right">
+                            <!-- Rounded switch -->
+                            <label class="switch">
+                            <input type="checkbox" name="lock_status">
+                            <span id="slider-<%= lock.id %>" class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    <% end %>
+    <button id="<%= @user %>" value= "All" class='flygroup'>All</button>
 </div>
+
+
+
+
+
 
 
 
@@ -41,11 +52,11 @@
 </head>
 
 
-
+<div id="info"></div>
 <div id='map'></div>
-<pre id='coordinates' class='coordinates'></pre>
 
-<button class='fly'>Fly</button>
+
+
 
 
 
@@ -53,18 +64,75 @@
 
 <script>
 // Script ----------Script ----------Script ----------Script ----------Script ---------
-// initialize map
+
+// initialize map---------------------------------------------------------------------
 mapboxgl.accessToken = 'pk.eyJ1IjoibG9ja25yb2xscy10ZWFtMSIsImEiOiJjam4xM3FvcDYxYnZuM2ttOThyYTc2cjFwIn0.LXhAvekTPkv8HSJvQd-32w';
 var map = new mapboxgl.Map({
     container: 'map', // container id
     style: 'mapbox://styles/mapbox/dark-v9',
     center: [101.63060418023838, 3.1352744737826583], // starting position
     zoom: 15 // starting zoom
+
 });
 
 
 
-// existing locks tagged into map
+
+
+
+
+
+
+
+
+
+
+
+
+
+// load 3D building to map----------------------------------------------------
+map.on('load', function() {
+    // Insert the layer beneath any symbol layer.
+    var layers = map.getStyle().layers;
+
+    var labelLayerId;
+    for (var i = 0; i < layers.length; i++) {
+        if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
+            labelLayerId = layers[i].id;
+            break;
+        }
+    }
+
+    map.addLayer({
+        'id': '3d-buildings',
+        'source': 'composite',
+        'source-layer': 'building',
+        'filter': ['==', 'extrude', 'true'],
+        'type': 'fill-extrusion',
+        'minzoom': 15,
+        'paint': {
+            'fill-extrusion-color': '#aaa',
+
+            // use an 'interpolate' expression to add a smooth transition effect to the
+            // buildings as the user zooms in
+            'fill-extrusion-height': [
+                "interpolate", ["linear"], ["zoom"],
+                15, 0,
+                15.05, ["get", "height"]
+            ],
+            'fill-extrusion-base': [
+                "interpolate", ["linear"], ["zoom"],
+                15, 0,
+                15.05, ["get", "min_height"]
+            ],
+            'fill-extrusion-opacity': .6
+        }
+    }, labelLayerId);
+});
+
+
+
+// existing locks tagged into map----------------------------------------------------
 var geojson = {
   type: 'FeatureCollection',
   features: [
@@ -78,17 +146,15 @@ var geojson = {
     properties: {
       title: "<%= lock.lock_name %>",
       group: "<%= lock.group %>",
-      description: "<%= lock.status %>"
+      description: "<%= lock.status %>",
+      link: "<%= user_lock_path(current_user.id, lock.id) %>"
+
     }
   },
 
   <% end %>
   ]
 };
-
-
-
-
 
 
 // add markers in html to map
@@ -98,40 +164,26 @@ geojson.features.forEach(function(marker) {
   var el = document.createElement('div');
   el.className = 'marker';
 
-  // make a marker for each feature and add to the map
+  // make a marker for each feature and add to the map-------------
   new mapboxgl.Marker(el)
     .setLngLat(marker.geometry.coordinates)
     .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-    .setHTML('<h5>' + marker.properties.title + '</h5><small>' + marker.properties.group + '</small><h4>' + marker.properties.description + '</h4>'))
+    .setHTML('<h5><a href="'+ marker.properties.link +'">' + marker.properties.title + '</a></h5><small>' + marker.properties.group + '</small><h4>' + marker.properties.description + '</h4>'))
     .addTo(map);
 });
 
 
-// draggable
-var marker = new mapboxgl.Marker({
-    draggable: true
-})
-    .setLngLat([101.63060418023838, 3.1352744737826583])
-    .addTo(map);
-
-function onDragEnd() {
-    var lngLat = marker.getLngLat();
-    coordinates.style.display = 'block';
-    coordinates.innerHTML = 'Longitude: ' + lngLat.lng + '<br />Latitude: ' + lngLat.lat;
-}
-
-marker.on('dragend', onDragEnd);
 
 
 
 
-// fly to individual marker
+// fly to individual marker--------------------------------------------------------
 $(".fly").click(function() {
     // Fly to a random location by offsetting the point -74.50, 40
     // by up to 5 degrees.
     map.flyTo({
         center: [this.value, this.name],
-        zoom: 19.5
+        zoom: 19
     });
 });
 
@@ -139,46 +191,27 @@ $(".fly").click(function() {
 
 
 
-// fly to group
 
-
-
-// $(".flygroup").click(function() {
-//   var bbox = [
-//     [<%= @locks.where(group: "Home").pluck(:longitude).max %>,
-//     <%= @locks.where(group: "Home").pluck(:latitude).max %>],
-//     [<%= @locks.where(group: "Home").pluck(:longitude).min %>,
-//     <%= @locks.where(group: "Home").pluck(:latitude).min %>]
-//   ];
-//   map.fitBounds(bbox, {
-//     padding: {top: 100, bottom:100, left: 100, right: 100}
-//   });
-// });
-
-
-
-
+// fly to group-------------------------------------------------------------------------
 $(".flygroup").click(function(e) {
   var place = this.value
     $.ajax({
+      type: 'GET',
       url: '/locks/group_points',
-      type: 'POST',
+      dataType:"json",
       data: {
-        id: e.target.id
+        id: e.target.id,
+        group: e.target.value
       },
 
-      success: function(points) {
-
-        console.log(points)
-        // $(".flygroup").click(function() {
-        //   var bbox = [
-        //     [points[0],points[1]],
-        //     [points[2],points[3]]
-        //   ];
-        //   map.fitBounds(bbox, {
-        //     padding: {top: 100, bottom:100, left: 100, right: 100}
-        //   });
-        // });
+      success: function(data) {
+          var bbox = [
+            [data.lngmax, data.latmax],
+            [data.lngmin, data.latmin]
+          ];
+          map.fitBounds(bbox, {
+            padding: {top: 100, bottom:100, left: 100, right: 100}
+          });
       },
       error: function(error) {
         console.log(error);
@@ -190,11 +223,22 @@ $(".flygroup").click(function(e) {
 
 
 
-// Add geolocate present location control to the map.
+// Add geolocate present location control to the map-----------------------------------
 map.addControl(new mapboxgl.GeolocateControl({
     positionOptions: {
         enableHighAccuracy: true
     },
     trackUserLocation: true
 }));
+
+
+// Add Navigation Controller
+map.addControl(new mapboxgl.NavigationControl());
+
+// Add Full screen BUtton
+map.addControl(new mapboxgl.FullscreenControl());
+
+
+
+
 </script>

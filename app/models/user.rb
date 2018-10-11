@@ -9,6 +9,8 @@ class User < ApplicationRecord
 	after_initialize :set_membership, on: [:create]
 
 
+
+
 	private
 
 	def set_membership
