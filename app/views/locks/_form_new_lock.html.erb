@@ -15,8 +15,14 @@
     <%= form.text_field :group %>
     </div>
 
+    <!-- coordinates text field-->
+    <%= form.hidden_field :longitude ,:id =>"longitude_field" %>
+    <%= form.hidden_field :latitude ,:id =>"latitude_field" %>
+
     <div class="submit-field">
         <%= form.submit "Register New Lock"%>
     </div>
+
+
 
 <% end %>
