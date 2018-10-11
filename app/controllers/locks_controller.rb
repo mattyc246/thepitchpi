@@ -71,8 +71,8 @@ class LocksController < ApplicationController
     lock = Lock.find(params[:toggle_id])
     @lock_status = ""
 
-    if lock.status == true
-      lock.status = false
+    if lock.status == "Locked"
+      lock.status = "Unlocked"
       if lock.save
         host = ENV['RASPBERRY_PI_HOST']
         user = ENV['RASPBERRY_PI_USER']
@@ -83,7 +83,7 @@ class LocksController < ApplicationController
           @lock_status = output.split
           if @lock_status[0].to_s == "Locked"
             ssh.exec!("cd Desktop; python lock_on.py")
-            render json: {notice: "Lock has been unlocked"}
+            render json: {notice: `#{lock.group}'s #{lock.name} has been unlocked`}
           else
             render json: {notice: "Error! Unable to unlock door!"}
           end
@@ -92,9 +92,9 @@ class LocksController < ApplicationController
         render json: {notice: "Error! Please try again!"}
       end
     else
-      lock.status = true
+      lock.status = "Locked"
       if lock.save
-        render json: {notice: "Lock has been locked!"}
+        render json: {notice: `#{lock.group}'s #{lock.name} has been locked!`}
       else
         render json: {notice: "Error! Please try again!"}
       end

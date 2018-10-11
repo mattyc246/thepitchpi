@@ -17,38 +17,46 @@
         <h2><%= current_user.name %>'s Locks</h2>
     </div>
 
-    <div>
-        <% @locks.order("id asc").group_by(&:group).each do |group, lock| %>
-            <div class="card text-dark border-light mb-3" style="max-width: 20rem; min-width: 20rem">
-                <div class="card-header">
-                    <div sytle="max-width: 5rem ">
-                        <%= group %>
-                        <button id="<%= lock.first.user_id %>" value= "<%= group %>" class='flygroup'>zoom</button>
-                    </div>
-                </div>
-                <% lock.each do |lock| %>
-                    <div class="card-body">
-                        <div>
-                            <h5 class="card-title float-left"><%= link_to lock.lock_name, user_lock_path(current_user.id, lock.id) %></h5>
-                            <button class='fly' value='<%=lock.longitude%>' name='<%=lock.latitude%>'>Find</button>
-                            <div class="float-right">
-                                <!-- Rounded switch -->
-                                <label class="switch" id="lock_status">
-                                    <input type="checkbox" name="lock_status" <%= lock.status ? "checked" : nil %> >
-                                    <span id="slider-<%= lock.id %>" class="slider round"></span>
-                                </label>
-                            </div>
+    <div class="float-left">
+        <div >
+            <% @locks.order("id asc").group_by(&:group).each do |group, lock| %>
+                <div class="card text-dark border-light mb-3" style="max-width: 20rem; min-width: 20rem">
+                    <div class="card-header">
+                        <div sytle="max-width: 5rem ">
+                            <%= group %>
+                            <button id="<%= lock.first.user_id %>" value= "<%= group %>" class='flygroup'>zoom</button>
                         </div>
                     </div>
-                <% end %>
-            </div>
-        <% end %>
-        <button id="<%= @user %>" value= "All" class='flygroup'>All</button>
+                    <% lock.each do |lock| %>
+                        <div class="card-body">
+                            <div>
+                                <h5 class="card-title float-left"><%= link_to lock.lock_name, user_lock_path(current_user.id, lock.id) %></h5>
+                                <button class='fly' value='<%=lock.longitude%>' name='<%=lock.latitude%>'>Find</button>
+                                <div class="float-right">
+                                    <!-- Rounded switch -->
+                                    <label class="switch" id="lock_status">
+                                        <input type="checkbox" name="lock_status"
+                                            <% unless lock.status == "Unlocked" %>
+                                                <%= "checked" %>
+                                            <% end %> >
+                                        <span id="slider-<%= lock.id %>" class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+            <% end %>
+        </div>
     </div>
-  </div>
+
+    <div class="">
+        <button id="<%= @user %>" value= "All" class='flygroup'>All</button>
+        <div id='map' class="min-width: 70rem" ></div>
+    </div>
 
 
-<div id='map'></div>
+
 
 
 
