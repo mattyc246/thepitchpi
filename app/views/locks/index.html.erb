@@ -33,7 +33,7 @@
                             <button class='fly' value='<%=lock.longitude%>' name='<%=lock.latitude%>'>Find</button>
                             <div class="float-right">
                                 <!-- Rounded switch -->
-                                <label class="switch" id="lock_status">
+                                <label class="switch">
                                     <input type="checkbox" name="lock_status" <%= lock.status ? "checked" : nil %> >
                                     <span id="slider-<%= lock.id %>" class="slider round"></span>
                                 </label>
@@ -47,15 +47,7 @@
     </div>
   </div>
 
-
 <div id='map'></div>
-
-
-
-
-
-
-
 
 <script>
 
@@ -88,21 +80,6 @@ var map = new mapboxgl.Map({
     zoom: 15 // starting zoom
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // load 3D building to map----------------------------------------------------
 map.on('load', function() {
@@ -144,8 +121,6 @@ map.on('load', function() {
     }, labelLayerId);
 });
 
-
-
 // existing locks tagged into map----------------------------------------------------
 var geojson = {
   type: 'FeatureCollection',
@@ -170,7 +145,6 @@ var geojson = {
   ]
 };
 
-
 // add markers in html to map
 geojson.features.forEach(function(marker) {
 
@@ -186,11 +160,6 @@ geojson.features.forEach(function(marker) {
     .addTo(map);
 });
 
-
-
-
-
-
 // fly to individual marker--------------------------------------------------------
 $(".fly").click(function() {
     // Fly to a random location by offsetting the point -74.50, 40
@@ -200,11 +169,6 @@ $(".fly").click(function() {
         zoom: 19
     });
 });
-
-
-
-
-
 
 // fly to group-------------------------------------------------------------------------
 $(".flygroup").click(function(e) {
@@ -233,10 +197,6 @@ $(".flygroup").click(function(e) {
     });
   })
 
-
-
-
-
 // Add geolocate present location control to the map-----------------------------------
 map.addControl(new mapboxgl.GeolocateControl({
     positionOptions: {
@@ -245,14 +205,10 @@ map.addControl(new mapboxgl.GeolocateControl({
     trackUserLocation: true
 }));
 
-
 // Add Navigation Controller
 map.addControl(new mapboxgl.NavigationControl());
 
 // Add Full screen BUtton
 map.addControl(new mapboxgl.FullscreenControl());
-
-
-
 
 </script>
