@@ -13,3 +13,22 @@ body {
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
 
 }
+
+.inner-cover {
+  position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+}
+
+@media only screen and (max-width: 425px) {
+            body {
+                background: url('/assets/generic-smart-lock-796x398.jpg');
+                background-position: 70%;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+            }
+        }
