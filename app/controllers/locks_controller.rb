@@ -73,7 +73,7 @@ class LocksController < ApplicationController
     if lock.status == "Locked"
 
       lock.status = "Unlocked"
-
+      
       if lock.save
         
         host = ENV['RASPBERRY_PI_HOST']
@@ -111,6 +111,7 @@ class LocksController < ApplicationController
             render json: { notice: "#{lock.group}'s #{lock.lock_name} has been locked" }
 
         end
+
 
       else
 
