@@ -59,9 +59,10 @@ class LocksController < ApplicationController
     password = ENV['RASPBERRY_PI_PASSWORD']
 
     Net::SSH.start(host, user, password: password) do |ssh|
-      output = ssh.exec!("cd Desktop; python button_press.py")
+      output = ssh.exec!("cd Desktop; python lock_controller.py status")
       @lock_status = output.split
     end
+    # Return will be Open or Closed
     render :json => {status: @lock_status[0].to_s}
   end
 
@@ -82,9 +83,19 @@ class LocksController < ApplicationController
         
         Net::SSH.start(host, user, password: password) do |ssh|
           
-            output = ssh.exec!("cd Desktop; python lock_on.py")
+            output = ssh.exec!("cd Desktop; python lock_controller.py unlock")
 
-            render json: { notice: "#{lock.group}'s #{lock.lock_name} has been unlocked" }
+            status = output.split
+
+            if status[0].to_s == "Unlocked"
+
+              render json: { notice: "#{lock.group}'s #{lock.lock_name} has been unlocked" }
+
+            else
+
+              render json: { notice: "#{lock.group}'s #{lock.lock_name} has been left open! Close the door! "}
+
+            end
 
         end
 
@@ -106,9 +117,20 @@ class LocksController < ApplicationController
         
         Net::SSH.start(host, user, password: password) do |ssh|
           
-            output = ssh.exec!("cd Desktop; python lock_off.py")
+            output = ssh.exec!("cd Desktop; python lock_controller.py lock")
 
-            render json: { notice: "#{lock.group}'s #{lock.lock_name} has been locked" }
+            status = output.split
+
+            if status[0].to_s == "Locked"
+
+              render json: { notice: "#{lock.group}'s #{lock.lock_name} has been locked" }
+
+            else
+
+              render json: { notice: "#{lock.group}'s #{lock.lock_name} has been left open! Close the door!" }
+              
+            end
+
 
         end
 
