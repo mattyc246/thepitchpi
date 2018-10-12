@@ -17,43 +17,49 @@
         <h2><%= current_user.name %>'s Locks</h2>
     </div>
 
-    <div class="float-left">
-        <div >
-            <% @locks.order("id asc").group_by(&:group).each do |group, lock| %>
-                <div class="card text-dark border-light mb-3" style="max-width: 20rem; min-width: 20rem">
-                    <div class="card-header">
-                        <div sytle="max-width: 5rem ">
-                            <%= group %>
-                            <button id="<%= lock.first.user_id %>" value= "<%= group %>" class='flygroup'>zoom</button>
-                        </div>
-                    </div>
-                    <% lock.each do |lock| %>
-                        <div class="card-body">
-                            <div>
-                                <h5 class="card-title float-left"><%= link_to lock.lock_name, user_lock_path(current_user.id, lock.id) %></h5>
-                                <button class='fly' value='<%=lock.longitude%>' name='<%=lock.latitude%>'>Find</button>
-                                <div class="float-right">
-                                    <!-- Rounded switch -->
-                                    <label class="switch" id="lock_status">
-                                        <input type="checkbox" name="lock_status"
-                                            <% unless lock.status == "Unlocked" %>
-                                                <%= "checked" %>
-                                            <% end %> >
-                                        <span id="slider-<%= lock.id %>" class="slider round"></span>
-                                    </label>
-                                </div>
+    <div class="d-flex" id="lock-map-container">
+
+        <div class="p-2" id="locks-container">
+            <div >
+                <% @locks.order("id asc").group_by(&:group).each do |group, lock| %>
+                    <div class="card text-dark border-light mb-3" style="max-width: 20rem; min-width: 20rem">
+                        <div class="card-header">
+                            <div sytle="max-width: 5rem ">
+                                <%= group %>
+                                <button id="<%= lock.first.user_id %>" value= "<%= group %>" class='flygroup'>zoom</button>
                             </div>
                         </div>
-                    <% end %>
-                </div>
-            <% end %>
+                        <% lock.each do |lock| %>
+                            <div class="card-body">
+                                <div>
+                                    <h5 class="card-title float-left"><%= link_to lock.lock_name, user_lock_path(current_user.id, lock.id) %></h5>
+                                    <button class='fly' value='<%=lock.longitude%>' name='<%=lock.latitude%>'>Find</button>
+                                    <div class="float-right">
+                                        <!-- Rounded switch -->
+                                        <label class="switch" id="lock_status">
+                                            <input type="checkbox" name="lock_status"
+                                                <% unless lock.status == "Unlocked" %>
+                                                    <%= "checked" %>
+                                                <% end %> >
+                                            <span id="slider-<%= lock.id %>" class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
+                    </div>
+                <% end %>
+            </div>
         </div>
+
+        <div class="p-2" style="min-width: 55rem" id="map-container">
+            <button id="<%= @user %>" value= "All" class='flygroup btn'>All</button>
+            <button id="<%= @user %>" value= "All" class='flygroup'><i class="fas fa-search-location"></i></button>
+            <div id='map' class="pt-2" ></div>
+        </div>
+
     </div>
 
-    <div class="">
-        <button id="<%= @user %>" value= "All" class='flygroup'>All</button>
-        <div id='map' class="min-width: 70rem" ></div>
-    </div>
 <script>
 
   $(document).ready(function() {
@@ -141,8 +147,8 @@ var geojson = {
       title: "<%= lock.lock_name %>",
       group: "<%= lock.group %>",
       description: "<%= lock.status %>",
-      link: "<%= user_lock_path(current_user.id, lock.id) %>"
-
+      link_to: "<%= user_lock_path(current_user.id, lock.id) %>",
+      link_2: "<%= toggle_lock_path(lock.id) %>",
     }
   },
 
@@ -161,7 +167,8 @@ geojson.features.forEach(function(marker) {
   new mapboxgl.Marker(el)
     .setLngLat(marker.geometry.coordinates)
     .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-    .setHTML('<h5><a href="'+ marker.properties.link +'">' + marker.properties.title + '</a></h5><small>' + marker.properties.group + '</small><h4>' + marker.properties.description + '</h4>'))
+    //.setHTML('<h5><a href="'+ marker.properties.link_to +'">' + marker.properties.title + '</a></h5><small>' + marker.properties.group + '</small><h4>' + marker.properties.description + '</h4>' + '<h5><a href="'+ marker.properties.toggle +'">' + 'Toggle' + '</a></h5>'))
+    .setHTML(`<h5><a href="${marker.properties.link_to}">${marker.properties.title}</a></h5> <small>${marker.properties.group}</small> <h4>${marker.properties.description}</h4> <a href="${marker.properties.link_2}" class ="map-toggle">Toggle Lock</a>`))
     .addTo(map);
 });
 
