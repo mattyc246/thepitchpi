@@ -16,8 +16,8 @@
 
 body {
 
-	height: 100vh;
-	width: 100vw;
+	/* height: 100vh; */
+	/* width: 100vw; */
 	font-family: 'K2D', 'Arial', sans-serif;
 	background-color: rgb(39, 67, 87);
 
@@ -30,12 +30,12 @@ body {
 
 .sign-up{
 
-	width: 50%;
+	width: 30%;
 }
 
 .sign-in{
 
-	width: 50%;
+	width: 30%;
 }
 
 .password-reset{
@@ -54,4 +54,26 @@ body {
 .container {
 	margin-top: 1rem;
 }
-=======
+
+.w-50 {
+	width: 60%!important;
+}
+
+@media only screen and (max-width: 425px) {
+	.sign-in {
+    width: 80%;
+  }
+
+  .sign-up {
+    width: 80%;
+  }
+
+	.w-50 {
+		width: 80%!important;
+	}
+
+	.p-3 {
+		padding: 0rem!important;
+
+	}
+}

@@ -1,5 +1,6 @@
+
 <% if current_user && @user.subscription_status == true %>
-	
+
 <div id="testing-here" class='w-25 h-25 bg-success'>
 
 	</div>
@@ -20,7 +21,40 @@
 
 <% else %>
 
-	<div class="text-center w-50 h-50 my-auto shadow-lg child bg-form-custom border rounded p-3">
+
+<div class="cover-container d-flex w-100 h-100 p-mx3-auto flex-column__web-inspector-hide-shortcut__">
+      <!-- <header class="masthead mb-auto">
+        <div class="inner">
+          <h3 class="masthead-brand">Lock n' Roll</h3>
+          <nav class="nav nav-masthead justify-content-center">
+            <a class="nav-link active" href="#">Home</a>
+            <a class="nav-link" href="#">Features</a>
+            <a class="nav-link" href="#">Contact</a>
+          </nav>
+         </div>
+      </header> -->
+			<div class="inner-cover">
+	       <main role="main" class="inner cover">
+	        <h1 class="cover-heading">Welcome to Lock N Roll!</h1>
+	        <p class="lead">Did you lock your door in your house? If not, you have come to the right page! We can help you to lock your door remotely. </p>
+	        <!-- <p class="lead">
+	          <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
+	        </p> -->
+	       </main>
+			 </div>
+
+       <!-- <footer class="mastfoot mt-auto">
+        <div class="inner">
+          <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+        </div>
+      </footer>
+     </div>
+
+
+</div>  -->
+
+<!-- ## Matt container -->
+	<!-- <div class="text-center w-50 h-50 my-auto shadow-lg child bg-form-custom border rounded p-3">
 	  <div class="child">
 		<h1 class="text-light">Welcome to Lock N Roll!</h1>
 		<h3 class="text-light">
@@ -28,11 +62,11 @@
 		</h3>
 		<h1 class="text-light"><i class="fas fa-lock"></i></h1>
 	  </div>
-	</div>
+	</div> -->
 
 <% end %>
 
-<script>
+<!-- <script>
 
 $(document).ready(function(){
 
@@ -43,6 +77,7 @@ $(document).ready(function(){
 						method: 'GET',
 						dataType: 'JSON',
 						success: function(data){
+							console.log(data)
 							var status = data.status;
 							if (status == "Unlocked"){
 								$('#testing-here').removeClass('bg-success');
@@ -57,5 +92,4 @@ $(document).ready(function(){
 			})
 
 
-</script> 
-
+</script> -->
