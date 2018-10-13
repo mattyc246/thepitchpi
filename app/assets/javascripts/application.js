@@ -14,3 +14,52 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+
+
+// USER LOCATION AND DISTANCE------------USER LOCATION AND DISTANCE--------------USER LOCATION AND DISTANCE----------------
+
+// detect it is mobile
+// if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+
+
+
+
+$(document).ready(function(){
+
+
+				setInterval(function(){
+
+				navigator.geolocation.getCurrentPosition(function(location){
+				 var lng = location.coords.longitude;
+				 var lat = location.coords.latitude;
+				 var acc = location.coords.accuracy;
+
+
+					$.ajax({
+
+						url: 'locks/distance_check',
+						method: 'GET',
+						dataType: 'JSON',
+						data: {current_lng: lng ,  current_lat: lat,  current_acc: acc},
+						success: function(data){
+							console.log(data);
+							// if (status == "Unlocked"){
+							// 	$('#testing-here').removeClass('bg-success');
+							// 	$('#testing-here').addClass('bg-danger');
+							// } else if (status == "Locked"){
+							// 	$('#testing-here').removeClass('bg-danger');
+							// 	$('#testing-here').addClass('bg-success');
+							// }
+						}
+					})})}, 6000);
+
+			})
+
+// }
+
+
+
+// NOT USED---------------NOT USED---------------NOT USED---------------NOT USED---------------
+// when positon change
+// id = navigator.geolocation.watchPosition(success[, error[, options]])

@@ -43,11 +43,36 @@ class LocksController < ApplicationController
 
   end
 
-  def within_radius?
-    @user = User.find(params[:id])
-    @lock = @user.locks.find_by(ranking: "Main")
-    if Geocoder::Calculations.distance_between([params[:lng],params[:lat]], [@lock.longitude, @lock.latitude]) > radius
+  def distance_check
+    radius = 0.5
+    @user = User.find(current_user.id)
+    @lock = @user.locks.find_by(tracking: true)
+    @distance = Geocoder::Calculations.distance_between([params[:current_lng],params[:current_lat]], [@lock.longitude, @lock.latitude])
+
+    if @lock && @lock.status == "Unlocked"
+        if @user.in_range == true
+          if @distance > radius
+              @in_range_true = true
+              #   Twilio::REST::Client.new.messages.create({
+              #   from: ENV['twilio_phone_number'],
+              #   to: 'your number',
+              #   body: "Your #{@lock.group}, #{@lock.lock_name}, is UNLOCKED and you are more than 500 meters way. Lock it? https://www.google.com/"
+              #   })
+                @user.update(in_range: false)
+            end
+          else
+            if @distance < radius
+              @user.update(in_range: true)
+            end
+          end
+      else @lock && @lock.status == "Locked"
+        if @distance > radius
+          @user.update(in_range: true) if !@user.in_range
+        end
     end
+
+    render json: {lng: params[:current_lng], lat: params[:current_lat], acc: params[:current_acc], distance: @distance, in_range: @in_range}
+
   end
 
   def status_check
@@ -77,7 +102,7 @@ class LocksController < ApplicationController
         host = ENV['RASPBERRY_PI_HOST']
         user = ENV['RASPBERRY_PI_USER']
         password = ENV['RASPBERRY_PI_PASSWORD']
-        
+
         Net::SSH.start(host, user, password: password) do |ssh|
           output = ssh.exec!("cd Desktop; python button_press.py")
           @lock_status = output.split

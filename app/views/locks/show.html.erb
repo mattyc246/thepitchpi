@@ -110,23 +110,4 @@ map.addControl(new mapboxgl.GeolocateControl({
 
 
 
-// send geolocation to backend------------------------------------------------
-$(".find_location").click(function() {
-  if (navigator.geolocation)
-     {
-     navigator.geolocation.getCurrentPosition(useGeoData);
-     }
-});
-
-function useGeoData(position){
-   var lng = position.coords.longitude;
-   var lat = position.coords.latitude;
-   console.log(lng)
-   console.log(lat)
-
-
- }
-
-
-
 </script>

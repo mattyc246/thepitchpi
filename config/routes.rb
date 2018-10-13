@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post 'subscription/checkout' => 'braintree#checkout', as: "subscription_checkout"
   root 'welcome#index'
   get 'locks/status_check' =>  'locks#status_check', as: "status_check"
+  get 'locks/distance_check' =>  'locks#distance_check', as: "distance_check"
   get 'locks/toggle_lock' => 'locks#toggle_lock', as: "toggle_lock"
 
   get 'locks/group_points' => 'locks#group_points', as: "group_points"
@@ -31,4 +32,3 @@ Rails.application.routes.draw do
   get "/sign_up" => "clearance/users#new", as: "sign_up"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
-
