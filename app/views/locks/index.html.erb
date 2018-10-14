@@ -17,7 +17,7 @@
         <h2><%= current_user.name %>'s Locks</h2>
     </div>
 
-    <div class ="position-relative">
+    <div class ="position-relative" id="everything-container">
         <div class="" id="button-container">
             <button id="<%= @user %>" value= "All" class='flygroup btn'>Show All</button>
             <button id="show-control" class='btn'>Show Controls</button> <!-- show controls in mobile -->
@@ -71,25 +71,26 @@
     </div>
         
 <script>
+    // lock switch ajax
+    $(document).ready(function() {
+        $('.slider').click(function(){
+            var slider_id = event.target.id.split('-')[1]
 
-  $(document).ready(function() {
-      $('.slider').click(function(){
-        var slider_id = event.target.id.split('-')[1]
+            $.ajax({
+                url: '/locks/toggle_lock',
+                method: 'GET',
+                data: {toggle_id: slider_id},
+                success: function(data){
+                    var alert_message = data.notice
+                    $(".navbar").after(`<div class="alert alert-warning w-50 mx-auto" role="alert">${alert_message}</div>`)
+                    $(".alert").delay(2000).fadeOut('slow');
+                },
+                error: function(){}
+            });
+        });
+    })
 
-          $.ajax({
-              url: '/locks/toggle_lock',
-              method: 'GET',
-              data: {toggle_id: slider_id},
-              success: function(data){
-                  var alert_message = data.notice
-                  $(".navbar").after(`<div class="alert alert-warning w-50 mx-auto" role="alert">${alert_message}</div>`)
-                  $(".alert").delay(2000).fadeOut('slow');
-              },
-              error: function(){}
-          });
-      });
-  })
-
+    // locks container toggle
     $('#show-control').click(function() {
         $('#locks-container').toggleClass("dont-show");
     });
@@ -100,6 +101,10 @@
         $('#locks-container').toggleClass("dont-show");
     });
     
+    // button div to follow scrolling (doesn't work right now)
+    $('#everything-container').scroll(function() {
+        $('button-container').css('top', $(this).scrollTop());
+    });
   
 // Script ----------Script ----------Script ----------Script ----------Script ---------
 
