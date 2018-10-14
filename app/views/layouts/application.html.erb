@@ -30,9 +30,9 @@
 </head>
 <body class="text-light">
   <!-- Navbar to be used across the app -->
-  <% if current_user %>
-  <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
-    <a class="navbar-brand text-light" href="/"><%= image_tag "logo_small_W.png", style:"width: 12rem;" %></a>
+  <% if current_user && current_user.subscription_status == true %>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand bg-secondary p-1" href="/"><%= image_tag "logo_small_W.png", style:"width: 12rem;" %></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -42,10 +42,24 @@
           <a class="nav-item nav-link text-light ml-2" href="/users/<%= current_user.id %>/locks/new">Add New Lock</a>
           <a class="nav-item nav-link text-light ml-2" href="/users/<%= current_user.id %>">View Profile</a>
           <a class="nav-item nav-link" href="#"></a>
-          <%= button_to t(".sign_out"), sign_out_path, method: :delete, class:"btn btn-outline-light my-auto" %>
+          <%= button_to t("LOCK OUT"), sign_out_path, method: :delete, class:"btn btn-outline-light my-auto" %>
       </div>
     </div>
   </nav>
+  <% elsif current_user && current_user.subscription_status == false %>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light p-0">
+      <a class="navbar-brand bg-secondary p-1" href="/"><%= image_tag "logo_small_W.png", style:"width: 12rem;" %></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <%= link_to "ACTIVATE TO LOCK ON", subscription_new_path, class:"btn btn-link text-body my-auto" %>
+            <a class="nav-item nav-link" href="#"></a>
+            <%= button_to "LOCK OUT", sign_out_path, method: :delete, class:"btn btn-link text-body my-auto" %>
+        </div>
+      </div>
+    </nav>
   <% end -%>
   <% flash.each do |key, value| %>
     <div class="alert alert-warning w-50 mx-auto" role="alert">
