@@ -38,11 +38,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-          <a class="nav-item nav-link text-light ml-2" href="/users/<%= current_user.id %>/locks">Lock Management</a>
-          <a class="nav-item nav-link text-light ml-2" href="/users/<%= current_user.id %>/locks/new">Add New Lock</a>
-          <a class="nav-item nav-link text-light ml-2" href="/users/<%= current_user.id %>">View Profile</a>
-          <a class="nav-item nav-link" href="#"></a>
-          <%= button_to t("LOCK OUT"), sign_out_path, method: :delete, class:"btn btn-outline-light my-auto" %>
+          <a class="nav-item nav-link btn btn-link text-body text-uppercase my-auto">HI <%= current_user.name %>, YOU HAVE <%= current_user.locks.count %> LOCKS</a>
+          <a class="nav-item nav-link btn btn-link text-body my-auto" href="/users/<%= current_user.id %>/locks">MY LOCKS!</a>
+          <a class="nav-item nav-link btn btn-link text-body my-auto" href="/users/<%= current_user.id %>/locks/new">I WANNA LOCK!</a>
+          <a class="nav-item nav-link btn btn-link text-body my-auto" href="/users/<%= current_user.id %>">LOCKIN MERCH!</a>
+          <%= button_to "LOCK OUT", sign_out_path, method: :delete, class:"btn btn-link text-body my-auto" %>
       </div>
     </div>
   </nav>
