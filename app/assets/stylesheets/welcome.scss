@@ -25,10 +25,28 @@
 
 @media only screen and (max-width: 425px) {
             body {
-                background: url('/assets/generic-smart-lock-796x398.jpg');
-                background-position: 70%;
-                background-size: cover;
-                background-repeat: no-repeat;
-                background-attachment: fixed;
+                // background: url('/assets/generic-smart-lock-796x398.jpg');
+                // background-position: 70%;
+                // background-size: cover;
+                // background-repeat: no-repeat;
+                // background-attachment: fixed;
+
+                color: white;
+              	background-color: black;
+            }
+
+            .w-25 {
+              width: 30%!important;
+            }
+
+            .w-75, element.style {
+              width: 90%!important;
+            }
+
+            .h1, h1 {
+              font-size: 1.5rem;
+            }
+            .form-control, element.style {
+              width: 50%!important;
             }
         }
