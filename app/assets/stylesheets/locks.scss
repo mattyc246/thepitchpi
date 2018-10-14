@@ -181,3 +181,32 @@ input:checked + .slider:before {
   }
 
 }
+.card-body {
+	padding: 0.75rem;
+}
+
+.zoom-button {
+  background: url('/assets/images/ic_action_location_2.png');
+}
+
+.dont-show {
+  display: none;
+}
+
+#lock-map-container {
+  
+}
+
+@media screen and (min-width: 320px){
+  #locks-container {
+    
+  }
+}
+
+@media screen and (min-width: 768px){
+	#locks-container {
+		display: block;
+    width: 50rem;
+    height: 100%;
+	}
+}

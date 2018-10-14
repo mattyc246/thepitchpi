@@ -163,6 +163,7 @@ body {
 	margin-top: 1rem;
 }
 
+<<<<<<< HEAD
 .w-50 {
 	width: 60%!important;
 }
@@ -185,3 +186,6 @@ body {
 
 	}
 }
+=======
+
+>>>>>>> 1. made locks container to appear on top of the map, better mobile UX
