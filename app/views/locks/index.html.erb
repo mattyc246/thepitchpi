@@ -18,7 +18,7 @@
     </div>
 
     <div class ="position-relative">
-        <div class="">
+        <div class="" id="button-container">
             <button id="<%= @user %>" value= "All" class='flygroup btn'>Show All</button>
             <button id="show-control" class='btn'>Show Controls</button> <!-- show controls in mobile -->
         </div>
@@ -91,6 +91,12 @@
   })
 
     $('#show-control').click(function() {
+        $('#locks-container').toggleClass("dont-show");
+    });
+    $('.fly').click(function() {
+        $('#locks-container').toggleClass("dont-show");
+    });
+    $('.flygroup').click(function() {
         $('#locks-container').toggleClass("dont-show");
     });
     
