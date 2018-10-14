@@ -42,7 +42,8 @@
           <a class="nav-item nav-link btn btn-link text-body my-auto" href="/users/<%= current_user.id %>/locks">MY LOCKS!</a>
           <a class="nav-item nav-link btn btn-link text-body my-auto" href="/users/<%= current_user.id %>/locks/new">I WANNA LOCK!</a>
           <a class="nav-item nav-link btn btn-link text-body my-auto" href="/users/<%= current_user.id %>">LOCKIN MERCH!</a>
-          <%= button_to "LOCK OUT", sign_out_path, method: :delete, class:"btn btn-link text-body my-auto" %>
+          <%= link_to "LOCK OUT", sign_out_path, method: :delete, class:"btn btn-link text-body my-auto" %>
+          <a class="nav-item btn btn-link text-body my-auto">UNLOCK LOCKSTAR MODE</a>
       </div>
     </div>
   </nav>
