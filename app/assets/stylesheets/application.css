@@ -18,8 +18,20 @@ body {
 
 	/* height: 100vh; */
 	/* width: 100vw; */
-	font-family: 'K2D', 'Arial', sans-serif;
-	background-color: rgb(39, 67, 87);
+	color: white;
+	background-color: black;
+
+}
+
+.f-1 {
+
+	font-family: "Oswald", sans-serif;
+
+}
+
+.f-2 {
+
+	font-family: "Roboto", sans-serif;
 
 }
 
