@@ -48,11 +48,12 @@ class LocksController < ApplicationController
     @user = User.find(current_user.id)
     @lock = @user.locks.find_by(tracking: true)
     @distance = Geocoder::Calculations.distance_between([params[:current_lng],params[:current_lat]], [@lock.longitude, @lock.latitude])
+    @in_range = "unchanged"
 
     if @lock && @lock.status == "Unlocked"
         if @user.in_range == true
           if @distance > radius
-              @in_range_true = true
+              @in_range = "false"
               #   Twilio::REST::Client.new.messages.create({
               #   from: ENV['twilio_phone_number'],
               #   to: 'your number',
@@ -62,16 +63,21 @@ class LocksController < ApplicationController
             end
           else
             if @distance < radius
+              @in_range = "true"
               @user.update(in_range: true)
             end
           end
       else @lock && @lock.status == "Locked"
         if @distance > radius
+          @in_range = "locked"
           @user.update(in_range: true) if !@user.in_range
         end
     end
+    # byebug
 
-    render json: {lng: params[:current_lng], lat: params[:current_lat], acc: params[:current_acc], distance: @distance, in_range: @in_range}
+    @status_db = @user.in_range
+
+    render json: {lng: params[:current_lng], lat: params[:current_lat], acc: params[:current_acc], distance: @distance, in_range: @in_range, status_db: @status_db}
 
   end
 

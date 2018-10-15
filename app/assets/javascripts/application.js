@@ -38,12 +38,16 @@ $(document).ready(function(){
 
 					$.ajax({
 
-						url: 'locks/distance_check',
+						url: '/locks/distance_check',
 						method: 'GET',
 						dataType: 'JSON',
 						data: {current_lng: lng ,  current_lat: lat,  current_acc: acc},
 						success: function(data){
 							console.log(data);
+							$(".distance").html(data.distance)
+							$(".db_status").html(String(data.status_db))
+							$(".acc").html(data.acc)
+							$(".in_range").html(data.in_range)
 							// if (status == "Unlocked"){
 							// 	$('#testing-here').removeClass('bg-success');
 							// 	$('#testing-here').addClass('bg-danger');
@@ -52,7 +56,7 @@ $(document).ready(function(){
 							// 	$('#testing-here').addClass('bg-success');
 							// }
 						}
-					})})}, 6000);
+					})})}, 5000);
 
 			})
 
