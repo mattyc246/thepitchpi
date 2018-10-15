@@ -43,7 +43,7 @@
 	  </div>
 	</div>
 </div>
-	
+
 
 
 
@@ -51,29 +51,27 @@
 
 <script>
 // STATUS CHECK-------------STATUS CHECK-------------STATUS CHECK-------------STATUS CHECK-------------
-$(document).ready(function(){
-
-				setInterval(function(){
-					$.ajax({
-
-						url: 'locks/status_check',
-						method: 'GET',
-						dataType: 'JSON',
-						success: function(data){
-							console.log(data)
-							var status = data.status;
-							if (status == "Unlocked"){
-								$('#testing-here').removeClass('bg-success');
-								$('#testing-here').addClass('bg-danger');
-							} else if (status == "Locked"){
-								$('#testing-here').removeClass('bg-danger');
-								$('#testing-here').addClass('bg-success');
-							}
-						}
-					})}, 5000);
-
-			})
+// $(document).ready(function(){
+//
+// 				setInterval(function(){
+// 					$.ajax({
+//
+// 						url: 'locks/status_check',
+// 						method: 'GET',
+// 						dataType: 'JSON',
+// 						success: function(data){
+// 							console.log(data)
+// 							var status = data.status;
+// 							if (status == "Unlocked"){
+// 								$('#testing-here').removeClass('bg-success');
+// 								$('#testing-here').addClass('bg-danger');
+// 							} else if (status == "Locked"){
+// 								$('#testing-here').removeClass('bg-danger');
+// 								$('#testing-here').addClass('bg-success');
+// 							}
+// 						}
+// 					})}, 5000);
+//
+// 			})
 
 </script>
-
-
