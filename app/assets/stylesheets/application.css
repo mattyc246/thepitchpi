@@ -23,6 +23,12 @@ body {
 
 }
 
+.bg-black {
+
+	background-color: black;
+	
+}
+
 #home-view {
 	z-index: 1;
 }
