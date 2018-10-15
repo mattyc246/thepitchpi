@@ -89,7 +89,7 @@ class LocksController < ApplicationController
     user = ENV['RASPBERRY_PI_USER']
     password = ENV['RASPBERRY_PI_PASSWORD']
 
-    Net::SSH.start(host, user, password: password) do |ssh|
+    Net::SSH.start('192.168.1.227', 'pi', password: password) do |ssh|
       output = ssh.exec!("cd Desktop; python lock_controller.py status")
       @lock_status = output.split
     end
@@ -112,7 +112,7 @@ class LocksController < ApplicationController
         user = ENV['RASPBERRY_PI_USER']
         password = ENV['RASPBERRY_PI_PASSWORD']
 
-        Net::SSH.start(host, user, password: password) do |ssh|
+        Net::SSH.start('192.168.1.227', 'pi', password: password) do |ssh|
           
             output = ssh.exec!("cd Desktop; python lock_controller.py unlock")
 
@@ -146,7 +146,7 @@ class LocksController < ApplicationController
         user = ENV['RASPBERRY_PI_USER']
         password = ENV['RASPBERRY_PI_PASSWORD']
         
-        Net::SSH.start(host, user, password: password) do |ssh|
+        Net::SSH.start('192.168.1.227', 'pi', password: password) do |ssh|
           
             output = ssh.exec!("cd Desktop; python lock_controller.py lock")
 
