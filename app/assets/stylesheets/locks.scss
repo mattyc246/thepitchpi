@@ -110,6 +110,8 @@ input:checked + .slider:before {
   border: 1px solid rgba(0,0,0,.5);
   background-color: #495057!important;
   min-width: 25%;
+  margin-top: 50px;
+  margin: 50px;
 
 }
 
@@ -130,10 +132,6 @@ input:checked + .slider:before {
   margin: 15px;
 }
 
-.text-body {
-    // color: white!important;
-}
-
 .form-control {
   border-radius: 0;
   border: 1px solid #343a40;
@@ -142,5 +140,37 @@ input:checked + .slider:before {
 .small-font {
 
   font-size: 0.75em ;
+
+}
+
+@media only screen and (max-width: 425px) {
+
+  .card {
+    min-width: 25%!important;
+    margin: 60px;
+  }
+
+  .form-control,
+    element.style {
+    width: 100% !important;
+  }
+
+}
+
+@media only screen and (max-width: 375px) {
+
+  .card {
+    min-width: 25%!important;
+    margin: 45px!important;
+  }
+
+}
+
+@media only screen and (max-width: 320px) {
+
+  .card {
+    min-width: 10%!important;
+    margin: 15px !important;
+  }
 
 }
