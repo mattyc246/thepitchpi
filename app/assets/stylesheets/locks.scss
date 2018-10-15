@@ -108,7 +108,7 @@ input:checked + .slider:before {
 .card {
   position: absolute;
   border: 1px solid rgba(0,0,0,.5);
-  background-color: #495057;
+  background-color: #495057!important;
   min-width: 25%;
 
 }
@@ -128,4 +128,19 @@ input:checked + .slider:before {
 
 .submit-field {
   margin: 15px;
+}
+
+.text-body {
+    // color: white!important;
+}
+
+.form-control {
+  border-radius: 0;
+  border: 1px solid #343a40;
+}
+
+.small-font {
+
+  font-size: 0.75em ;
+
 }

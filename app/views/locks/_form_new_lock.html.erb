@@ -14,12 +14,12 @@
     <%= form.hidden_field :location %>
 
 
-    <div class="drop-down">
+    <div class="drop-down text-left m-2 f-1">
     <%= form.label :group %>
     <%= form.text_field :group, placeholder:"HOME", class:"form-control w-95 mx-left" %>
     </div>
 
-    <div class="drop-down">
+    <div class="drop-down text-left m-2 f-1">
     <label for="tracking">Rock Around the Clock!</label>
     <%= form.check_box :tracking, {}, true, false %>
     </div>
@@ -29,9 +29,10 @@
     <%= form.hidden_field :latitude ,:id =>"latitude_field" %>
 
     <div class="submit-field">
-      <p>Drag marker to your new lock location and submit</p>
-        <%= form.submit "NEW", class:"btn btn-secondary text-body f-1 form-control w-95" %>
+      <h6 class="small-font">Drag marker to your new lock location and submit</h6>
+        <%= form.submit "NEW", class:"btn btn-secondary text-white f-1 form-control w-95" %>
     </div>
+
 
 
 
