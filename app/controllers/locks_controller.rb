@@ -44,7 +44,7 @@ class LocksController < ApplicationController
   end
 
   def distance_check
-    radius = 0.1
+    radius = 0.02
     @user = User.find(current_user.id)
     @lock = @user.locks.find_by(tracking: true)
     @distance = Geocoder::Calculations.distance_between([params[:current_lng],params[:current_lat]], [@lock.longitude, @lock.latitude])
