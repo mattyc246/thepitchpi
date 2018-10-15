@@ -54,12 +54,12 @@ class LocksController < ApplicationController
         if @user.in_range == true
           if @distance > radius
               @in_range = "false"
-                Twilio::REST::Client.new.messages.create({
-                from: ENV['twilio_phone_number'],
-                to: '+60102362993',
-                body: "Your #{@lock.group}, #{@lock.lock_name}, is UNLOCKED and you are more than 200 meters way. Lock it? https://locknroll.herokuapp.com"
-                })
-#                 redirect_back(fallback_location: user_lock_path), :flash => { :success => "Your #{@lock.group}, #{@lock.lock_name}, is UNLOCKED and you are more than 200 meters way. Lock it?" }
+                # Twilio::REST::Client.new.messages.create({
+                # from: ENV['twilio_phone_number'],
+                # to: '+60102362993',
+                # body: "Your #{@lock.group}, #{@lock.lock_name}, is UNLOCKED and you are more than 200 meters way. Lock it? https://locknroll.herokuapp.com"
+                # })
+
                 @user.update(in_range: false)
             end
           else
