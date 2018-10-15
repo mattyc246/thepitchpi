@@ -47,7 +47,7 @@
       </div>
     </div>
   </nav>
-  <% elsif current_user && current_user.subscription_status == false %>
+  <% elsif current_user && current_user.subscription_status != true %>
     <nav class="navbar navbar-expand-lg navbar-light bg-light p-0 f-1">
       <a class="navbar-brand bg-secondary p-1" href="/"><%= image_tag "logo_small_W.png", style:"width: 12rem;" %></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">

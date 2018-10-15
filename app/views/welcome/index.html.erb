@@ -1,20 +1,31 @@
 <% if current_user && @user.subscription_status == true %>
 
-<div id="testing-here" class='w-25 h-25 bg-success'>
+<%= video_tag "stage_flames.mp4", id: "myVideo", autoplay: :autoplay, loop: :loop, mute: true %>
 
+	<div class="vertical-center">
+		<div id="home-view" class="w-75 mx-auto text-center">
+		  <%= image_tag "logo_large_W.png", style:"width: 60%;" %>
+		  <h1 class="cover-heading f-1">SECURITY <%= image_tag "logo_crossbones_W.png", style:"width: 3rem;" %> SYSTEMS</h1>
+		  <div class="w-50 mx-auto f-1">
+		    <h2 class="lead">Welcome back <%= current_user.name %>!</h2>
+		  </div>
+		</div>
+	</div>
 
 
 <% elsif current_user && @user.subscription_status == false %>
 
+	<%= video_tag "stage_flames.mp4", id: "myVideo", autoplay: :autoplay, loop: :loop, mute: true %>
 
-	<div class="text-center w-50 h-50 my-auto shadow-lg child bg-form-custom border rounded p-3">
-	  <div class="child">
-		<h1 class="text-center text-light">Welcome back <%= @user.name %></h1>
-		<h3 class="text-light">
-			Your subscription is not yet validated! Please make immediate payment in order to access your account!
-		</h3>
-		<%= link_to "Make Payment", subscription_new_path, class:"btn btn-outline-danger" %>
-	  </div>
+	<div class="vertical-center">
+		<div id="home-view" class="w-75 mx-auto text-center">
+		  <%= image_tag "logo_large_W.png", style:"width: 60%;" %>
+		  <h1 class="cover-heading f-1">SECURITY <%= image_tag "logo_crossbones_W.png", style:"width: 3rem;" %> SYSTEMS</h1>
+		  <div class="w-50 mx-auto f-1">
+		    <p class="lead">You are currently on Lock Down. Complete the subscription payment to fully Lock On!</p>
+			<%= link_to "ACTIVATE", subscription_new_path, class:"btn btn-secondary text-black" %>
+		  </div>
+		</div>
 	</div>
 
 
