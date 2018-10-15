@@ -31,33 +31,32 @@
 <body class="text-light">
   <!-- Navbar to be used across the app -->
   <% if current_user && current_user.subscription_status == true %>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light p-0 f-1">
-      <a class="navbar-brand bg-secondary p-1" href="/"><%= image_tag "logo_small_W.png", style:"width: 12rem;" %></a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-black p-2 f-1">
+      <a class="navbar-brand p-1" href="/"><%= image_tag "logo_small_W.png", style:"width: 12rem;" %></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-          <a class="nav-item nav-link btn btn-link text-body text-uppercase my-auto">HI <%= current_user.name %>, YOU HAVE <%= current_user.locks.count %> LOCKS</a>
-          <a class="nav-item nav-link btn btn-link text-body my-auto" href="/users/<%= current_user.id %>/locks">MY LOCKS!</a>
-          <a class="nav-item nav-link btn btn-link text-body my-auto" href="/users/<%= current_user.id %>/locks/new">I WANNA LOCK!</a>
-          <a class="nav-item nav-link btn btn-link text-body my-auto" href="/users/<%= current_user.id %>">LOCKIN MERCH!</a>
-          <%= link_to "LOCK OUT", sign_out_path, method: :delete, class:"btn btn-link text-body my-auto" %>
-          <a class="nav-item btn btn-link text-body my-auto">UNLOCK LOCKSTAR MODE</a>
+          <a class="nav-item nav-link text-lb text-uppercase my-auto" href="/users/<%= current_user.id %>">HI <%= current_user.name %>, YOU HAVE <%= current_user.locks.count %> LOCKS</a>
+          <a class="nav-item nav-link text-lb my-auto" href="/users/<%= current_user.id %>/locks">MY LOCKS!</a>
+          <a class="nav-item nav-link text-lb my-auto" href="/users/<%= current_user.id %>/locks/new">I WANNA LOCK!</a>
+          <a class="nav-item nav-link text-lb my-auto" href="/users/<%= current_user.id %>">LOCKIN MERCH!</a>
+          <%= link_to "LOCK OUT", sign_out_path, method: :delete, class:"btn text-lb my-auto" %>
+          <a id="easter-egg" class="nav-item text-pink my-auto">UNLOCK LOCKSTAR MODE <%= image_tag "logo_crossbones_W_full.png", style:"width: 3rem;" %></a>
       </div>
     </div>
   </nav>
   <% elsif current_user && current_user.subscription_status != true %>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light p-0 f-1">
+    <nav class="navbar navbar-expand-lg navbar-light bg-black p-0 f-1">
       <a class="navbar-brand bg-secondary p-1" href="/"><%= image_tag "logo_small_W.png", style:"width: 12rem;" %></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <%= link_to "ACTIVATE TO LOCK ON", subscription_new_path, class:"btn btn-link text-body my-auto" %>
-            <a class="nav-item nav-link" href="#"></a>
-            <%= button_to "LOCK OUT", sign_out_path, method: :delete, class:"btn btn-link text-body my-auto" %>
+            <%= link_to "ACTIVATE TO LOCK ON", subscription_new_path, class:"btn text-lb my-auto" %>
+            <%= button_to "LOCK OUT", sign_out_path, method: :delete, class:"text-lb my-auto" %>
         </div>
       </div>
     </nav>

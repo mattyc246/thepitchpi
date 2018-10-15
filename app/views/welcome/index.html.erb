@@ -7,7 +7,7 @@
 		  <%= image_tag "logo_large_W.png", style:"width: 60%;" %>
 		  <h1 class="cover-heading f-1">SECURITY <%= image_tag "logo_crossbones_W.png", style:"width: 3rem;" %> SYSTEMS</h1>
 		  <div class="w-50 mx-auto f-1">
-		    <h2 class="lead">Welcome back <%= current_user.name %>!</h2>
+		    <h2 class="lead text-pink">Welcome back <%= current_user.name %>!</h2>
 		  </div>
 		</div>
 	</div>
@@ -36,10 +36,10 @@
 	<div id="home-view" class="w-75 mx-auto text-center">
 	  <%= image_tag "logo_large_W.png", style:"width: 60%;" %>
 	  <h1 class="cover-heading f-1">SECURITY <%= image_tag "logo_crossbones_W.png", style:"width: 3rem;" %> SYSTEMS</h1>
-	  <a href="/sign_in" class="btn btn-secondary text-body m-2 w-25 f-1">LOCK IN</a></br>
-	  <a href="/sign_up" class="text-white f-1">or Sign Up</a>
+	  <a href="/sign_in" class="btn btn-dark btn-lg bg-black text-pink m-2 w-25 f-1">LOCK IN</a></br>
+	  <a href="/sign_up" class="text-pink f-1">or Sign Up</a>
 	  <div class="w-50 mx-auto f-1">
-	    <p class="lead">Did you lock your door in your house? If not, you have come to the right page! We can help you to lock your door remotely. </p>
+	    <p class="lead text-pink">Did you lock your door in your house? If not, you have come to the right page! We can help you to lock your door remotely. </p>
 	  </div>
 	</div>
 </div>
@@ -51,28 +51,28 @@
 
 <script>
 // STATUS CHECK-------------STATUS CHECK-------------STATUS CHECK-------------STATUS CHECK-------------
-$(document).ready(function(){
+// $(document).ready(function(){
 
-				setInterval(function(){
-					$.ajax({
+// 				setInterval(function(){
+// 					$.ajax({
 
-						url: 'locks/status_check',
-						method: 'GET',
-						dataType: 'JSON',
-						success: function(data){
-							console.log(data)
-							var status = data.status;
-							if (status == "Unlocked"){
-								$('#testing-here').removeClass('bg-success');
-								$('#testing-here').addClass('bg-danger');
-							} else if (status == "Locked"){
-								$('#testing-here').removeClass('bg-danger');
-								$('#testing-here').addClass('bg-success');
-							}
-						}
-					})}, 5000);
+// 						url: 'locks/status_check',
+// 						method: 'GET',
+// 						dataType: 'JSON',
+// 						success: function(data){
+// 							console.log(data)
+// 							var status = data.status;
+// 							if (status == "Unlocked"){
+// 								$('#testing-here').removeClass('bg-success');
+// 								$('#testing-here').addClass('bg-danger');
+// 							} else if (status == "Locked"){
+// 								$('#testing-here').removeClass('bg-danger');
+// 								$('#testing-here').addClass('bg-success');
+// 							}
+// 						}
+// 					})}, 5000);
 
-			})
+// 			})
 
 </script>
 
