@@ -8,7 +8,7 @@
 
 User.create(name: 'Userone', email: 'locknrolls.user1@gmail.com', subscription_status: true, phone: 1111111, password: 11111111)
 
-Lock.create(lock_name: 'Front Door', latitude: 3.13500, longitude:101.62991, user_id: 1, group: 'Office')
+Lock.create(lock_name: 'Front Door', latitude: 3.13500, longitude:101.62991, user_id: 1, group: 'Office', tracking: true)
 Lock.create(lock_name: 'Side Door', latitude: 3.13467, longitude:101.62991, user_id: 1, group: 'Office')
 Lock.create(lock_name: 'Back Door', latitude: 3.13476, longitude:101.63011, user_id: 1, group: 'Office')
 

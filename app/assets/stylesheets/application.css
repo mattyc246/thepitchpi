@@ -19,7 +19,44 @@ body {
 	/* height: 100vh; */
 	/* width: 100vw; */
 	color: white;
-	background-color: black;
+	 background: url('backgound_pages.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+
+}
+
+#easter-egg{
+
+  position: absolute;
+  right: 10px;
+
+}
+
+.alert {
+
+  z-index: 998;
+  background-color: #FF046B;
+  color: #2E2E2E;
+
+}
+
+.text-pink {
+
+  color: #FF046B!important;
+
+}
+
+.text-lb {
+
+  color: #B5FFFF!important;
+
+}
+
+.almost-black {
+
+  color: #2E2E2E;
 
 }
 
