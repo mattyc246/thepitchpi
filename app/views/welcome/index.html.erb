@@ -1,13 +1,22 @@
 <% if current_user && @user.subscription_status == true %>
 
-<div id="testing-here" class='w-25 h-25 bg-success'>
+<%= video_tag "stage_flames.mp4", id: "myVideo", autoplay: :autoplay, loop: :loop, mute: true %>
 
+	<div class="vertical-center">
+		<div id="home-view" class="w-75 mx-auto text-center">
+		  <%= image_tag "logo_large_W.png", style:"width: 60%;" %>
+		  <h1 class="cover-heading f-1">SECURITY <%= image_tag "logo_crossbones_W.png", style:"width: 3rem;" %> SYSTEMS</h1>
+		  <div class="w-50 mx-auto f-1">
+		    <h2 class="lead">Welcome back <%= current_user.name %>!</h2>
+		  </div>
+		</div>
+	</div>
 
 
 <% elsif current_user && @user.subscription_status == false %>
 
 	<%= video_tag "stage_flames.mp4", id: "myVideo", autoplay: :autoplay, loop: :loop, mute: true %>
-	
+
 	<div class="vertical-center">
 		<div id="home-view" class="w-75 mx-auto text-center">
 		  <%= image_tag "logo_large_W.png", style:"width: 60%;" %>
