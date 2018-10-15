@@ -64,7 +64,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ff4949;
+  background-color: #ff0067;
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -82,17 +82,18 @@
 }
 
 input:checked + .slider {
-  background-color: #1dc656;
+  background-color: #A6FFFF;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #1dc656;
+  box-shadow: 0 0 1px #A6FFFF;
 }
 
 input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
+  background-color: #323232;
 }
 
 /* Rounded sliders */
@@ -183,7 +184,12 @@ input:checked + .slider:before {
 }
 .card-body {
   padding: 0.75rem;
-  height: 2rem;
+  height: 3.5rem;
+  background-color: #323232;
+}
+
+.card {
+  background-color: #000000;
 }
 
 .zoom-button {
@@ -199,6 +205,14 @@ input:checked + .slider:before {
   top: 20px;
 }
 
+a.fill-div {
+  display: block;
+}
+
+.locked-color {
+  filter: hue-rotate(336);
+}
+
 #lock-map-container {
   
 }
@@ -211,7 +225,6 @@ input:checked + .slider:before {
 
 @media screen and (min-width: 768px){
 	#locks-container {
-		display: block;
     width: 50rem;
     height: 100%;
   }
