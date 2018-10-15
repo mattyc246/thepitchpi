@@ -59,7 +59,7 @@ class LocksController < ApplicationController
                 to: '+60102362993',
                 body: "Your #{@lock.group}, #{@lock.lock_name}, is UNLOCKED and you are more than 200 meters way. Lock it? https://locknroll.herokuapp.com"
                 })
-                redirect_back(fallback_location: user_lock_path), :flash => { :success => "Your #{@lock.group}, #{@lock.lock_name}, is UNLOCKED and you are more than 200 meters way. Lock it?" }
+#                 redirect_back(fallback_location: user_lock_path), :flash => { :success => "Your #{@lock.group}, #{@lock.lock_name}, is UNLOCKED and you are more than 200 meters way. Lock it?" }
                 @user.update(in_range: false)
             end
           else
@@ -89,8 +89,9 @@ class LocksController < ApplicationController
     host = ENV['RASPBERRY_PI_HOST']
     user = ENV['RASPBERRY_PI_USER']
     password = ENV['RASPBERRY_PI_PASSWORD']
+    port = ENV['RASPBERRY_PI_PORT']
 
-    Net::SSH.start(host, user, password: password) do |ssh|
+    Net::SSH.start(host, user, password: password, port: port) do |ssh|
       output = ssh.exec!("cd Desktop; python lock_controller.py status")
       @lock_status = output.split
     end
@@ -112,9 +113,11 @@ class LocksController < ApplicationController
         host = ENV['RASPBERRY_PI_HOST']
         user = ENV['RASPBERRY_PI_USER']
         password = ENV['RASPBERRY_PI_PASSWORD']
+        port = ENV['RASPBERRY_PI_PORT']
 
-        Net::SSH.start(host, user, password: password) do |ssh|
 
+        Net::SSH.start(host, user, password: password, port: port) do |ssh|
+          
             output = ssh.exec!("cd Desktop; python lock_controller.py unlock")
 
             status = output.split
@@ -146,9 +149,10 @@ class LocksController < ApplicationController
         host = ENV['RASPBERRY_PI_HOST']
         user = ENV['RASPBERRY_PI_USER']
         password = ENV['RASPBERRY_PI_PASSWORD']
-
-        Net::SSH.start(host, user, password: password) do |ssh|
-
+        port = ENV['RASPBERRY_PI_PORT']
+        
+        Net::SSH.start(host, user, password: password, port: port) do |ssh|
+          
             output = ssh.exec!("cd Desktop; python lock_controller.py lock")
 
             status = output.split
