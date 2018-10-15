@@ -1,5 +1,5 @@
 
-<div>
+<!-- <div>
   <meta charset='utf-8' />
   <title>Create a draggable Marker</title>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
@@ -9,12 +9,16 @@
   body { margin:0; padding:0;}
   #map {width:100%;height:400px }
   </style>
+</div> -->
+
+<div class="card" style="width: 18rem;">
+  <h5 class="card-header">I WANNA LOCK!</h5>
+  <div class="card-body">
+        <%= render partial: '/locks/form_new_lock'%>
+    </div>
+  </div>
 </div>
 
-<div class="container">
-    <h1>Register a new lock</h1>
-    <%= render partial: '/locks/form_new_lock'%>
-</div>
 
 <div id='map'></div>
 <pre id='coordinates' class='coordinates'></pre>

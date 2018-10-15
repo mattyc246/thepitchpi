@@ -1,20 +1,20 @@
 <%= form_with scope: :locks, url: user_locks_path, local: true do |form| %>
 
-    <div class="text-field">
-    <%= form.label :lock_name %>
-    <%= form.text_field :lock_name %>
+    <div class="text-field text-left m-2 f-1">
+      <%= form.label :NAME %>
+      <%= form.text_field :lock_name, placeholder:"FRONT DOOR", class:"form-control w-95 mx-left"%>
     </div>
 
 
     <%= form.hidden_field :location %>
 
 
-    <div class="drop-down">
+    <div class="drop-down text-left m-2 f-1">
     <%= form.label :group %>
-    <%= form.text_field :group %>
+    <%= form.text_field :group, placeholder:"HOME", class:"form-control w-95 mx-left" %>
     </div>
 
-    <div class="drop-down">
+    <div class="drop-down text-left m-2 f-1">
     <label for="tracking">Rock Around the Clock!</label>
     <%= form.check_box :tracking, {}, true, false %>
     </div>
@@ -24,8 +24,10 @@
     <%= form.hidden_field :latitude ,:id =>"latitude_field" %>
 
     <div class="submit-field">
-        <%= form.submit "Register New Lock"%>
+      <h6 class="small-font">Drag marker to your new lock location and submit</h6>
+        <%= form.submit "NEW", class:"btn btn-secondary text-white f-1 form-control w-95" %>
     </div>
+
 
 
 
