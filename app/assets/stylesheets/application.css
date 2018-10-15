@@ -23,6 +23,12 @@ body {
 
 }
 
+.navbar {
+
+  z-index: 999;
+
+}
+
 .bg-black {
 
 	background-color: black;
