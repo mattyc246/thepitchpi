@@ -1,32 +1,36 @@
-<div id="clearance" class="sign-in mx-auto text-center bg-form-custom border rounded shadow-lg p-3">
+<div class="vertical-center f-1">
+  <div class="w-75 mx-auto text-center">
+    <%= image_tag "logo_large_W.png", style:"width: 60%;" %>
+    <h1 class="cover-heading f-1">SECURITY <%= image_tag "logo_crossbones_W.png", style:"width: 3rem;" %> SYSTEMS</h1>
+    <h2>SUBSCRIBE TO LOCK ON</h2>
+    <%= form_for :checkout_form, url: subscription_checkout_path(id: @user.id), html: { id: "cardForm"} do |form| %>
 
-<h1>Make your payment</h1>
+      <%= form.select :price, options_for_select([["1 Year @ $99.99", 99.99],["2 Years @ $159.99", 159.99],["3 Years @ $209.99", 209.99]]), {prompt: "Select Subscription Period..."}, {class:"form-control w-50 mx-auto"} %></br>
 
-<div class="demo-frame payment-new">
+      <%= form.label :card_number, "Credit Card Number", html: {class: "hosted-fields--label"} %>
+      <div id="card-number" class="hosted-field w-50 mx-auto"></div>
 
+      <%= form.label :expiration_date, "Expiration Date", html: {class: "hosted-fields--label"} %>
+      <div id="expiration-date" class="hosted-field w-50 mx-auto"></div>
 
+      <%= form.label :cvv, "CVV", html: {class: "hosted-fields--label"} %>
+      <div id="cvv" class="hosted-field w-50 mx-auto"></div>
 
-  <%= form_for :checkout_form, url: subscription_checkout_path(id: @user.id), html: { id: "cardForm"} do |form| %>
+      <%= form.hidden_field "payment_method_nonce" %>
 
-    <%= form.label :subscription, "Subscription Length", html: {class: "hosted-fields--label"} %></br>
-    <%= form.select :price, options_for_select([["1 Year @ $99.99", 99.99],["2 Years @ $159.99", 159.99],["3 Years @ $209.99", 209.99]]), {prompt: "Select Subscription Period..."}, {class:"form-control"} %></br>
-
-    <%= form.label :card_number, "Credit Card Number", html: {class: "hosted-fields--label m-2"} %>
-    <div id="card-number" class="hosted-field"></div>
-
-    <%= form.label :expiration_date, "Expiration Date", html: {class: "hosted-fields--label"} %>
-    <div id="expiration-date" class="hosted-field"></div>
-
-    <%= form.label :cvv, "CVV", html: {class: "hosted-fields--label"} %>
-    <div id="cvv" class="hosted-field"></div>
-
-    <%= form.hidden_field "payment_method_nonce" %>
-
-    <div class="button-container">
-      <%= form.submit "Purchase", disabled: true, class: "btn btn-primary", id: "submit-payment-btn" %>
-    </div>
-  <% end %>
+      <div class="button-container">
+        <%= form.submit "Purchase", disabled: true, class: "btn btn-secondary text-body", id: "submit-payment-btn", confirm: "Are you sure you wish to subscribe?" %>
+      </div>
+    <% end %>
+  </div>
 </div>
+
+
+
+
+
+
+
 
 
   <!-- Load the Client component. -->
@@ -54,7 +58,7 @@
       client: clientInstance,
       styles: {
         'input': {
-          'font-size': '14pt'
+          'font-size': '12pt'
         },
         'input.invalid': {
           'color': 'red'

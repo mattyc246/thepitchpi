@@ -1,15 +1,12 @@
-<div class="text-field text-center m-1">
-  <%= form.label :full_name %>
-  <%= form.text_field :name, placeholder:"John Smith", class:"form-control w-50 mx-auto" %>
+<div class="text-field text-center m-2 f-1">
+  <%= form.text_field :name, placeholder:"FULL NAME", class:"form-control w-50 mx-auto" %>
 </div>
 
-<div class="text-field text-center m-1">
-  <%= form.label :email %>
-  <%= form.text_field :email, type: 'email', placeholder:"john@smith.com", class:"form-control w-50 mx-auto" %>
+<div class="text-field text-center m-2 f-1">
+  <%= form.text_field :email, type: 'email', placeholder:"EMAIL", class:"form-control w-50 mx-auto" %>
 </div>
 
-<div class="password-field text-center m-1">
-  <%= form.label :password %>
-  <%= form.password_field :password, class:"form-control w-50 mx-auto", placeholder:"*********" %></br>
+<div class="password-field text-center m-1 f-1">
+  <%= form.password_field :password, class:"form-control w-50 mx-auto", placeholder:"PASSWORD" %></br>
   <%= form.label "Password length must be 8-20 Characters" %>
 </div>

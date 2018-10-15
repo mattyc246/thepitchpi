@@ -1,22 +1,19 @@
 <%= form_for :session, url: session_path do |form| %>
-  <div class="text-field text-center m-1">
-    <%= form.label :email %>
-    <%= form.text_field :email, type: 'email', placeholder:"johnsmith@example.com", class:"form-control w-50 mx-auto" %>
+  <div class="text-field text-center m-2 f-1">
+    <%= form.text_field :email, type: 'email', placeholder:"EMAIL", class:"form-control mx-auto", style: "width: 35%;" %>
   </div>
 
-  <div class="password-field text-center m-1">
-    <%= form.label :password %>
-    <%= form.password_field :password, placeholder:"********", class:"form-control w-50 mx-auto" %>
+  <div class="password-field text-center m-2 f-1">
+    <%= form.password_field :password, placeholder:"PASSWORD", class:"form-control mx-auto", style: "width: 35%;" %>
   </div>
 
-  <div class="submit-field text-center m-2">
-    <%= form.submit "Sign In", class:"btn btn-outline-success" %>
+  <div class="submit-field text-center m-2 f-1">
+    <%= form.submit "LOCK IN", class:"btn btn-secondary text-body" %>
   </div>
 
-  <div class="other-links text-center m-1">
+  <div class="other-links text-center m-2 f-1">
     <% if Clearance.configuration.allow_sign_up? %>
-      <%= link_to t("Not Registered? Sign Up Here"), sign_up_path, class:"text-white" %>
+      <%= link_to t("or Sign Up"), sign_up_path, class:"text-white" %>
     <% end %>
-    <%= link_to t("Reset Password"), new_password_path, class:"ml-2 text-white" %>
   </div>
 <% end %>

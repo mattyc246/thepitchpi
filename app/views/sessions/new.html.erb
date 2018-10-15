@@ -1,8 +1,12 @@
-<div id="clearance" class="sign-in mx-auto text-center bg-form-custom border rounded shadow-lg p-3">
-  <h2><%= t(".title") %></h2>
+<%= video_tag "crowd.mp4", id: "signinVideo", autoplay: :autoplay, loop: :loop, mute: true %>
 
-  <%= render partial: '/sessions/form' %>
-
-
-
+<div id="clearance" class="vertical-center">
+	<div id="sign-in-view" class="w-75 mx-auto text-center">
+	  <%= image_tag "logo_large_W.png", style:"width: 60%;" %>
+		<h1 class="cover-heading f-1">SECURITY <%= image_tag "logo_crossbones_W.png", style:"width: 3rem;" %> SYSTEMS</h1>
+		  
+  		<%= render partial: '/sessions/form' %>
+		  
+	</div>
 </div>
+

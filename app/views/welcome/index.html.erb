@@ -2,7 +2,7 @@
 
 <div id="testing-here" class='w-25 h-25 bg-success'>
 
-	</div>
+
 
 <% elsif current_user && @user.subscription_status == false %>
 
@@ -20,15 +20,21 @@
 
 <% else %>
 
-	<div class="text-center w-50 h-50 my-auto shadow-lg child bg-form-custom border rounded p-3">
-	  <div class="child">
-		<h1 class="text-light">Welcome to Lock N Roll!</h1>
-		<h3 class="text-light">
-			Please login to gain access to your account!
-		</h3>
-		<h1 class="text-light"><i class="fas fa-lock"></i></h1>
+<%= video_tag "stage_flames.mp4", id: "myVideo", autoplay: :autoplay, loop: :loop, mute: true %>
+<div class="vertical-center">
+	<div id="home-view" class="w-75 mx-auto text-center">
+	  <%= image_tag "logo_large_W.png", style:"width: 60%;" %>
+	  <h1 class="cover-heading f-1">SECURITY <%= image_tag "logo_crossbones_W.png", style:"width: 3rem;" %> SYSTEMS</h1>
+	  <a href="/sign_in" class="btn btn-secondary text-body m-2 w-25 f-1">LOCK IN</a></br>
+	  <a href="/sign_up" class="text-white f-1">or Sign Up</a>
+	  <div class="w-50 mx-auto f-1">
+	    <p class="lead">Did you lock your door in your house? If not, you have come to the right page! We can help you to lock your door remotely. </p>
 	  </div>
 	</div>
+</div>
+	
+
+
 
 <% end %>
 
@@ -43,6 +49,7 @@ $(document).ready(function(){
 						method: 'GET',
 						dataType: 'JSON',
 						success: function(data){
+							console.log(data)
 							var status = data.status;
 							if (status == "Unlocked"){
 								$('#testing-here').removeClass('bg-success');
@@ -57,3 +64,6 @@ $(document).ready(function(){
 			})
 
 </script>
+
+</script> 
+

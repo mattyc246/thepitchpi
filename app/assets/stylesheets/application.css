@@ -16,11 +16,70 @@
 
 body {
 
-	height: 100vh;
-	width: 100vw;
-	font-family: 'K2D', 'Arial', sans-serif;
-	background-color: rgb(39, 67, 87);
+	/* height: 100vh; */
+	/* width: 100vw; */
+	color: white;
+	background-color: black;
 
+}
+
+#home-view {
+	z-index: 1;
+}
+
+#sign-in-view {
+	z-index: 1;
+}
+
+#sign-up-view {
+	z-index: 1;
+}
+
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+    z-index: 0;
+}
+
+#signinVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+    z-index: 0;
+}
+
+#signupVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+    z-index: 0;
+}
+
+.f-1 {
+
+	font-family: "Oswald", sans-serif;
+
+}
+
+.f-2 {
+
+	font-family: "Roboto", sans-serif;
+
+}
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one */
+
+  display: flex;
+  align-items: center;
 }
 
 .bg-form-custom {
@@ -30,12 +89,12 @@ body {
 
 .sign-up{
 
-	width: 50%;
+	width: 30%;
 }
 
 .sign-in{
 
-	width: 50%;
+	width: 30%;
 }
 
 .password-reset{
@@ -54,4 +113,26 @@ body {
 .container {
 	margin-top: 1rem;
 }
-=======
+
+.w-50 {
+	width: 60%!important;
+}
+
+@media only screen and (max-width: 425px) {
+	.sign-in {
+    width: 80%;
+  }
+
+  .sign-up {
+    width: 80%;
+  }
+
+	.w-50 {
+		width: 80%!important;
+	}
+
+	.p-3 {
+		padding: 0rem!important;
+
+	}
+}
