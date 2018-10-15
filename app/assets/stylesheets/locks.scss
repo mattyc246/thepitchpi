@@ -107,7 +107,7 @@ input:checked + .slider:before {
 /*register lock card*/
 .card {
   position: absolute;
-  border: 1px solid rgba(0,0,0,.5);
+  border: 1px solid black;
   background-color: #495057!important;
   min-width: 25%;
   margin-top: 50px;
@@ -116,7 +116,8 @@ input:checked + .slider:before {
 }
 
 .card-header, h5 {
-  color: white;
+  color: #B5FFFF!important;
+  background-color: black;
 }
 
 .card-body {
@@ -129,7 +130,13 @@ input:checked + .slider:before {
 }
 
 .submit-field {
-  margin: 15px;
+  margin: 0;
+  padding: 0px;
+}
+
+.btn-secondary {
+    background-color: #FF046B!important;
+    border-color: white!important;
 }
 
 .form-control {
