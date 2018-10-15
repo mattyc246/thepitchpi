@@ -103,3 +103,29 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+/*register lock card*/
+.card {
+  position: absolute;
+  border: 1px solid rgba(0,0,0,.5);
+  background-color: #495057;
+  min-width: 25%;
+
+}
+
+.card-header, h5 {
+  color: white;
+}
+
+.card-body {
+  background-color: white;
+
+}
+
+.text-light {
+    color: #383d41!important;
+}
+
+.submit-field {
+  margin: 15px;
+}
