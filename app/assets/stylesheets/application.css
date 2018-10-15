@@ -23,13 +23,21 @@ body {
 
 }
 
+.alert {
+
+  z-index: 998;
+  background-color: #FF046B;
+  color: #2E2E2E;
+
+}
+
 .text-pink {
 
   color: #FF046B;
 
 }
 
-.light-blue {
+.text-lb {
 
   color: #B5FFFF;
 
