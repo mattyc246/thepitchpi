@@ -19,7 +19,7 @@
 
     <div class ="position-relative" id="everything-container">
         <div class="" id="button-container">
-            <button id="<%= @user %>" value= "All" class='flygroup btn'>Show All</button>
+            <button id="<%= @user %>" value= "All" class='flygroup btn f-1'>Show All</button>
             <button id="show-control" class='btn'>Show Controls</button> <!-- show controls in mobile -->
         </div>
 
@@ -31,19 +31,19 @@
                     <div class="card text-dark border-light mb-3" style="max-width: 18rem; min-width: 18rem">
                         <div class="card-header d-flex">
                             
-                            <div>
+                            <div class="f-1">
                                 <%= group %>
                             </div>
                             
                             <div class="ml-auto pr-2">
-                                <input id="<%= lock.first.user_id %>" value= "<%= group %>" class='flygroup' type="image" width="25rem" src="/assets/ic_action_location_2.png"/>
+                                <input id="<%= lock.first.user_id %>" value= "<%= group %>" class='flygroup flying' type="image" width="25rem" src="/assets/ic_action_location_2.png"/>
                             </div>
 
                         </div>
                         <% lock.each do |lock| %>
                             <div class="card-body">
                                 <div>
-                                    <h5 class="card-title float-left"><%= link_to lock.lock_name, user_lock_path(current_user.id, lock.id) %></h5>
+                                    <h5 class="card-title float-left f-3"><%= link_to lock.lock_name, user_lock_path(current_user.id, lock.id) %></h5>
                                     <div class="float-right d-flex">
                                         <div class="pr-2">
                                             <input type='image' src="/assets/ic_action_location_2.png" width="30rem" class='fly' value='<%=lock.longitude%>' name='<%=lock.latitude%>'/>
@@ -94,10 +94,8 @@
     $('#show-control').click(function() {
         $('#locks-container').toggleClass("dont-show");
     });
-    $('.fly').click(function() {
-        $('#locks-container').toggleClass("dont-show");
-    });
-    $('.flygroup').click(function() {
+
+    $('.flying').click(function() {
         $('#locks-container').toggleClass("dont-show");
     });
     
@@ -202,6 +200,7 @@ geojson.features.forEach(function(marker) {
 $(".fly").click(function() {
     // Fly to a random location by offsetting the point -74.50, 40
     // by up to 5 degrees.
+    $('#locks-container').toggleClass("dont-show");
     map.flyTo({
         center: [this.value, this.name],
         zoom: 19
