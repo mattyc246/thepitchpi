@@ -6,7 +6,7 @@
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css' rel='stylesheet' />
     <style>
     body { margin:0; padding:0;}
-    #map {width:100%;height:400px }
+    #map {width:100%;height:75vh; margin-bottom: 3vh }
     </style>
   </div>
 
@@ -17,64 +17,102 @@
         <h2><%= current_user.name %>'s Locks</h2>
     </div>
 
-    <div class="float-left">
-        <div >
-            <% @locks.order("id asc").group_by(&:group).each do |group, lock| %>
-                <div class="card text-dark border-light mb-3" style="max-width: 20rem; min-width: 20rem">
-                    <div class="card-header">
-                        <div sytle="max-width: 5rem ">
-                            <%= group %>
-                            <button id="<%= lock.first.user_id %>" value= "<%= group %>" class='flygroup'>zoom</button>
-                        </div>
-                    </div>
-                    <% lock.each do |lock| %>
-                        <div class="card-body">
-                            <div>
-                                <h5 class="card-title float-left"><%= link_to lock.lock_name, user_lock_path(current_user.id, lock.id) %></h5>
-                                <button class='fly' value='<%=lock.longitude%>' name='<%=lock.latitude%>'>Find</button>
-                                <div class="float-right">
-                                    <!-- Rounded switch -->
-                                    <label class="switch" id="lock_status">
-                                        <input type="checkbox" name="lock_status"
-                                            <% unless lock.status == "Unlocked" %>
-                                                <%= "checked" %>
-                                            <% end %> >
-                                        <span id="slider-<%= lock.id %>" class="slider round"></span>
-                                    </label>
+    <div id="everything-container" class ="">
+        <div class="" id="button-container">
+            <button id="<%= @user %>" value= "All" class='flygroup btn f-1 lock-page-btns'>Show All</button>
+            <button id="show-control" class='btn f-1 lock-page-btns'>Show Controls</button> <!-- show controls in mobile -->
+        </div>
+
+        <div id="locks-map-container" class="">
+            <div style="z-index: 999;" id="locks-container" class="p-2 dont-show">
+                <div>
+                    <% @locks.order("id asc").group_by(&:group).each do |group, lock| %>
+                        <div class="card text-dark border-dark mb-3" style="max-width: 18rem; min-width: 18rem">
+                            <div class="card-header d-flex">
+                                
+                                <div class="f-1">
+                                    <%= group %>
                                 </div>
+                                
+                                <div class="ml-auto pr-2">
+                                    <input id="<%= lock.first.user_id %>" value= "<%= group %>" class='flygroup flying' type="image" width="25rem" src="/assets/ic_action_location_2.png"/>
+                                </div>
+
                             </div>
+                            <% lock.each do |lock| %>
+                                <div class="card-body">
+                                    <div>
+                                        <h5 class="card-title float-left f-3"><%= link_to lock.lock_name, user_lock_path(current_user.id, lock.id) %></h5>
+                                        <div class="float-right d-flex">
+                                            <div class="pr-2">
+                                                <input type='image' src="/assets/ic_action_location_2.png" width="30rem" class='fly' value='<%=lock.longitude%>' name='<%=lock.latitude%>'/>
+                                            </div>
+                                            <div>
+                                            <!-- Rounded switch -->
+                                                <label class="switch" id="lock_status">
+                                                    <input type="checkbox" name="lock_status"
+                                                        <% unless lock.status == "Unlocked" %>
+                                                            <%= "checked" %>
+                                                        <% end %> >
+                                                    <span id="slider-<%= lock.id %>" class="slider round"></span>
+                                                </label>
+                                            </div>
+                                            <div class="pl-2 locked-color">
+                                                <% unless lock.status == "Unlocked" %>
+                                                    <%= image_tag ("locked_largel_W.png"), height: "30rem", class: "mr-2" %>
+                                                <% else %>
+                                                    <%= image_tag ("unlocked_large_W.png"), height: "30rem", class: "" %>
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% end %>
                         </div>
                     <% end %>
                 </div>
-            <% end %>
+            </div>
+            
+            <div id='map' class="pt-2"></div>
         </div>
+        
     </div>
-
-    <div class="">
-        <button id="<%= @user %>" value= "All" class='flygroup'>All</button>
-        <div id='map' class="min-width: 70rem" ></div>
-    </div>
+        
 <script>
+    // lock switch ajax
+    $(document).ready(function() {
+        $('.slider').click(function(){
+            var slider_id = event.target.id.split('-')[1]
 
-  $(document).ready(function() {
-      $('.slider').click(function(){
-      var slider_id = event.target.id.split('-')[1]
+            $.ajax({
+                url: '/locks/toggle_lock',
+                method: 'GET',
+                data: {toggle_id: slider_id},
+                success: function(data){
+                    var alert_message = data.notice
+                    $(".navbar").after(`<div class="alert alert-warning w-50 mx-auto" role="alert">${alert_message}</div>`)
+                    $(".alert").delay(2000).fadeOut('slow');
+                },
+                error: function(){}
+            });
+        });
+    })
 
-          $.ajax({
-              url: '/locks/toggle_lock',
-              method: 'GET',
-              data: {toggle_id: slider_id},
-              success: function(data){
-                  var alert_message = data.notice
-                  $(".navbar").after(`<div class="alert alert-warning w-50 mx-auto" role="alert">${alert_message}</div>`)
-                  $(".alert").delay(2000).fadeOut('slow');
-              },
-              error: function(){}
-          });
-      });
-  })
-  // MAP Script -------MAP Script -------MAP Script -------MAP Script -------MAP Script -------
+    // locks container toggle
+    $('#show-control').click(function() {
+        $('#locks-container').toggleClass("dont-show");
+    });
 
+    $('.flying').click(function() {
+        $('#locks-container').toggleClass("dont-show");
+    });
+    
+    // button div to follow scrolling (doesn't work right now)
+    $('#everything-container').scroll(function() {
+        $('button-container').css('top', $(this).scrollTop());
+    });
+  
+// Script ----------Script ----------Script ----------Script ----------Script ---------
 
 // initialize map---------------------------------------------------------------------
 mapboxgl.accessToken = 'pk.eyJ1IjoibG9ja25yb2xscy10ZWFtMSIsImEiOiJjam4xM3FvcDYxYnZuM2ttOThyYTc2cjFwIn0.LXhAvekTPkv8HSJvQd-32w';
@@ -141,8 +179,8 @@ var geojson = {
       title: "<%= lock.lock_name %>",
       group: "<%= lock.group %>",
       description: "<%= lock.status %>",
-      link: "<%= user_lock_path(current_user.id, lock.id) %>"
-
+      link_to: "<%= user_lock_path(current_user.id, lock.id) %>",
+      link_2: "<%= toggle_lock_path(lock.id) %>",
     }
   },
 
@@ -161,7 +199,8 @@ geojson.features.forEach(function(marker) {
   new mapboxgl.Marker(el)
     .setLngLat(marker.geometry.coordinates)
     .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-    .setHTML('<h5><a href="'+ marker.properties.link +'">' + marker.properties.title + '</a></h5><small>' + marker.properties.group + '</small><h4>' + marker.properties.description + '</h4>'))
+    //.setHTML('<h5><a href="'+ marker.properties.link_to +'">' + marker.properties.title + '</a></h5><small>' + marker.properties.group + '</small><h4>' + marker.properties.description + '</h4>' + '<h5><a href="'+ marker.properties.toggle +'">' + 'Toggle' + '</a></h5>'))
+    .setHTML(`<h5><a href="${marker.properties.link_to}">${marker.properties.title}</a></h5> <small>${marker.properties.group}</small> <h4>${marker.properties.description}</h4> <!-- <a href="${marker.properties.link_2}" class ="map-toggle">Toggle Lock</a> -->`))
     .addTo(map);
 });
 
@@ -169,6 +208,7 @@ geojson.features.forEach(function(marker) {
 $(".fly").click(function() {
     // Fly to a random location by offsetting the point -74.50, 40
     // by up to 5 degrees.
+    $('#locks-container').toggleClass("dont-show");
     map.flyTo({
         center: [this.value, this.name],
         zoom: 19
@@ -177,6 +217,7 @@ $(".fly").click(function() {
 
 // fly to group-------------------------------------------------------------------------
 $(".flygroup").click(function(e) {
+  event.preventDefault()
   var place = this.value
     $.ajax({
       type: 'GET',
