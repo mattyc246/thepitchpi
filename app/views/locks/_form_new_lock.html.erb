@@ -7,11 +7,16 @@
 
 
     <%= form.hidden_field :location %>
-    
+
 
     <div class="drop-down">
     <%= form.label :group %>
     <%= form.text_field :group %>
+    </div>
+
+    <div class="drop-down">
+    <label for="tracking">Rock Around the Clock!</label>
+    <%= form.check_box :tracking, {}, true, false %>
     </div>
 
     <!-- coordinates text field-->
