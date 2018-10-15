@@ -8,12 +8,12 @@
   </div>
 
   <div class="submit-field text-center m-2 f-1">
-    <%= form.submit "LOCK IN", class:"btn btn-secondary text-body" %>
+    <%= form.submit "LOCK IN", class:"btn btn-dark btn-lg bg-black text-pink" %>
   </div>
 
   <div class="other-links text-center m-2 f-1">
     <% if Clearance.configuration.allow_sign_up? %>
-      <%= link_to "or Sign Up", sign_up_path, class:"text-white" %>
+      <%= link_to "or Sign Up", sign_up_path, class:"text-pink" %>
     <% end %>
   </div>
 <% end %>
