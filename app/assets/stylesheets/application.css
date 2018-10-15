@@ -23,6 +23,24 @@ body {
 
 }
 
+.text-pink {
+
+  color: #FF046B;
+
+}
+
+.light-blue {
+
+  color: #B5FFFF;
+
+}
+
+.almost-black {
+
+  color: #2E2E2E;
+
+}
+
 .navbar {
 
   z-index: 999;
