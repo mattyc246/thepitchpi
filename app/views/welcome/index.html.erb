@@ -4,8 +4,7 @@
 
 	<div class="vertical-center">
 		<div id="home-view" class="w-75 mx-auto text-center">
-		  <%= image_tag "logo_large_W.png", style:"width: 60%;" %>
-		  <h1 class="cover-heading f-1">SECURITY <%= image_tag "logo_crossbones_W.png", style:"width: 3rem;" %> SYSTEMS</h1>
+		  <%= image_tag "logo_large_W_full.png", style:"width: 70%;" %></br>>
 		  <div class="w-50 mx-auto f-1">
 		    <h2 class="lead text-pink">Welcome back <%= current_user.name %>!</h2>
 		  </div>
@@ -19,11 +18,10 @@
 
 	<div class="vertical-center">
 		<div id="home-view" class="w-75 mx-auto text-center">
-		  <%= image_tag "logo_large_W.png", style:"width: 60%;" %>
-		  <h1 class="cover-heading f-1">SECURITY <%= image_tag "logo_crossbones_W.png", style:"width: 3rem;" %> SYSTEMS</h1>
+		  <%= image_tag "logo_large_W_full.png", style:"width: 70%;" %></br>
 		  <div class="w-50 mx-auto f-1">
-		    <p class="lead">You are currently on Lock Down. Complete the subscription payment to fully Lock On!</p>
-			<%= link_to "ACTIVATE", subscription_new_path, class:"btn btn-secondary text-black" %>
+		    <p class="lead text-pink">You are currently on Lock Down. Complete the subscription payment to fully Lock On!</p>
+			<%= link_to "ACTIVATE", subscription_new_path, class:"btn btn-secondary bg-black text-pink" %>
 		  </div>
 		</div>
 	</div>
@@ -34,8 +32,7 @@
 <%= video_tag "stage_flames_LO.mp4", id: "myVideo", autoplay: :autoplay, loop: :loop, mute: true %>
 <div class="vertical-center">
 	<div id="home-view" class="w-75 mx-auto text-center">
-	  <%= image_tag "logo_large_W.png", style:"width: 60%;" %>
-	  <h1 class="cover-heading f-1">SECURITY <%= image_tag "logo_crossbones_W.png", style:"width: 3rem;" %> SYSTEMS</h1>
+	  <%= image_tag "logo_large_W_full.png", style:"width: 70%;" %></br>
 	  <a href="/sign_in" class="btn btn-dark btn-lg bg-black text-pink m-2 w-25 f-1">LOCK IN</a></br>
 	  <a href="/sign_up" class="text-pink f-1">or Sign Up</a>
 	  <div class="w-50 mx-auto f-1">
