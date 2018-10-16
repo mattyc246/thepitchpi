@@ -11,15 +11,11 @@
   </div>
 
 
-<div class="container">
-
-    <div class="mb-3">
-        <h2><%= current_user.name %>'s Locks</h2>
-    </div>
+<div class="container-fluid">
 
     <div id="everything-container" class ="">
         <div class="" id="button-container">
-            <button id="<%= @user %>" value= "All" class='flygroup btn f-1 lock-page-btns'>Show All</button>
+            <button id="<%= @user %>" value= "All" class='flygroup btn w-25 f-1 lock-page-btns'>Show All</button>
             <button id="show-control" class='btn f-1 lock-page-btns'>Show Controls</button> <!-- show controls in mobile -->
         </div>
 
@@ -27,7 +23,7 @@
           <div style="z-index: 999;" id="locks-container" class="p-2 dont-show">
             <div>
               <% @locks.order("id asc").group_by(&:group).each do |group, lock| %>
-              <div class="card text-dark border-dark mb-3" style="max-width: 18rem; min-width: 18rem">
+              <div class="card text-dark border-dark mb-3" style="max-width: 18rem; min-width: 25rem">
               <div class="card-header d-flex bg-black">  
 
                 <div class="f-1">
@@ -72,6 +68,7 @@
         <div id='map' class="pt-2"></div>
       </div>    
     </div>
+  </div>
         
 <script>
     // lock switch ajax
@@ -195,15 +192,15 @@ var geojson = {
 // add markers in html to map
 geojson.features.forEach(function(marker) {
 
-
-  // create a HTML element for each feature
-  if(marker.properties.description == "Locked"){
     var el = document.createElement('div');
     el.className = 'marker-locked';
-  } else {
-    var el = document.createElement('div');
-    el.className = 'marker-unlocked';
-  }
+
+  // // create a HTML element for each feature
+  // if(marker.properties.description == "Locked"){
+  // } else {
+  //   var el = document.createElement('div');
+  //   el.className = 'marker-unlocked';
+  // }
   
   
 
