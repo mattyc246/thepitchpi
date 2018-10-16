@@ -1,37 +1,61 @@
-<div>
-  <meta charset='utf-8' />
-  <title>Locate the user</title>
-  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js'></script>
-  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css' rel='stylesheet' />
-  <style>
-  body { margin:0; padding:0;}
-  #map {width:100%;height:400px }
-  </style>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-4">
+
+      <div class = "div-panel-right">
+        <div class ="d-flex">
+          <div class="show-icon">
+            <div class = "show-toggle">
+              <!-- Rounded switch -->
+              <label class="switch" id="lock_status">
+                <input type="checkbox" name="lock_status"
+                <% unless @lock.status == "Unlocked" %>
+                <%= "checked" %>
+                <% end %> >
+                <span id="slider-<%= @lock.id %>" class="slider round"></span>
+              </label>
+            </div>
+            <div>
+                  <% if @lock.status == "Unlocked" %>
+                      <%= image_tag ("unlocked_large_color.png"), style:"width: 150px;" %>
+                  <% elsif @lock.status == "Locked" %>
+                      <%= image_tag ("locked_large_color.png"), style:"width: 150px;" %>
+                  <% end %>
+
+          </div>
+          </div>
+          <div class ="show-status-locked text-uppercase f-1">
+              <p><%= @lock.status %></p>
+
+          </div>
+        </div>
+
+      <div class="card" id = "show-card">
+          <h5 class="card-header fly bg-black" data-longitude='<%=@lock.longitude%>' data-latitude='<%=@lock.latitude%>' ><%= @lock.lock_name %></h5>
+          <div class="card-body text-body">
+            <h6 class = "f-1 text-dark">Group</h6>
+            <h3 class = "f-1 text-dark"><%= @lock.group %></h3>
+            <br>
+            <h6 class = "f-1 text-dark">Address</h6>
+            <p><%= @lock.location %></p>
+          </div>
+      </div>
+    </div>
+
+
+
+      </div>
+      <div class="col-8">
+
+        <div id='map'></div>
+
+      </div>
+    </div>
 </div>
 
 
-<h2>Details of lock</h2>
-<div>
-<table>
-    <tr>
-        <th>Lock Name</th>
-        <th>Status</th>
-        <th>Group</th>
-        <th>Location</th>
-        <th>Delete Lock</th>
-    </tr>
-    <tr>
-        <td><%= @lock.lock_name %></td>
-        <td><%= @lock.status %></td>
-        <td><%= @lock.group %></td>
-        <td><%= @lock.location %></td>
-        <td>Delete</td>
-   </tr>
-</table>
-</div>
 
-<p>distance: <span class = "distance">
+<!-- <p>distance: <span class = "distance">
   distance
 </span></p>
 
@@ -47,13 +71,11 @@
   in-range
 </span></p>
 
-<div>
   <p class = "distance">
     distance
-  </p>
+  </p> -->
 
 
-<div id='map'></div>
 
 
 
@@ -96,23 +118,78 @@ var geojson = {
 // add visual to lock tag popup-----
 geojson.features.forEach(function(marker) {
 
-  // create a HTML element for each feature
-  var el = document.createElement('div');
-  el.className = 'marker';
+      var el = document.createElement('div');
+      el.className = 'marker-locked';
+
+    // // create a HTML element for each feature
+    // if(marker.properties.description == "Locked"){
+    // } else {
+    //   var el = document.createElement('div');
+    //   el.className = 'marker-unlocked';
+    // }
+
 
   // make a marker for each feature and add to the map
-  new mapboxgl.Marker(el)
+  new mapboxgl.Marker(el, {offset: [0, -25]})
     .setLngLat(marker.geometry.coordinates)
     .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
     .setHTML('<h5>' + marker.properties.title + '</h5><small>' + marker.properties.group + '</small><h4>' + marker.properties.description + '</h4>'))
     .addTo(map);
 });
 
+// fly to individual marker--------------------------------------------------------
+$(".fly").click(function() {
+    // Fly to a random location by offsetting the point -74.50, 40
+    // by up to 5 degrees.
+    console.log(this)
+    map.flyTo({
+        center: [this.getAttribute("data-longitude"), this.getAttribute("data-latitude")],
+        zoom: 19
+    });
+});
+
+// load 3D building to map----------------------------------------------------
+map.on('load', function() {
+    // Insert the layer beneath any symbol layer.
+    var layers = map.getStyle().layers;
+
+    var labelLayerId;
+    for (var i = 0; i < layers.length; i++) {
+        if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
+            labelLayerId = layers[i].id;
+            break;
+        }
+    }
+
+    map.addLayer({
+        'id': '3d-buildings',
+        'source': 'composite',
+        'source-layer': 'building',
+        'filter': ['==', 'extrude', 'true'],
+        'type': 'fill-extrusion',
+        'minzoom': 15,
+        'paint': {
+            'fill-extrusion-color': '#aaa',
+
+            // use an 'interpolate' expression to add a smooth transition effect to the
+            // buildings as the user zooms in
+            'fill-extrusion-height': [
+                "interpolate", ["linear"], ["zoom"],
+                15, 0,
+                15.05, ["get", "height"]
+            ],
+            'fill-extrusion-base': [
+                "interpolate", ["linear"], ["zoom"],
+                15, 0,
+                15.05, ["get", "min_height"]
+            ],
+            'fill-extrusion-opacity': .6
+        }
+    }, labelLayerId);
+});
 
 
-
-
-// Add geolocate control to the map.----------------------------------------
+// Add geolocate present location control to the map-----------------------------------
 map.addControl(new mapboxgl.GeolocateControl({
     positionOptions: {
         enableHighAccuracy: true
@@ -120,8 +197,11 @@ map.addControl(new mapboxgl.GeolocateControl({
     trackUserLocation: true
 }));
 
+// Add Navigation Controller
+map.addControl(new mapboxgl.NavigationControl());
 
-//
+// Add Full screen BUtton
+map.addControl(new mapboxgl.FullscreenControl());
 
 
 
