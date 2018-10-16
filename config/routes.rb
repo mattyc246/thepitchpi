@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   get 'locks/group_points' => 'locks#group_points', as: "group_points"
 
-
+  get 'easter_egg' => 'welcome#easter_egg', as: "easter_egg"
   ##### Clearance Routes - Overwritten #####
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
@@ -26,6 +26,8 @@ Rails.application.routes.draw do
       only: [:create, :edit, :update]
       resources :locks, only: [:new, :create, :show, :edit, :destroy, :index]
   end
+
+
 
   get "/sign_in" => "clearance/sessions#new", as: "sign_in"
   delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"

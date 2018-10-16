@@ -45,7 +45,7 @@
           <a class="nav-item nav-link text-lb my-auto" href="/users/<%= current_user.id %>/locks/new">I WANNA LOCK!</a>
           <a class="nav-item nav-link text-lb my-auto" href="/users/<%= current_user.id %>">LOCKIN MERCH!</a>
           <%= link_to "LOCK OUT", sign_out_path, method: :delete, class:"btn text-lb my-auto" %>
-          <a id="easter-egg" class="nav-item text-pink my-auto">UNLOCK LOCKSTAR MODE <%= image_tag "logo_crossbones_W_full.png", style:"width: 3rem;", class:"my-auto" %></a>
+          <a id="easter-egg" href="/easter_egg" data-confirm="Are you sure you are ready to be a Lockstar?" class="nav-item text-pink my-auto">UNLOCK LOCKSTAR MODE <%= image_tag "logo_crossbones_W_full.png", style:"width: 3rem;", class:"my-auto" %></a>
       </div>
     </div>
   </nav>
