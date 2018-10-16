@@ -60,6 +60,50 @@
                         <% end %>   
                     </div>
                   </div>
+                    <% @locks.order("id asc").group_by(&:group).each do |group, lock| %>
+                        <div id="bt-card" class="card text-dark border-dark mb-3">
+                            <div id="bt-card-header" class="card-header d-flex">
+                                
+                                <div class="f-1">
+                                    <%= group %>
+                                </div>
+                                
+                                <div class="ml-auto pr-2">
+                                    <input id="<%= lock.first.user_id %>" value= "<%= group %>" class='flygroup flying' type="image" width="25rem" src="/assets/ic_action_location_2.png"/>
+                                </div>
+
+                            </div>
+                            <% lock.each do |lock| %>
+                                <div id="bt-card-body" class="card-body">
+                                    <div>
+                                        <h5 class="card-title float-left f-3"><%= link_to lock.lock_name, user_lock_path(current_user.id, lock.id) %></h5>
+                                        <div class="float-right d-flex">
+                                            <div class="pr-2">
+                                                <input type='image' src="/assets/ic_action_location_2.png" width="30rem" class='fly' value='<%=lock.longitude%>' name='<%=lock.latitude%>'/>
+                                            </div>
+                                            <div>
+                                            <!-- Rounded switch -->
+                                                <label class="switch" id="lock_status">
+                                                    <input type="checkbox" name="lock_status"
+                                                        <% unless lock.status == "Unlocked" %>
+                                                            <%= "checked" %>
+                                                        <% end %> >
+                                                    <span id="slider-<%= lock.id %>" class="slider round"></span>
+                                                </label>
+                                            </div>
+                                            <div class="pl-2 locked-color">
+                                                <% unless lock.status == "Unlocked" %>
+                                                    <%= image_tag ("locked_largel_W.png"), height: "30rem", class: "mr-2" %>
+                                                <% else %>
+                                                    <%= image_tag ("unlocked_large_W.png"), height: "30rem", class: "" %>
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% end %>
+                        </div>
+                    <% end %>
                 </div>
               </div>
               <% end %>

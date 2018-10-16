@@ -130,6 +130,9 @@ input:checked + .slider:before {
 .card {
   // width: 30%;
   position: relative;
+/*register lock card*/
+#kend-card {
+  position: absolute;
   border: 1px solid black;
   background-color: #495057!important;
   min-width: 200px;
@@ -138,12 +141,12 @@ input:checked + .slider:before {
 
 }
 
-.card-header, h5 {
+#kend-card-header, h5 {
   color: #B5FFFF!important;
   background-color: black;
 }
 
-.card-body {
+#kend-card-body {
   background-color: white;
 
 }
@@ -157,7 +160,7 @@ input:checked + .slider:before {
   padding: 0px;
 }
 
-.btn-secondary {
+#kend-btn-secondary {
     background-color: #FF046B!important;
     border-color: white!important;
 }
@@ -167,13 +170,19 @@ input:checked + .slider:before {
   border: 1px solid #343a40;
 }
 
-.small-font {
+#kend-small-font {
 
   font-size: 0.75em ;
 
 }
 
 // SHOW page--------------------------------------
+@media only screen and (max-width: 425px) {
+
+  #kend-card {
+    min-width: 25%!important;
+    margin: 60px;
+  }
 
 .show-icon {
 position: relative;
@@ -203,6 +212,37 @@ min-width: 200px;
   color: #A6FFFF;
   margin: auto;
   margin-bottom: 70px;
+@media only screen and (max-width: 375px) {
+
+  #kend-card {
+    min-width: 25%!important;
+    margin: 45px!important;
+  }
+
+}
+
+@media only screen and (max-width: 320px) {
+
+  #kend-card {
+    min-width: 10%!important;
+    margin: 15px !important;
+  }
+
+}
+
+#bt-card {
+  background-color: #000000;
+  max-width: 20rem;
+}
+
+#bt-card-body {
+  padding: 0.75rem;
+  height: 3.5rem;
+  background-color: #323232;
+}
+
+.zoom-button {
+  background: url('/assets/images/ic_action_location_2.png');
 }
 
 
@@ -221,6 +261,9 @@ min-width: 200px;
 }
 
 
+.lock-page-btns {
+  background-color: #000000;
+}
 
 
 
@@ -233,6 +276,29 @@ min-width: 200px;
   .card {
     min-width: 25%!important;
     margin: 60px;
+  #map {
+    position: absolute;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 768px){
+  #locks-map-container {
+    display: flex;
+  }
+  
+  #locks-container {
+    display: block;
+    position: relative;
+    float: left;
+    width: 30rem;
+    height: 100%;
+  }
+
+  #map {
+    float: right;
+    width: 70rem;
+    height: 100%;
   }
 
   .form-control,
