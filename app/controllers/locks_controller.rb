@@ -84,19 +84,12 @@ class LocksController < ApplicationController
 
   def status_check
 
-    @lock_status = ""
+    @lock = Lock.find(params[:toggle_id])
 
-    host = ENV['RASPBERRY_PI_HOST']
-    user = ENV['RASPBERRY_PI_USER']
-    password = ENV['RASPBERRY_PI_PASSWORD']
-    port = ENV['RASPBERRY_PI_PORT']
+    lock_status = @lock.status 
 
-    Net::SSH.start(host, user, password: password, port: port) do |ssh|
-      output = ssh.exec!("cd Desktop; python lock_controller.py status")
-      @lock_status = output.split
-    end
     # Return will be Open or Closed
-    render :json => {status: @lock_status[0].to_s}
+    render :json => {status: lock_status}
   end
 
   def toggle_lock
@@ -124,11 +117,11 @@ class LocksController < ApplicationController
 
             if status[0].to_s == "Unlocked"
 
-              render json: { notice: "#{lock.group}'s #{lock.lock_name} has been unlocked" }
+              render json: { status: lock.status, notice: "#{lock.group}'s #{lock.lock_name} has been unlocked" }
 
             else
 
-              render json: { notice: "#{lock.group}'s #{lock.lock_name} has been left open! Close the door! "}
+              render json: { status: lock.status, notice: "#{lock.group}'s #{lock.lock_name} has been left open! Close the door! "}
 
             end
 
@@ -159,11 +152,11 @@ class LocksController < ApplicationController
 
             if status[0].to_s == "Locked"
 
-              render json: { notice: "#{lock.group}'s #{lock.lock_name} has been locked" }
+              render json: { status: lock.status, notice: "#{lock.group}'s #{lock.lock_name} has been locked" }
 
             else
 
-              render json: { notice: "#{lock.group}'s #{lock.lock_name} has been left open! Close the door!" }
+              render json: { status: lock.status, notice: "#{lock.group}'s #{lock.lock_name} has been left open! Close the door!" }
 
             end
 
