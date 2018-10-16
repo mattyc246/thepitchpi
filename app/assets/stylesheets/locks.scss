@@ -4,23 +4,35 @@
 
 
 /* lock map css */
-.marker-locked {
-  background-image: url('locked_map.png');
-  background-size: cover;
-  width: 45px;
-  height: 70px;
-  /*border-radius: 50%;*/
-  cursor: pointer;
+body {
+  margin-top: 100px;
 }
 
-.marker-unlocked {
-  background-image: url('unlocked_map.png');
-  background-size: cover;
-  width: 45px;
-  height: 70px;
-  /*border-radius: 50%;*/
-  cursor: pointer;
-}
+#map {
+  width:95%;
+  height: 800px;
+  position: absolute;
+  border: 1px solid black;
+ }
+
+ /* lock map css */
+ .marker-locked {
+   background-image: url('locked_map.png');
+   background-size: cover;
+   width: 45px;
+   height: 70px;
+   /*border-radius: 50%;*/
+   cursor: pointer;
+ }
+
+ .marker-unlocked {
+   background-image: url('unlocked_map.png');
+   background-size: cover;
+   width: 45px;
+   height: 70px;
+   /*border-radius: 50%;*/
+   cursor: pointer;
+ }
 
 .mapboxgl-popup {
   max-width: 200px;
@@ -114,23 +126,28 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
-/*register lock card*/
+/*register lock card-------------------------------------------------------------*/
 .card {
-  position: absolute;
+  // width: 30%;
+  position: relative;
   border: 1px solid black;
   background-color: #495057!important;
-  min-width: 25%;
-  margin-top: 50px;
-  margin: 50px;
+  min-width: 200px;
+  // margin-top: 13px;
+  // margin: 0px 2px 1px 50px;
 
 }
 
 .card-header, h5 {
   color: #B5FFFF!important;
-  /*background-color: black;*/
+  background-color: black;
 }
 
+.card-body {
+  background-color: white;
 
+}
+// DONT TOUCH
 .text-light {
     color: #383d41!important;
 }
@@ -138,6 +155,11 @@ input:checked + .slider:before {
 .submit-field {
   margin: 0;
   padding: 0px;
+}
+
+.btn-secondary {
+    background-color: #FF046B!important;
+    border-color: white!important;
 }
 
 .form-control {
@@ -150,6 +172,61 @@ input:checked + .slider:before {
   font-size: 0.75em ;
 
 }
+
+// SHOW page--------------------------------------
+
+.show-icon {
+position: relative;
+
+}
+
+.show-toggle {
+position: absolute;
+top: 150px;
+left: 45px;
+
+}
+
+.div-panel-right {
+padding-left: 50px;
+min-width: 200px;
+
+}
+
+
+// Show Page LOCKED OR UNLOCKED-----------------------------
+.show-status-locked {
+  font-family: "Oswald", sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  font-size: 4.5rem;
+  color: #A6FFFF;
+  margin: auto;
+  margin-bottom: 70px;
+}
+
+
+.show-status-unlocked {
+  font-family: "Oswald", sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  font-size: 4.5rem;
+  color: #FF046B;
+  margin: auto;
+  margin-bottom: 70px;
+}
+
+#show-card {
+  margin-top: 20px;
+}
+
+
+
+
+
+
+
+// MOBILE SIZES-----------------------------------------
 
 @media only screen and (max-width: 425px) {
 
@@ -165,91 +242,20 @@ input:checked + .slider:before {
 
 }
 
-@media only screen and (max-width: 375px) {
+// @media only screen and (max-width: 375px) {
+//
+//   .card {
+//     min-width: 25%!important;
+//     margin: 45px!important;
+//   }
+//
+// }
 
-  .card {
-    min-width: 25%!important;
-    margin: 45px!important;
-  }
-
-}
-
-@media only screen and (max-width: 320px) {
-
-  .card {
-    min-width: 10%!important;
-    margin: 15px !important;
-  }
-
-}
-.card-body {
-  padding: 0.75rem;
-  background-color: #323232;
-}
-
-.card {
-  background-color: #000000;
-}
-
-.zoom-button {
-  background: url('/assets/images/ic_action_location_2.png');
-}
-
-.dont-show {
-  display: none;
-}
-
-.fixed {
-  position: fixed;
-  top: 20px;
-}
-
-a.fill-div {
-  display: block;
-}
-
-.locked-color {
-  filter: hue-rotate(336);
-}
-
-.lock-page-btns {
-  background-color: #000000;
-}
-
-@media screen and (max-width: 576px){
-  #everything-container{
-    position: relative;
-  }
-  
-  #locks-container {
-    position: absolute;
-    margin-top: 1rem;
-  }
-
-  #map {
-    position: absolute;
-  }
-}
-
-@media screen and (min-width: 768px){
-  #locks-map-container {
-    display: flex;
-  }
-  
-  #locks-container {
-    display: block;
-    float: left;
-    width: 50rem;
-    height: 100%;
-  }
-
-  #map {
-    float: right;
-    width: 50rem;
-    height: 100%;
-  }
-  
-  #show-control {
-    display: none;
-  }
-}
+// @media only screen and (max-width: 320px) {
+//
+//   .card {
+//     min-width: 10%!important;
+//     margin: 15px !important;
+//   }
+//
+// }

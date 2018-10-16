@@ -16,8 +16,7 @@
 
 body {
 
-	/* height: 100vh; */
-	/* width: 100vw; */
+	margin-top: 100px;
 	color: white;
 	 background: url('backgound_pages.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -69,7 +68,7 @@ body {
 .bg-black {
 
 	background-color: black;
-	
+
 }
 
 #home-view {
@@ -88,7 +87,7 @@ body {
     position: fixed;
     right: 0;
     bottom: 0;
-    min-width: 100%; 
+    min-width: 100%;
     min-height: 100%;
     z-index: 0;
 }
@@ -97,7 +96,7 @@ body {
     position: fixed;
     right: 0;
     bottom: 0;
-    min-width: 100%; 
+    min-width: 100%;
     min-height: 100%;
     z-index: 0;
 }
@@ -106,7 +105,7 @@ body {
     position: fixed;
     right: 0;
     bottom: 0;
-    min-width: 100%; 
+    min-width: 100%;
     min-height: 100%;
     z-index: 0;
 }
@@ -114,7 +113,7 @@ body {
 .f-1 {
 
 	font-family: "Oswald", sans-serif;
-	font-weight: 300; 
+	font-weight: 300;
 	text-transform: uppercase;
 	/*font-size: 1.25rem;*/
 	color: #A6FFFF;
