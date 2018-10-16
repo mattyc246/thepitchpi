@@ -14,6 +14,7 @@
 <div class="container-fluid">
 
     <div id="everything-container" class ="">
+<<<<<<< HEAD
         <div class="" id="button-container">
             <button id="<%= @user %>" value= "All" class='flygroup btn w-25 f-1 lock-page-btns'>Show All</button>
             <button id="show-control" class='btn f-1 lock-page-btns'>Show Controls</button> <!-- show controls in mobile -->
@@ -71,16 +72,40 @@
                                 <div class="ml-auto pr-2">
                                     <input id="<%= lock.first.user_id %>" value= "<%= group %>" class='flygroup flying' type="image" width="25rem" src="/assets/ic_action_location_2.png"/>
                                 </div>
+=======
 
-                            </div>
-                            <% lock.each do |lock| %>
-                                <div id="bt-card-body" class="card-body">
-                                    <div>
-                                        <h5 class="card-title float-left f-3"><%= link_to lock.lock_name, user_lock_path(current_user.id, lock.id) %></h5>
-                                        <div class="float-right d-flex">
+        <div id="locks-map-container" class="">
+            <div id="" class="">
+                <div id="button-container" class="pr-2">
+                    <button id="<%= @user %>" value= "All" class='flygroup btn btn-block f-1 lock-page-btns'>Show All</button>
+                    <button id="show-control" class='btn btn-block f-1 lock-page-btns'>Show Controls</button> <!-- show controls in mobile -->
+                </div>
+                <div style="z-index: 999;" id="locks-container" class="pr-2 pt-2 dont-show">
+                    <div>
+                        <% @locks.order("id asc").group_by(&:group).each do |group, lock| %>
+                            <div id="bt-card" class="card text-dark border-dark mb-3">
+                                <div id="bt-card-header" class="card-header d-flex">
+                                    
+                                    <div class="f-1">
+                                        <%= group %>
+                                    </div>
+                                    
+                                    <div class="ml-auto pr-2">
+                                        <input id="<%= lock.first.user_id %>" value= "<%= group %>" class='flygroup flying' type="image" width="30rem" src="/assets/ic_action_location_2_white.png"/>
+                                    </div>
+>>>>>>> 1. fixed conflicting css between boon tek's and kendall's
+
+                                </div>
+                                <% lock.each do |lock| %>
+                                    <div id="bt-card-body" class="card-body">  
+                                        <div class="float-left d-flex">
                                             <div class="pr-2">
-                                                <input type='image' src="/assets/ic_action_location_2.png" width="30rem" class='fly' value='<%=lock.longitude%>' name='<%=lock.latitude%>'/>
+                                                <input type='image' src="/assets/ic_action_location_2_white.png" width="30rem" class='fly' value='<%=lock.longitude%>' name='<%=lock.latitude%>'/>
                                             </div>
+                                            <h5 id="bt-lock-name" class="card-title f-3"><%= link_to lock.lock_name, user_lock_path(current_user.id, lock.id) %></h5>
+                                        </div>
+
+                                        <div class="float-right d-flex">
                                             <div>
                                             <!-- Rounded switch -->
                                                 <label class="switch" id="lock_status">
@@ -100,16 +125,21 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            <% end %>
-                        </div>
-                    <% end %>
+                                <% end %>
+                            </div>
+                        <% end %>
+                    </div>
                 </div>
               </div>
               <% end %>
             </div>
+<<<<<<< HEAD
             <% end %>
           </div>
+=======
+            
+            <div id='map' class=""></div>
+>>>>>>> 1. fixed conflicting css between boon tek's and kendall's
         </div>
             
         <div id='map' class="pt-2"></div>
@@ -155,8 +185,17 @@
     });
     
     // button div to follow scrolling (doesn't work right now)
-    $('#everything-container').scroll(function() {
-        $('button-container').css('top', $(this).scrollTop());
+    $(document).ready(function () { 
+        let top = $('#map').offset().top - parseFloat($('#map').css('marginTop').replace(/auto/, 0));
+        $(window).scroll(function (event) {
+            let y = $(this).scrollTop();
+            //if y > top, it means that if we scroll down any more, parts of our element will be outside the viewport
+            //so we move the element down so that it remains in view.
+            if (y >= top) {
+            let difference = y - top;
+            $('#map').css("top",difference);
+            }
+        });
     });
   
 // Script ----------Script ----------Script ----------Script ----------Script ---------
