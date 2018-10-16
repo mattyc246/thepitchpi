@@ -298,6 +298,7 @@ min-width: 200px;
 
 
 
+<<<<<<< HEAD
 // MOBILE SIZES-----------------------------------------
 
 @media only screen and (max-width: 425px) {
@@ -306,9 +307,11 @@ min-width: 200px;
     min-width: 25%!important;
     margin: 60px;
   #map {
+=======
+  .lock-page-map {
+>>>>>>> 1. minor fix for locks.scss
     position: absolute;
-    top: 3rem !important;
-    margin-top: 4rem;
+    margin-top: 1rem;
   }
 }
 
@@ -321,11 +324,12 @@ min-width: 200px;
     display: block;
     position: relative;
     float: left;
+    padding: 1rem 0.55rem 1rem 0rem;
     width: 27rem;
     height: 100%;
   }
 
-  #map {
+  .lock-page-map {
     float: right;
     width: 60rem;
     height: 100%;

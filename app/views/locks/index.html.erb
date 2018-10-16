@@ -80,7 +80,7 @@
                     <button id="<%= @user %>" value= "All" class='flygroup btn btn-block f-1 lock-page-btns'>Show All</button>
                     <button id="show-control" class='btn btn-block f-1 lock-page-btns'>Show Controls</button> <!-- show controls in mobile -->
                 </div>
-                <div style="z-index: 999;" id="locks-container" class="pr-2 pt-2 dont-show">
+                <div style="z-index: 999;" id="locks-container" class="dont-show">
                     <div>
                         <% @locks.order("id asc").group_by(&:group).each do |group, lock| %>
                             <div id="bt-card" class="card text-dark border-dark mb-3">
@@ -138,8 +138,12 @@
           </div>
 =======
             
+<<<<<<< HEAD
             <div id='map' class=""></div>
 >>>>>>> 1. fixed conflicting css between boon tek's and kendall's
+=======
+            <div id='map' class="lock-page-map"></div>
+>>>>>>> 1. minor fix for locks.scss
         </div>
             
         <div id='map' class="pt-2"></div>
