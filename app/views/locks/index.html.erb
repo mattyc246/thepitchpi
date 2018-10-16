@@ -37,7 +37,10 @@
                   <h5 class="card-title float-left f-3"><%= link_to lock.lock_name, user_lock_path(current_user.id, lock.id), class:"f-1 btn btn-link text-pink bg-transparent" %></h5>
                   <div class="float-right d-flex">
                     <div class="pr-2">
-                      <input type='image' src="/assets/ic_action_location_2.png" width="30rem" class='fly' value='<%=lock.longitude%>' name='<%=lock.latitude%>'/>
+                      <% if lock.tracking == true %>
+                      <%= image_tag 'clock_icon_small.png', style:"width: 30px;", class:"my-auto"%>
+                      <% end %>
+                      <input type='image' src="/assets/ic_action_location_2.png" width="30rem" class='fly my-auto' value='<%=lock.longitude%>' name='<%=lock.latitude%>'/>
                     </div>
                     <div>
             <!-- Rounded switch -->
