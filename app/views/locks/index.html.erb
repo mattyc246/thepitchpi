@@ -106,25 +106,7 @@
     $('.flying').click(function() {
         $('#locks-container').toggleClass("dont-show");
     });
-<<<<<<< HEAD
-
-    // button div to follow scrolling (doesn't work right now)
-    $(document).ready(function () {
-        let top = $('#map').offset().top - parseFloat($('#map').css('marginTop').replace(/auto/, 0));
-        $(window).scroll(function (event) {
-            let y = $(this).scrollTop();
-            //if y > top, it means that if we scroll down any more, parts of our element will be outside the viewport
-            //so we move the element down so that it remains in view.
-            if (y >= top) {
-            let difference = y - top;
-            $('#map').css("top",difference);
-            }
-        });
-    });
-
-=======
   
->>>>>>> 1. made locks container to look better in mobile
 // Script ----------Script ----------Script ----------Script ----------Script ---------
 
 // initialize map---------------------------------------------------------------------
