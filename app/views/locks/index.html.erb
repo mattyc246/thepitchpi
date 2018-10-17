@@ -1,155 +1,78 @@
+<%= stylesheet_link_tag "boontek", media: "all" %> 
   <div>
     <meta charset='utf-8' />
     <title>Locate the user</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css' rel='stylesheet' />
-    <style>
-    body { margin:0; padding:0;}
-    #map {width:100%;height:75vh; margin-bottom: 3vh }
-    </style>
+    <!-- <style>
+        body { margin:0; padding:0;}
+        #map {width:100%;height:75vh; margin-bottom: 3vh }
+    </style> -->
   </div>
 
-
-<div class="container-fluid">
+<div class="container-fluid"> 
 
     <div id="everything-container" class ="">
-<<<<<<< HEAD
-        <div class="" id="button-container">
-            <button id="<%= @user %>" value= "All" class='flygroup btn w-25 f-1 lock-page-btns'>Show All</button>
-            <button id="show-control" class='btn f-1 lock-page-btns'>Show Controls</button> <!-- show controls in mobile -->
-        </div>
-
         <div id="locks-map-container" class="">
-          <div style="z-index: 999;" id="locks-container" class="p-2 dont-show">
-            <div>
-              <% @locks.order("id asc").group_by(&:group).each do |group, lock| %>
-              <div class="card text-dark border-dark mb-3" style="max-width: 18rem; min-width: 25rem">
-              <div class="card-header d-flex bg-black">  
-
-                <div class="f-1">
-                  <button id="<%= lock.first.user_id %>" value= "<%= group %>" class='flygroup flying btn btn-link text-pink f-1' ><%= group %></button>
-                </div>
-
-              </div>
-              <% lock.each do |lock| %>
-              <div class="card-body">
-                <div>
-                  <h5 class="card-title float-left f-3"><%= link_to lock.lock_name, user_lock_path(current_user.id, lock.id), class:"f-1 btn btn-link text-pink bg-transparent" %></h5>
-                  <div class="float-right d-flex">
-                    <div class="pr-2">
-                      <% if lock.tracking == true %>
-                      <%= image_tag 'clock_icon_small.png', style:"width: 30px;", class:"my-auto"%>
-                      <% end %>
-                      <input type='image' src="/assets/ic_action_location_2.png" width="30rem" class='fly my-auto' value='<%=lock.longitude%>' name='<%=lock.latitude%>'/>
-                    </div>
-                    <div>
-            <!-- Rounded switch -->
-                      <label class="switch" id="lock_status">
-                        <input type="checkbox" name="lock_status"
-                        <% unless lock.status == "Unlocked" %>
-                          <%= "checked" %>
-                        <% end %> >
-                        <span id="slider-<%= lock.id %>" class="slider round"></span>
-                      </label>
-                    </div>
-                    <div id="lock_icon-<%= lock.id %>" class="pl-2 locked-color">
-                        <% if lock.status == "Unlocked" %>
-                            <%= image_tag ("unlocked_small_B.png"), height: "30rem", class: "" %>
-                        <% elsif lock.status == "Locked" %>
-                            <%= image_tag ("locked_small_color.png"), height: "30rem", class: "" %>
-                        <% end %>   
-                    </div>
-                  </div>
-                    <% @locks.order("id asc").group_by(&:group).each do |group, lock| %>
-                        <div id="bt-card" class="card text-dark border-dark mb-3">
-                            <div id="bt-card-header" class="card-header d-flex">
-                                
-                                <div class="f-1">
-                                    <%= group %>
-                                </div>
-                                
-                                <div class="ml-auto pr-2">
-                                    <input id="<%= lock.first.user_id %>" value= "<%= group %>" class='flygroup flying' type="image" width="25rem" src="/assets/ic_action_location_2.png"/>
-                                </div>
-=======
-
-        <div id="locks-map-container" class="">
-            <div id="" class="">
-                <div id="button-container" class="pr-2">
+            <div id="locks-btn-container">
+                <div class="" id="button-container">
                     <button id="<%= @user %>" value= "All" class='flygroup btn btn-block f-1 lock-page-btns'>Show All</button>
                     <button id="show-control" class='btn btn-block f-1 lock-page-btns'>Show Controls</button> <!-- show controls in mobile -->
                 </div>
-                <div style="z-index: 999;" id="locks-container" class="dont-show">
-                    <div>
-                        <% @locks.order("id asc").group_by(&:group).each do |group, lock| %>
-                            <div id="bt-card" class="card text-dark border-dark mb-3">
-                                <div id="bt-card-header" class="card-header d-flex">
-                                    
-                                    <div class="f-1">
-                                        <%= group %>
-                                    </div>
-                                    
-                                    <div class="ml-auto pr-2">
-                                        <input id="<%= lock.first.user_id %>" value= "<%= group %>" class='flygroup flying' type="image" width="30rem" src="/assets/ic_action_location_2_white.png"/>
-                                    </div>
->>>>>>> 1. fixed conflicting css between boon tek's and kendall's
 
+                <div id="locks-container" class="dont-show">
+                    <% @locks.order("id asc").group_by(&:group).each do |group, lock| %>
+                        <div id="bt-card" class="card text-dark mb-3">
+                            <div id="bt-card-header" class="card-header d-flex bg-black">
+                                <div class="f-1">
+                                    <button id="<%= lock.first.user_id %>" value= "<%= group %>" class='flygroup flying btn btn-link f-1' ><%= group %></button>
                                 </div>
-                                <% lock.each do |lock| %>
-                                    <div id="bt-card-body" class="card-body">  
-                                        <div class="float-left d-flex">
-                                            <div class="pr-2">
-                                                <input type='image' src="/assets/ic_action_location_2_white.png" width="30rem" class='fly' value='<%=lock.longitude%>' name='<%=lock.latitude%>'/>
-                                            </div>
-                                            <h5 id="bt-lock-name" class="card-title f-3"><%= link_to lock.lock_name, user_lock_path(current_user.id, lock.id) %></h5>
-                                        </div>
+                            </div>
 
-                                        <div class="float-right d-flex">
-                                            <div>
-                                            <!-- Rounded switch -->
-                                                <label class="switch" id="lock_status">
-                                                    <input type="checkbox" name="lock_status"
-                                                        <% unless lock.status == "Unlocked" %>
-                                                            <%= "checked" %>
-                                                        <% end %> >
-                                                    <span id="slider-<%= lock.id %>" class="slider round"></span>
-                                                </label>
-                                            </div>
-                                            <div class="pl-2 locked-color">
-                                                <% unless lock.status == "Unlocked" %>
-                                                    <%= image_tag ("locked_largel_W.png"), height: "30rem", class: "mr-2" %>
-                                                <% else %>
-                                                    <%= image_tag ("unlocked_large_W.png"), height: "30rem", class: "" %>
-                                                <% end %>
-                                            </div>
-                                        </div>
+                        <% lock.each do |lock| %>
+                            <div id="bt-card-body" class="card-body">
+                                <div id="" class="d-flex float-left">
+                                    <input type='image' src="/assets/ic_action_location_2_white.png" height="30rem" class='fly pr-2' value='<%=lock.longitude%>' name='<%=lock.latitude%>'/>
+                                    <h5 id="bt-lock-name" class="card-title f-3 my-auto"><%= link_to lock.lock_name, user_lock_path(current_user.id, lock.id), class:"f-1 btn-link bg-transparent" %></h5>
+                                </div>
+
+                                <div class="float-right d-flex">
+                                    <div class="pr-2 my-auto">
+                                        <% if lock.tracking == true %>
+                                            <%= image_tag 'clock_icon_small.png', style:"height: 1.5rem", class:""%>
+                                        <% end %>
                                     </div>
-                                <% end %>
+                                    <div>
+                                        <!-- Rounded switch -->
+                                        <label class="switch" id="lock_status">
+                                            <input type="checkbox" name="lock_status"
+                                                <% unless lock.status == "Unlocked" %>
+                                                <%= "checked" %>
+                                            <% end %> >
+                                            <span id="slider-<%= lock.id %>" class="slider round"></span>
+                                        </label>
+                                    </div>
+                                    <div id="lock_icon-<%= lock.id %>" class="pl-2 locked-color">
+                                        <% if lock.status == "Unlocked" %>
+                                            <%= image_tag ("unlocked_small_B.png"), height: "30rem", class: "" %>
+                                        <% elsif lock.status == "Locked" %>
+                                            <%= image_tag ("locked_small_color.png"), height: "30rem", class: "" %>
+                                        <% end %>   
+                                    </div>
+                                </div>
+
                             </div>
                         <% end %>
-                    </div>
+                        </div>
+                    <% end %>
                 </div>
-              </div>
-              <% end %>
             </div>
-<<<<<<< HEAD
-            <% end %>
-          </div>
-=======
-            
-<<<<<<< HEAD
-            <div id='map' class=""></div>
->>>>>>> 1. fixed conflicting css between boon tek's and kendall's
-=======
+
             <div id='map' class="lock-page-map"></div>
->>>>>>> 1. minor fix for locks.scss
-        </div>
-            
-        <div id='map' class="pt-2"></div>
-      </div>    
+        </div>    
     </div>
-  </div>
+</div>
         
 <script>
     // lock switch ajax

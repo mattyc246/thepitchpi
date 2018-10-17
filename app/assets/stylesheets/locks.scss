@@ -10,7 +10,7 @@ body {
 
 #map {
   width:95%;
-  height: 800px;
+  height: 85vh;
   position: absolute;
   border: 1px solid black;
  }
@@ -60,9 +60,7 @@ body {
     display: none;
 }
 
-a.mapboxgl-ctrl-logo {
-  width: 0px !important;
-}
+
 
 
 
@@ -132,9 +130,6 @@ input:checked + .slider:before {
 .card {
   // width: 30%;
   position: relative;
-/*register lock card*/
-#kend-card {
-  position: absolute;
   border: 1px solid black;
   background-color: #495057!important;
   min-width: 200px;
@@ -143,12 +138,12 @@ input:checked + .slider:before {
 
 }
 
-#kend-card-header, #kend-card-header h5 {
+.card-header, h5 {
   color: #B5FFFF!important;
   background-color: black;
 }
 
-#kend-card-body {
+.card-body {
   background-color: white;
 
 }
@@ -162,7 +157,7 @@ input:checked + .slider:before {
   padding: 0px;
 }
 
-#kend-btn-secondary {
+.btn-secondary {
     background-color: #FF046B!important;
     border-color: white!important;
 }
@@ -172,19 +167,13 @@ input:checked + .slider:before {
   border: 1px solid #343a40;
 }
 
-#kend-small-font {
+.small-font {
 
   font-size: 0.75em ;
 
 }
 
 // SHOW page--------------------------------------
-@media only screen and (max-width: 425px) {
-
-  #kend-card {
-    min-width: 25%!important;
-    margin: 60px;
-  }
 
 .show-icon {
 position: relative;
@@ -214,45 +203,9 @@ min-width: 200px;
   color: #A6FFFF;
   margin: auto;
   margin-bottom: 70px;
-@media only screen and (max-width: 375px) {
-
-  #kend-card {
-    min-width: 25%!important;
-    margin: 45px!important;
-  }
-
-}
-
-@media only screen and (max-width: 320px) {
-
-  #kend-card {
-    min-width: 10%!important;
-    margin: 15px !important;
-  }
-
-}
-
-#bt-card {
-  background-color: #000000;
-  max-width: 27rem;
-}
-
-#bt-card-body {
-  padding: 0.75rem;
-  height: 3.5rem;
-  background-color: #323232;
-}
-
-#bt-lock-name a {
-  color: white !important;
-}
-
-.zoom-button {
-  background: url('/assets/images/ic_action_location_2.png');
 }
 
 
-<<<<<<< HEAD
 .show-status-unlocked {
   font-family: "Oswald", sans-serif;
   font-weight: 300;
@@ -261,10 +214,6 @@ min-width: 200px;
   color: #FF046B;
   margin: auto;
   margin-bottom: 70px;
-=======
-.fixed {
-  position: fixed;
->>>>>>> 1. fixed conflicting css between boon tek's and kendall's
 }
 
 #show-card {
@@ -272,33 +221,11 @@ min-width: 200px;
 }
 
 
-.lock-page-btns {
-  background-color: #000000;
-}
-
-<<<<<<< HEAD
-=======
-@media screen and (max-width: 767px){
-  #everything-container{
-    position: relative;
-  }
-  
-  #locks-map-container {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  #locks-container {
-    position: absolute;
-    margin-top: 1rem;
-    width: 21rem;
-  }
->>>>>>> 1. fixed conflicting css between boon tek's and kendall's
 
 
 
 
-<<<<<<< HEAD
+
 // MOBILE SIZES-----------------------------------------
 
 @media only screen and (max-width: 425px) {
@@ -306,33 +233,6 @@ min-width: 200px;
   .card {
     min-width: 25%!important;
     margin: 60px;
-  #map {
-=======
-  .lock-page-map {
->>>>>>> 1. minor fix for locks.scss
-    position: absolute;
-    margin-top: 1rem;
-  }
-}
-
-@media screen and (min-width: 768px){
-  #locks-map-container {
-    display: flex;
-  }
-  
-  #locks-container {
-    display: block;
-    position: relative;
-    float: left;
-    padding: 1rem 0.55rem 1rem 0rem;
-    width: 27rem;
-    height: 100%;
-  }
-
-  .lock-page-map {
-    float: right;
-    width: 60rem;
-    height: 100%;
   }
 
   .form-control,
@@ -341,6 +241,85 @@ min-width: 200px;
   }
 
 }
+
+
+// #bt-card {
+//   background-color: #000000;
+//   max-width: 27rem;
+// }
+
+// #bt-card-body {
+//   padding: 0.75rem;
+//   height: 3.5rem;
+//   background-color: #323232;
+// }
+
+// #bt-lock-name a {
+//   color: white !important;
+// }
+
+// .zoom-button {
+//   background: url('/assets/images/ic_action_location_2.png');
+// }
+
+// .dont-show {
+//   display: none;
+// }
+
+// .fixed {
+//   position: fixed;
+// }
+
+// .lock-page-btns {
+//   background-color: #000000;
+// }
+
+// @media screen and (max-width: 767px){
+//   #everything-container{
+//     position: relative;
+//   }
+  
+//   #locks-map-container {
+//     margin-left: auto;
+//     margin-right: auto;
+//   }
+  
+//   #locks-container {
+//     position: absolute;
+//     margin-top: 1rem;
+//     width: 21rem;
+//   }
+// }
+
+// @media screen and (min-width: 768px){
+//   #locks-map-container {
+//     display: flex;
+//   }
+  
+//   #locks-container {
+//     display: block;
+//     position: relative;
+//     float: left;
+//     width: 27rem;
+//     height: 100%;
+//   }
+  
+//   .lock-page-map {
+//     float: right;
+//     width: 60rem;
+//     height: 100%;
+//   }
+// }
+
+// a.mapboxgl-ctrl-logo {
+//   width: 0px !important;
+// }
+  
+  
+  
+
+
+
 
 // @media only screen and (max-width: 375px) {
 //
