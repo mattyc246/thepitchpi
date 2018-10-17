@@ -15,7 +15,7 @@
                 <span id="slider-<%= @lock.id %>" class="slider round"></span>
               </label>
             </div>
-            <div>
+            <div id="big-icon">
                   <% if @lock.status == "Unlocked" %>
                       <%= image_tag ("unlocked_large_color.png"), style:"width: 150px;" %>
                   <% elsif @lock.status == "Locked" %>
@@ -115,6 +115,28 @@
 
 <script>
 
+  $(document).ready(function() {
+      $('.slider').click(function(){
+          var slider_id = event.target.id.split('-')[1]    
+
+          $.ajax({
+              url: '/locks/toggle_lock',
+              method: 'GET',
+              data: {toggle_id: slider_id},
+              success: function(data){
+
+                  if(data.status == "Locked"){
+                      $(`#big-icon`).html('<%= image_tag ("locked_large_color.png"), style:"width: 150px;" %>')
+                  } else if(data.status == "Unlocked"){
+                      $(`#big-icon`).html('<%= image_tag ("unlocked_large_color.png"), style:"width: 150px;" %>')
+                  }
+
+              },
+              error: function(){}
+          });
+
+      });
+  })
 
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibG9ja25yb2xscy10ZWFtMSIsImEiOiJjam4xM3FvcDYxYnZuM2ttOThyYTc2cjFwIn0.LXhAvekTPkv8HSJvQd-32w';
