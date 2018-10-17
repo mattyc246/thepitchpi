@@ -1,4 +1,4 @@
-<%= stylesheet_link_tag "boontek", media: "all" %> 
+<%= stylesheet_link_tag "boontek", media: "all" %>
   <div>
     <meta charset='utf-8' />
     <title>Locate the user</title>
@@ -11,7 +11,7 @@
     </style> -->
   </div>
 
-<div class="container-fluid"> 
+<div class="container-fluid" style = "margin-top: 100px;">
 
     <div id="everything-container" class ="">
         <div id="locks-map-container" class="">
@@ -58,7 +58,7 @@
                                             <%= image_tag ("unlocked_small_B.png"), height: "30rem", class: "" %>
                                         <% elsif lock.status == "Locked" %>
                                             <%= image_tag ("locked_small_color.png"), height: "30rem", class: "" %>
-                                        <% end %>   
+                                        <% end %>
                                     </div>
                                 </div>
 
@@ -70,10 +70,10 @@
             </div>
 
             <div id='map' class="lock-page-map"></div>
-        </div>    
+        </div>
     </div>
 </div>
-        
+
 <script>
     // lock switch ajax
     $(document).ready(function() {
@@ -110,9 +110,9 @@
     $('.flying').click(function() {
         $('#locks-container').toggleClass("dont-show");
     });
-    
+
     // button div to follow scrolling (doesn't work right now)
-    $(document).ready(function () { 
+    $(document).ready(function () {
         let top = $('#map').offset().top - parseFloat($('#map').css('marginTop').replace(/auto/, 0));
         $(window).scroll(function (event) {
             let y = $(this).scrollTop();
@@ -124,7 +124,7 @@
             }
         });
     });
-  
+
 // Script ----------Script ----------Script ----------Script ----------Script ---------
 
 // initialize map---------------------------------------------------------------------
@@ -214,8 +214,8 @@ geojson.features.forEach(function(marker) {
   //   var el = document.createElement('div');
   //   el.className = 'marker-unlocked';
   // }
-  
-  
+
+
 
   // make a marker for each feature and add to the map-------------
   new mapboxgl.Marker(el)
