@@ -172,6 +172,42 @@ class LocksController < ApplicationController
     end
   end
 
+  def lock_around_the_clock
+
+    current_lock = Lock.find(params[:lock_id])
+
+    if current_lock.tracking == true
+
+      current_lock.tracking = false
+
+      if current_lock.save
+
+        render json: {tracking_set: current_lock.tracking}
+
+      else
+
+        flash[:notice] = "Internal Error! Please contact the Locker Admin"
+
+      end
+
+    elsif current_lock.tracking == false
+
+      current_lock.tracking = true
+
+      if current_lock.save
+
+        render json: {tracking_set: current_lock.tracking}
+
+      else
+
+        flash[:notice] = "Internal Error! Please contact the Locker Admin"
+
+      end
+
+    end
+
+  end
+
   private
   def lock_params
     params.require(:locks).permit(:lock_name, :location, :group, :longitude, :latitude)
