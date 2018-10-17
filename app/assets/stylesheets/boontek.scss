@@ -1,12 +1,19 @@
 #bt-card {
   background-color: #000000 !important;
   max-width: 27rem;
+  border: none;
+
+}
+
+#bt-card-header {
+    padding: 0.03rem 0.25rem;
 }
 
 #bt-card-body {
   padding: 0.75rem;
   height: 3.5rem;
   background-color: #323232;
+  border-bottom: solid #000000 1px;
 }
 
 #bt-lock-name a {
