@@ -20,10 +20,10 @@
 // USER LOCATION AND DISTANCE------------USER LOCATION AND DISTANCE--------------USER LOCATION AND DISTANCE----------------
 
 // detect it is mobile
-// if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
 
 
 
+if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
 
 $(document).ready(function(){
 
@@ -60,7 +60,7 @@ $(document).ready(function(){
 
 			})
 
-// }
+}
 
 
 

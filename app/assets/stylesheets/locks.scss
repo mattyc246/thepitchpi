@@ -4,13 +4,10 @@
 
 
 /* lock map css */
-body {
-  margin-top: 100px;
-}
 
 #map {
   width:95%;
-  height: 800px;
+  height: 85vh;
   position: absolute;
   border: 1px solid black;
  }
@@ -199,7 +196,7 @@ min-width: 200px;
   font-family: "Oswald", sans-serif;
   font-weight: 300;
   text-transform: uppercase;
-  font-size: 4.5rem;
+  font-size: 4rem;
   color: #A6FFFF;
   margin: auto;
   margin-bottom: 70px;
@@ -210,7 +207,7 @@ min-width: 200px;
   font-family: "Oswald", sans-serif;
   font-weight: 300;
   text-transform: uppercase;
-  font-size: 4.5rem;
+  font-size: 4rem;
   color: #FF046B;
   margin: auto;
   margin-bottom: 70px;
@@ -232,7 +229,7 @@ min-width: 200px;
 
   .card {
     min-width: 25%!important;
-    margin: 60px;
+    margin: 15px;
   }
 
   .form-control,
@@ -240,8 +237,42 @@ min-width: 200px;
     width: 100% !important;
   }
 
+  .div-panel-right {
+  padding-left: 1px;
+  min-width: 200px;
 }
 
+#map {
+  width:95%;
+  height: 500px;
+  margin-top: 20px;
+
+ }
+
+#map {
+  width:95%;
+  height: 500px;
+  margin-top: 20px;
+
+ }
+
+ .show-status-locked {
+
+   font-size: 3rem;
+
+ }
+
+ .show-status-unlocked {
+  font-size: 3rem;
+ }
+
+
+
+
+
+
+
+}
 // @media only screen and (max-width: 375px) {
 //
 //   .card {

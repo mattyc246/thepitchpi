@@ -1,10 +1,10 @@
 
 <div class="row">
-  <div class="col-4">
+  <div class="col-md-4">
     <div class="div-panel-right">
 
     <div class="card">
-      <h5 class="card-header f-1">I WANNA LOCK!</h5>
+      <h5 class="card-header f-header-blue">I WANNA LOCK!</h5>
       <div class="card-body text-body">
         <%= render partial: '/locks/form_new_lock'%>
       </div>
@@ -13,7 +13,7 @@
 
   </div>
 </div>
-  <div class="col-8">
+  <div class="col-md-8">
 
     <div id='map'></div>
 
@@ -32,7 +32,7 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoibG9ja25yb2xscy10ZWFtMSIsImEiOiJjam4xM3FvcDYxYnZuM2ttOThyYTc2cjFwIn0.LXhAvekTPkv8HSJvQd-32w';
 var map = new mapboxgl.Map({
     container: 'map', // container id
-    style: 'mapbox://styles/mapbox/dark-v9',
+    style: 'mapbox://styles/locknrolls-team1/cjn14k39471xh2rs7lmh6r40x',
     center: [101.63060418023838, 3.1352744737826583], // starting position
     zoom: 15 // starting zoom
 });
@@ -113,6 +113,10 @@ map.addControl(new mapboxgl.GeolocateControl({
     trackUserLocation: true
 }));
 
-map.addControl(new mapboxgl.NavigationControl());
+// Add Navigation Controller
+map.addControl(new mapboxgl.NavigationControl(), 'top-left');
+
+// Add Full screen BUtton
+map.addControl(new mapboxgl.FullscreenControl());
 
 </script>
