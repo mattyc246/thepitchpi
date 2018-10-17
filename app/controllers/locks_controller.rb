@@ -44,7 +44,7 @@ class LocksController < ApplicationController
   end
 
   def distance_check
-    radius = 0.02
+    radius = 0.015
     @user = User.find(current_user.id)
     @lock = @user.locks.find_by(tracking: true)
     @distance = Geocoder::Calculations.distance_between([params[:current_lng],params[:current_lat]], [@lock.longitude, @lock.latitude])
@@ -54,11 +54,11 @@ class LocksController < ApplicationController
         if @user.in_range == true
           if @distance > radius
               @in_range = "false"
-                # Twilio::REST::Client.new.messages.create({
-                # from: ENV['twilio_phone_number'],
-                # to: '+60102362993',
-                # body: "Your #{@lock.group}, #{@lock.lock_name}, is UNLOCKED and you are more than 200 meters way. Lock it? https://locknroll.herokuapp.com"
-                # })
+                Twilio::REST::Client.new.messages.create({
+                from: ENV['twilio_phone_number'],
+                to: '+60102362993',
+                body: "Your #{@lock.group}, #{@lock.lock_name}, is UNLOCKED and you are more than 150 meters way. Lock it? https://locknroll.herokuapp.com/users/#{@lock.user_id}/locks/#{@lock.id}"
+                })
 
                 @user.update(in_range: false)
             end
@@ -74,7 +74,6 @@ class LocksController < ApplicationController
           @user.update(in_range: true) if !@user.in_range
         end
     end
-    # byebug
 
     @status_db = @user.in_range
 
