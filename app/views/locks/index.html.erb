@@ -26,7 +26,7 @@
                         <div id="bt-card" class="card text-dark mb-3">
                             <div id="bt-card-header" class="card-header d-flex bg-black">
                                 <div class="f-1">
-                                    <button id="<%= lock.first.user_id %>" value= "<%= group %>" class='flygroup flying btn btn-link f-1' ><%= group %></button>
+                                    <button id="<%= lock.first.user_id %>" value= "<%= group %>" class='flygroup flying btn btn-link f-header-blue' ><%= group %></button>
                                 </div>
                             </div>
 
@@ -38,22 +38,18 @@
                                 </div>
 
                                 <div class="float-right d-flex">
-                                    <div class="pr-2 my-auto">
                                         <% if lock.tracking == true %>
-                                            <%= image_tag 'clock_icon_small.png', style:"height: 1.5rem", class:""%>
+                                            <%= image_tag 'clock_icon_small.png', style:"height: 2rem", class:"pr-2"%>
                                         <% end %>
-                                    </div>
-                                    <div>
                                         <!-- Rounded switch -->
                                         <label class="switch" id="lock_status">
                                             <input type="checkbox" name="lock_status"
                                                 <% unless lock.status == "Unlocked" %>
                                                 <%= "checked" %>
                                             <% end %> >
-                                            <span id="slider-<%= lock.id %>" class="slider round"></span>
+                                            <span id="slider-<%= lock.id %>" class="slider round "></span>
                                         </label>
-                                    </div>
-                                    <div id="lock_icon-<%= lock.id %>" class="pl-2 locked-color">
+                                    <div id="lock_icon-<%= lock.id %>" class="locked-color pl-2">
                                         <% if lock.status == "Unlocked" %>
                                             <%= image_tag ("unlocked_small_B.png"), height: "30rem", class: "" %>
                                         <% elsif lock.status == "Locked" %>
@@ -110,28 +106,14 @@
     $('.flying').click(function() {
         $('#locks-container').toggleClass("dont-show");
     });
-
-    // button div to follow scrolling (doesn't work right now)
-    $(document).ready(function () {
-        let top = $('#map').offset().top - parseFloat($('#map').css('marginTop').replace(/auto/, 0));
-        $(window).scroll(function (event) {
-            let y = $(this).scrollTop();
-            //if y > top, it means that if we scroll down any more, parts of our element will be outside the viewport
-            //so we move the element down so that it remains in view.
-            if (y >= top) {
-            let difference = y - top;
-            $('#map').css("top",difference);
-            }
-        });
-    });
-
+  
 // Script ----------Script ----------Script ----------Script ----------Script ---------
 
 // initialize map---------------------------------------------------------------------
 mapboxgl.accessToken = 'pk.eyJ1IjoibG9ja25yb2xscy10ZWFtMSIsImEiOiJjam4xM3FvcDYxYnZuM2ttOThyYTc2cjFwIn0.LXhAvekTPkv8HSJvQd-32w';
 var map = new mapboxgl.Map({
     container: 'map', // container id
-    style: 'mapbox://styles/mapbox/dark-v9',
+    style: 'mapbox://styles/locknrolls-team1/cjn14k39471xh2rs7lmh6r40x',
     center: [101.63060418023838, 3.1352744737826583], // starting position
     zoom: 15 // starting zoom
 
@@ -274,7 +256,7 @@ map.addControl(new mapboxgl.GeolocateControl({
 }));
 
 // Add Navigation Controller
-map.addControl(new mapboxgl.NavigationControl());
+map.addControl(new mapboxgl.NavigationControl(), 'top-left');
 
 // Add Full screen BUtton
 map.addControl(new mapboxgl.FullscreenControl());
