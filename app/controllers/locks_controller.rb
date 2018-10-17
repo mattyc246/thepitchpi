@@ -102,7 +102,11 @@ class LocksController < ApplicationController
 
       if lock.save
 
-        host = lock.host_id
+        if lock.id == "1"
+          host = ENV['RASPBERRY_PI_HOST']
+        else
+          host = "123.123.3.3.1"
+        end
         user = ENV['RASPBERRY_PI_USER']
         password = ENV['RASPBERRY_PI_PASSWORD']
         port = ENV['RASPBERRY_PI_PORT']
@@ -138,7 +142,11 @@ class LocksController < ApplicationController
 
       if lock.save
 
-        host = lock.host_id
+        if lock.id == "1"
+          host = ENV['RASPBERRY_PI_HOST']
+        else
+          host = "123.123.3.3.1"
+        end
         user = ENV['RASPBERRY_PI_USER']
         password = ENV['RASPBERRY_PI_PASSWORD']
         port = ENV['RASPBERRY_PI_PORT']
