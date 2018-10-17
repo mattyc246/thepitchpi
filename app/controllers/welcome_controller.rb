@@ -24,5 +24,9 @@ class WelcomeController < ApplicationController
   	end
 
   end
+
+  def merch
+
+  end
   
 end
