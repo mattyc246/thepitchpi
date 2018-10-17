@@ -240,7 +240,6 @@ $('#latc').click(function(){
     method: "GET",
     data: { lock_id: lock },
     success: function(data){
-      console.log(data)
       if(data.tracking_set == true){
         $('#latc').html('<%= image_tag 'lock_around_clock_pink.png', style:"width: 10rem;" %>')
       } else if(data.tracking_set == false){
