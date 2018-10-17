@@ -1,10 +1,10 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-4">
+    <div class="col-md-4">
 
       <div class = "div-panel-right">
         <div class ="d-flex">
-          <div class="show-icon">
+          <div class="show-icon ml-3">
             <div class = "show-toggle">
               <!-- Rounded switch -->
               <label class="switch" id="lock_status">
@@ -25,19 +25,32 @@
           </div>
           </div>
           <div class ="show-status-locked text-uppercase f-1">
-              <p><%= @lock.status %></p>
+
+              <% if @lock.status == "Unlocked" %>
+                  <p>Unlocked</p>
+              <% elsif @lock.status == "Locked" %>
+                  <p>Lock On!</p>
+              <% end %>
 
           </div>
         </div>
 
       <div class="card" id = "show-card">
-          <h5 class="card-header fly bg-black" data-longitude='<%=@lock.longitude%>' data-latitude='<%=@lock.latitude%>' ><%= @lock.lock_name %></h5>
+          <h5 class="card-header fly bg-black f-header-blue" data-longitude='<%=@lock.longitude%>' data-latitude='<%=@lock.latitude%>' ><%= @lock.lock_name %></h5>
           <div class="card-body text-body">
             <h6 class = "f-1 text-dark">Group</h6>
             <h3 class = "f-1 text-dark"><%= @lock.group %></h3>
             <br>
             <h6 class = "f-1 text-dark">Address</h6>
             <p><%= @lock.location %></p>
+
+            <small>distance: <span class = "distance">
+
+            </span></small>
+            <small>accuracy: <span class = "acc">
+
+            </small>
+
           </div>
       </div>
     </div>
@@ -45,7 +58,7 @@
 
 
       </div>
-      <div class="col-8">
+      <div class="col-md-8">
 
         <div id='map'></div>
 
@@ -88,11 +101,10 @@
 
 
 
-
 mapboxgl.accessToken = 'pk.eyJ1IjoibG9ja25yb2xscy10ZWFtMSIsImEiOiJjam4xM3FvcDYxYnZuM2ttOThyYTc2cjFwIn0.LXhAvekTPkv8HSJvQd-32w';
 var map = new mapboxgl.Map({
     container: 'map', // container id
-    style: 'mapbox://styles/mapbox/dark-v9',
+    style: 'mapbox://styles/locknrolls-team1/cjn14k39471xh2rs7lmh6r40x',
     center: [<%= @lock.longitude %>, <%= @lock.latitude %>], // starting position
     zoom: 15 // starting zoom
 });
@@ -198,7 +210,7 @@ map.addControl(new mapboxgl.GeolocateControl({
 }));
 
 // Add Navigation Controller
-map.addControl(new mapboxgl.NavigationControl());
+map.addControl(new mapboxgl.NavigationControl(), 'top-left');
 
 // Add Full screen BUtton
 map.addControl(new mapboxgl.FullscreenControl());

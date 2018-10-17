@@ -4,9 +4,6 @@
 
 
 /* lock map css */
-body {
-  margin-top: 100px;
-}
 
 #map {
   width:95%;
@@ -140,7 +137,7 @@ input:checked + .slider:before {
 
 .card-header, h5 {
   color: #B5FFFF!important;
-  background-color: black;
+  // background-color: black;
 }
 
 .card-body {
@@ -199,7 +196,7 @@ min-width: 200px;
   font-family: "Oswald", sans-serif;
   font-weight: 300;
   text-transform: uppercase;
-  font-size: 4.5rem;
+  font-size: 4rem;
   color: #A6FFFF;
   margin: auto;
   margin-bottom: 70px;
@@ -210,7 +207,7 @@ min-width: 200px;
   font-family: "Oswald", sans-serif;
   font-weight: 300;
   text-transform: uppercase;
-  font-size: 4.5rem;
+  font-size: 4rem;
   color: #FF046B;
   margin: auto;
   margin-bottom: 70px;
@@ -232,7 +229,7 @@ min-width: 200px;
 
   .card {
     min-width: 25%!important;
-    margin: 60px;
+    margin: 15px;
   }
 
   .form-control,
@@ -240,101 +237,31 @@ min-width: 200px;
     width: 100% !important;
   }
 
+  .div-panel-right {
+  padding-left: 1px;
+  min-width: 200px;
 }
 
 
-// #bt-card {
-//   background-color: #000000;
-//   max-width: 27rem;
-// }
 
-// #bt-card-body {
-//   padding: 0.75rem;
-//   height: 3.5rem;
-//   background-color: #323232;
-// }
+#map {
+  width: 90vw;
+  height: 500px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 
-// #bt-lock-name a {
-//   color: white !important;
-// }
+ }
 
-// .zoom-button {
-//   background: url('/assets/images/ic_action_location_2.png');
-// }
+ .show-status-locked {
 
-// .dont-show {
-//   display: none;
-// }
+   font-size: 3rem;
 
-// .fixed {
-//   position: fixed;
-// }
+ }
 
-// .lock-page-btns {
-//   background-color: #000000;
-// }
-
-// @media screen and (max-width: 767px){
-//   #everything-container{
-//     position: relative;
-//   }
-  
-//   #locks-map-container {
-//     margin-left: auto;
-//     margin-right: auto;
-//   }
-  
-//   #locks-container {
-//     position: absolute;
-//     margin-top: 1rem;
-//     width: 21rem;
-//   }
-// }
-
-// @media screen and (min-width: 768px){
-//   #locks-map-container {
-//     display: flex;
-//   }
-  
-//   #locks-container {
-//     display: block;
-//     position: relative;
-//     float: left;
-//     width: 27rem;
-//     height: 100%;
-//   }
-  
-//   .lock-page-map {
-//     float: right;
-//     width: 60rem;
-//     height: 100%;
-//   }
-// }
-
-// a.mapboxgl-ctrl-logo {
-//   width: 0px !important;
-// }
-  
-  
-  
+ .show-status-unlocked {
+  font-size: 3rem;
+ }
 
 
 
-
-// @media only screen and (max-width: 375px) {
-//
-//   .card {
-//     min-width: 25%!important;
-//     margin: 45px!important;
-//   }
-//
-// }
-
-// @media only screen and (max-width: 320px) {
-//
-//   .card {
-//     min-width: 10%!important;
-//     margin: 15px !important;
-//   }
-//
-// }
+}
