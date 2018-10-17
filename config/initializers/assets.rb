@@ -13,3 +13,6 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 Rails.application.config.assets.paths << "#{Rails.root}/app/assets/videos"
+
+# Boon Tek's own world
+Rails.application.config.assets.precompile += %w( boontek.css )

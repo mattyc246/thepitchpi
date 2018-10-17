@@ -1,0 +1,91 @@
+#bt-card {
+  background-color: #000000 !important;
+  max-width: 27rem;
+}
+
+#bt-card-body {
+  padding: 0.75rem;
+  height: 3.5rem;
+  background-color: #323232;
+}
+
+#bt-lock-name a {
+  color: white !important;
+  background-color: transparent !important;
+}
+
+.zoom-button {
+  background: url('/assets/images/ic_action_location_2.png');
+}
+
+.dont-show {
+  display: none;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.lock-page-btns {
+  background-color: #000000;
+}
+
+@media screen and (max-width: 767px){
+    #everything-container{
+        position: relative;
+    }
+
+    #locks-map-container {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #locks-container {
+        z-index: 999;
+        position: absolute;
+        margin-top: 1rem;
+        width: 100%;
+    }
+
+    .lock-page-map {
+        position: absolute;
+        margin-top: 1rem;
+        width: 100% !important;
+        height: 32rem !important;
+    }
+}
+
+@media screen and (min-width: 768px){
+  #locks-map-container {
+    display: flex;
+  }
+  
+  #locks-btn-container{
+      margin-right: 1rem;
+  }
+
+  #locks-container {
+    display: block;
+    position: relative;
+    float: left;
+    margin-top: 1rem;
+    width: 27rem;
+    height: 100%;
+  }
+  
+  .lock-page-map {
+    float: right;
+    position: relative !important;
+    width: 60rem;
+    height: 85vh !important;
+  }
+
+  #show-control {
+      display: none;
+  }
+}
+
+a.mapboxgl-ctrl-logo {
+  width: 0px !important;
+}
+  
