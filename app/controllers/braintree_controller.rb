@@ -26,7 +26,7 @@ class BraintreeController < ApplicationController
       @user.save
       Twilio::REST::Client.new.messages.create({
         from: ENV['twilio_phone_number'],
-        to: 'your number',
+        to: '+60102362993',
         body: 'You have made a successful transaction to LocknRoll.'
       })
       redirect_to root_path, :flash => { :success => "Transaction successful!" }
