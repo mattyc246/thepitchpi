@@ -27,7 +27,7 @@
           <div class ="show-status-locked text-uppercase f-1">
 
               <% if @lock.status == "Unlocked" %>
-                  <p>Unlocked</p>
+                  <p class="text-pink">Unlocked</p>
                   <div id="latc">
                     <% if @lock.tracking == true %>
                       <%= image_tag 'lock_around_clock_pink.png', style:"width: 10rem;" %>
@@ -36,7 +36,7 @@
                     <% end %>
                   </div>
               <% elsif @lock.status == "Locked" %>
-                  <p>Lock On!</p>
+                  <p class="text-lb">Lock On!</p>
                   <div id="latc">
                     <% if @lock.tracking == true %>
                       <%= image_tag 'lock_around_clock_pink.png', style:"width: 10rem;" %>
