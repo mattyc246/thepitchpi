@@ -102,7 +102,7 @@ class LocksController < ApplicationController
 
       if lock.save
 
-        if lock.id == "1"
+        if lock.id == 1
           host = ENV['RASPBERRY_PI_HOST']
         else
           host = "123.123.3.3.1"
@@ -142,7 +142,7 @@ class LocksController < ApplicationController
 
       if lock.save
 
-        if lock.id == "1"
+        if lock.id == 1
           host = ENV['RASPBERRY_PI_HOST']
         else
           host = "123.123.3.3.1"
