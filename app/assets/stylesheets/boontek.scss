@@ -22,12 +22,12 @@
   display: none;
 }
 
-.fixed {
-  position: fixed;
-}
-
 .lock-page-btns {
   background-color: #000000;
+}
+
+#lock_status {
+    margin: 0;
 }
 
 @media screen and (max-width: 767px){

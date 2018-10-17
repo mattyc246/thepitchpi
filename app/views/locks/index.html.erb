@@ -38,22 +38,18 @@
                                 </div>
 
                                 <div class="float-right d-flex">
-                                    <div class="pr-2 my-auto">
                                         <% if lock.tracking == true %>
-                                            <%= image_tag 'clock_icon_small.png', style:"height: 1.5rem", class:""%>
+                                            <%= image_tag 'clock_icon_small.png', style:"height: 2rem", class:"pr-2"%>
                                         <% end %>
-                                    </div>
-                                    <div>
                                         <!-- Rounded switch -->
                                         <label class="switch" id="lock_status">
                                             <input type="checkbox" name="lock_status"
                                                 <% unless lock.status == "Unlocked" %>
                                                 <%= "checked" %>
                                             <% end %> >
-                                            <span id="slider-<%= lock.id %>" class="slider round"></span>
+                                            <span id="slider-<%= lock.id %>" class="slider round "></span>
                                         </label>
-                                    </div>
-                                    <div id="lock_icon-<%= lock.id %>" class="pl-2 locked-color">
+                                    <div id="lock_icon-<%= lock.id %>" class="locked-color pl-2">
                                         <% if lock.status == "Unlocked" %>
                                             <%= image_tag ("unlocked_small_B.png"), height: "30rem", class: "" %>
                                         <% elsif lock.status == "Locked" %>
