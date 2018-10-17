@@ -28,10 +28,23 @@
 
               <% if @lock.status == "Unlocked" %>
                   <p>Unlocked</p>
-                  <%= image_tag 'lock_around_clock_pink.png', id:"latc", style:"width: 10rem;" %>
+                  <div id="latc">
+                    <% if @lock.tracking == true %>
+                      <%= image_tag 'lock_around_clock_pink.png', style:"width: 10rem;" %>
+                    <% elsif @lock.tracking == false %>
+                      <h6 class="btn">Lock around the clock?</h6>
+                    <% end %>
+                  </div>
               <% elsif @lock.status == "Locked" %>
                   <p>Lock On!</p>
-                  <button class="btn btn-secondary">Lock Around The Clock</button>
+                  <div id="latc">
+                    <% if @lock.tracking == true %>
+                      <%= image_tag 'lock_around_clock_pink.png', style:"width: 10rem;" %>
+                    <% elsif @lock.tracking == false %>
+                      <h6 class="btn">Lock around the clock?</h6>
+                    <% end %>
+                  </div>
+                  
               <% end %>
 
 
@@ -228,7 +241,12 @@ $('#latc').click(function(){
     data: { lock_id: lock },
     success: function(data){
       console.log(data)
-    }
+      if(data.tracking_set == true){
+        $('#latc').html('<%= image_tag 'lock_around_clock_pink.png', style:"width: 10rem;" %>')
+      } else if(data.tracking_set == false){
+        $('#latc').html('<h6 class="btn">Lock around the clock?</h6>')
+      }
+    },
 
   })
 
