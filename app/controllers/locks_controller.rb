@@ -44,7 +44,7 @@ class LocksController < ApplicationController
   end
 
   def distance_check
-    radius = 0.02
+    radius = 0.015
     @user = User.find(current_user.id)
     @lock = @user.locks.find_by(tracking: true)
     @distance = Geocoder::Calculations.distance_between([params[:current_lng],params[:current_lat]], [@lock.longitude, @lock.latitude])
@@ -85,7 +85,7 @@ class LocksController < ApplicationController
 
     @lock = Lock.find(params[:toggle_id])
 
-    lock_status = @lock.status 
+    lock_status = @lock.status
 
     # Return will be Open or Closed
     render :json => {status: lock_status}
@@ -113,7 +113,7 @@ class LocksController < ApplicationController
 
 
         Net::SSH.start(host, user, password: password, port: port) do |ssh|
-          
+
             output = ssh.exec!("cd Desktop; python lock_controller.py unlock")
 
             status = output.split
@@ -150,9 +150,9 @@ class LocksController < ApplicationController
         user = ENV['RASPBERRY_PI_USER']
         password = ENV['RASPBERRY_PI_PASSWORD']
         port = ENV['RASPBERRY_PI_PORT']
-        
+
         Net::SSH.start(host, user, password: password, port: port) do |ssh|
-          
+
             output = ssh.exec!("cd Desktop; python lock_controller.py lock")
 
             status = output.split
