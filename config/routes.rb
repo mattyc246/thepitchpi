@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 
   get 'easter_egg' => 'welcome#easter_egg', as: "easter_egg"
   get 'merch' => 'welcome#merch', as:"merch"
+
+  get 'lock_around_the_clock' => 'locks#lock_around_the_clock' as: "latc"
   ##### Clearance Routes - Overwritten #####
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]

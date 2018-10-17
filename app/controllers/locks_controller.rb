@@ -172,6 +172,14 @@ class LocksController < ApplicationController
     end
   end
 
+  def lock_around_the_clock
+
+    current_lock = Lock.find(params[:lock_id])
+
+
+
+  end
+
   private
   def lock_params
     params.require(:locks).permit(:lock_name, :location, :group, :longitude, :latitude)

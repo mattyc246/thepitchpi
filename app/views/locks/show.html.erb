@@ -28,9 +28,12 @@
 
               <% if @lock.status == "Unlocked" %>
                   <p>Unlocked</p>
+                  <%= image_tag 'lock_around_clock_pink.png', id:"latc", style:"width: 10rem;" %>
               <% elsif @lock.status == "Locked" %>
                   <p>Lock On!</p>
+                  <button class="btn btn-secondary">Lock Around The Clock</button>
               <% end %>
+
 
           </div>
         </div>
@@ -215,6 +218,20 @@ map.addControl(new mapboxgl.NavigationControl(), 'top-left');
 // Add Full screen BUtton
 map.addControl(new mapboxgl.FullscreenControl());
 
+$('#latc').click(function(){
 
+  var lock = <%= @lock.id %>
+
+  $.ajax({
+    url: "/lock_around_the_clock"
+    method: "GET"
+    data: { lock_id: lock }
+    success: function(data){
+      console.log(data)
+    }
+
+  })
+
+})
 
 </script>
