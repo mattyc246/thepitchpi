@@ -10,7 +10,7 @@ body {
 
 #map {
   width:95%;
-  height: 800px;
+  height: 85vh;
   position: absolute;
   border: 1px solid black;
  }
@@ -241,6 +241,85 @@ min-width: 200px;
   }
 
 }
+
+
+// #bt-card {
+//   background-color: #000000;
+//   max-width: 27rem;
+// }
+
+// #bt-card-body {
+//   padding: 0.75rem;
+//   height: 3.5rem;
+//   background-color: #323232;
+// }
+
+// #bt-lock-name a {
+//   color: white !important;
+// }
+
+// .zoom-button {
+//   background: url('/assets/images/ic_action_location_2.png');
+// }
+
+// .dont-show {
+//   display: none;
+// }
+
+// .fixed {
+//   position: fixed;
+// }
+
+// .lock-page-btns {
+//   background-color: #000000;
+// }
+
+// @media screen and (max-width: 767px){
+//   #everything-container{
+//     position: relative;
+//   }
+  
+//   #locks-map-container {
+//     margin-left: auto;
+//     margin-right: auto;
+//   }
+  
+//   #locks-container {
+//     position: absolute;
+//     margin-top: 1rem;
+//     width: 21rem;
+//   }
+// }
+
+// @media screen and (min-width: 768px){
+//   #locks-map-container {
+//     display: flex;
+//   }
+  
+//   #locks-container {
+//     display: block;
+//     position: relative;
+//     float: left;
+//     width: 27rem;
+//     height: 100%;
+//   }
+  
+//   .lock-page-map {
+//     float: right;
+//     width: 60rem;
+//     height: 100%;
+//   }
+// }
+
+// a.mapboxgl-ctrl-logo {
+//   width: 0px !important;
+// }
+  
+  
+  
+
+
+
 
 // @media only screen and (max-width: 375px) {
 //
