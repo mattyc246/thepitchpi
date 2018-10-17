@@ -44,7 +44,7 @@ class LocksController < ApplicationController
   end
 
   def distance_check
-    radius = 0.015
+    radius = 0.02
     @user = User.find(current_user.id)
     @lock = @user.locks.find_by(tracking: true)
     @distance = Geocoder::Calculations.distance_between([params[:current_lng],params[:current_lat]], [@lock.longitude, @lock.latitude])
@@ -102,7 +102,7 @@ class LocksController < ApplicationController
 
       if lock.save
 
-        host = ENV['RASPBERRY_PI_HOST']
+        host = lock.host_id
         user = ENV['RASPBERRY_PI_USER']
         password = ENV['RASPBERRY_PI_PASSWORD']
         port = ENV['RASPBERRY_PI_PORT']
@@ -138,7 +138,7 @@ class LocksController < ApplicationController
 
       if lock.save
 
-        host = ENV['RASPBERRY_PI_HOST']
+        host = lock.host_id
         user = ENV['RASPBERRY_PI_USER']
         password = ENV['RASPBERRY_PI_PASSWORD']
         port = ENV['RASPBERRY_PI_PORT']
