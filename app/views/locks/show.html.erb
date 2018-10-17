@@ -223,9 +223,9 @@ $('#latc').click(function(){
   var lock = <%= @lock.id %>
 
   $.ajax({
-    url: "/lock_around_the_clock"
-    method: "GET"
-    data: { lock_id: lock }
+    url: "/lock_around_the_clock",
+    method: "GET",
+    data: { lock_id: lock },
     success: function(data){
       console.log(data)
     }
