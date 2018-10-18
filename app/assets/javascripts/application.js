@@ -62,7 +62,16 @@ $(document).ready(function(){
 
 }
 
-
+$(document).ready(function(){
+	$('.nav-link').hover(function(){
+		$(this).removeClass('text-lb');
+		$(this).addClass('text-pink')},
+		function(){
+			$(this).removeClass('text-pink');
+			$(this).addClass('text-lb')
+		}
+	)
+})
 
 // NOT USED---------------NOT USED---------------NOT USED---------------NOT USED---------------
 // when positon change
