@@ -20,6 +20,15 @@ class LocksController < ApplicationController
   end
 
   def edit
+    # byebug
+    @lock = Lock.find(params[:id])
+  end
+
+  def update
+    # byebug
+    @lock = Lock.find(params[:id])
+    @lock.update(lock_params)
+    redirect_to user_lock_path
   end
 
   def destroy
@@ -44,7 +53,7 @@ class LocksController < ApplicationController
   end
 
   def distance_check
-    radius = 0.02
+    radius = 0.015
     @user = User.find(current_user.id)
     @lock = @user.locks.find_by(tracking: true)
     @distance = Geocoder::Calculations.distance_between([params[:current_lng],params[:current_lat]], [@lock.longitude, @lock.latitude])
@@ -85,7 +94,7 @@ class LocksController < ApplicationController
 
     @lock = Lock.find(params[:toggle_id])
 
-    lock_status = @lock.status 
+    lock_status = @lock.status
 
     # Return will be Open or Closed
     render :json => {status: lock_status}
@@ -95,6 +104,11 @@ class LocksController < ApplicationController
 
     @locks = Lock.where(user_id: params[:user_id])
     lock = Lock.find(params[:toggle_id])
+
+
+    # bypass all if not lock id 1-----------------------------------
+    if lock.id == 1
+    # bypass all if not lock id 1-----------------------------------
 
     if lock.status == "Locked"
 
@@ -113,7 +127,7 @@ class LocksController < ApplicationController
 
 
         Net::SSH.start(host, user, password: password, port: port) do |ssh|
-          
+
             output = ssh.exec!("cd Desktop; python lock_controller.py unlock")
 
             status = output.split
@@ -150,9 +164,9 @@ class LocksController < ApplicationController
         user = ENV['RASPBERRY_PI_USER']
         password = ENV['RASPBERRY_PI_PASSWORD']
         port = ENV['RASPBERRY_PI_PORT']
-        
+
         Net::SSH.start(host, user, password: password, port: port) do |ssh|
-          
+
             output = ssh.exec!("cd Desktop; python lock_controller.py lock")
 
             status = output.split
@@ -177,6 +191,20 @@ class LocksController < ApplicationController
 
       end
     end
+
+
+    # bypass all if not lock id 1-----------------------------------
+    else
+      if lock.status == "Locked"
+        lock.update(status:"Unlocked")
+        render json: { status: "Unlocked", notice: "#{lock.group}'s #{lock.lock_name} has been unlocked" }
+      elsif lock.status == "Unlocked"
+        lock.update(status:"Locked")
+      render json: { status: "Locked", notice: "#{lock.group}'s #{lock.lock_name} has been locked" }
+    end
+  end
+    # bypass all if not lock id 1-----------------------------------
+
   end
 
   def lock_around_the_clock
@@ -217,7 +245,7 @@ class LocksController < ApplicationController
 
   private
   def lock_params
-    params.require(:locks).permit(:lock_name, :location, :group, :longitude, :latitude)
+    params.require(:locks).permit(:id, :user_id, :lock_name, :location, :group, :longitude, :latitude)
   end
 
 end

@@ -18,6 +18,7 @@
    background-size: cover;
    width: 45px;
    height: 70px;
+   font-family: "Oswald";
    /*border-radius: 50%;*/
    cursor: pointer;
  }
@@ -37,7 +38,8 @@
 
 .mapboxgl-popup-content {
   text-align: center;
-  /* font-family: 'Open Sans', sans-serif; */
+  font-family: 'Oswald';
+  text-transform: uppercase;
 	color: black;
 }
 
@@ -94,7 +96,7 @@
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: white;
+  background-color: #323232;
   -webkit-transition: .4s;
   transition: .4s;
 }

@@ -1,2 +1,122 @@
-<h1>Locks#edit</h1>
-<p>Find me in app/views/locks/edit.html.erb</p>
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="div-panel-right">
+
+    <div class="card">
+      <h5 class="card-header bg-black f-header-blue">EDIT YOUR LOCK</h5>
+      <div class="card-body text-body">
+        <%= render partial: '/locks/form_edit_lock'%>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+  <div class="col-md-8">
+
+    <div id='map' class=""></div>
+
+
+</div>
+</div>
+
+
+
+
+
+
+<pre id='coordinates' class='coordinates'></pre>
+<script>
+// initialize map-----------------------------------------------
+mapboxgl.accessToken = 'pk.eyJ1IjoibG9ja25yb2xscy10ZWFtMSIsImEiOiJjam4xM3FvcDYxYnZuM2ttOThyYTc2cjFwIn0.LXhAvekTPkv8HSJvQd-32w';
+var map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: 'mapbox://styles/locknrolls-team1/cjn14k39471xh2rs7lmh6r40x',
+    center: [101.63060418023838, 3.1352744737826583], // starting position
+    zoom: 15 // starting zoom
+});
+
+// load 3D building to map----------------------------------------------------
+map.on('load', function() {
+    // Insert the layer beneath any symbol layer.
+    var layers = map.getStyle().layers;
+
+    var labelLayerId;
+    for (var i = 0; i < layers.length; i++) {
+        if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
+            labelLayerId = layers[i].id;
+            break;
+        }
+    }
+
+    map.addLayer({
+        'id': '3d-buildings',
+        'source': 'composite',
+        'source-layer': 'building',
+        'filter': ['==', 'extrude', 'true'],
+        'type': 'fill-extrusion',
+        'minzoom': 15,
+        'paint': {
+            'fill-extrusion-color': '#aaa',
+
+            // use an 'interpolate' expression to add a smooth transition effect to the
+            // buildings as the user zooms in
+            'fill-extrusion-height': [
+                "interpolate", ["linear"], ["zoom"],
+                15, 0,
+                15.05, ["get", "height"]
+            ],
+            'fill-extrusion-base': [
+                "interpolate", ["linear"], ["zoom"],
+                15, 0,
+                15.05, ["get", "min_height"]
+            ],
+            'fill-extrusion-opacity': .6
+        }
+    }, labelLayerId);
+});
+
+// dragable marker for new lock and enter into hidden params-------------------------------------------
+var coordinates = document.getElementById('coordinates');
+
+var el = document.createElement('div');
+el.className = 'marker-locked';
+var marker = new mapboxgl.Marker(el, {
+  offset: [0, -25],
+    draggable: true
+})
+
+// var marker = new mapboxgl.Marker({
+//
+//     draggable: true
+// })
+
+
+    .setLngLat([101.63060418023838, 3.1352744737826583])
+    .addTo(map);
+
+function onDragEnd() {
+    var lngLat = marker.getLngLat();
+    coordinates.style.display = 'block';
+    $("#longitude_field").val(lngLat.lng);
+    $("#latitude_field").val(lngLat.lat);
+    coordinates.innerHTML = 'Longitude: ' + lngLat.lng + '<br />Latitude: ' + lngLat.lat;
+}
+marker.on('dragend', onDragEnd);
+
+// Add geolocate present location control to the map-----------------------------------
+map.addControl(new mapboxgl.GeolocateControl({
+    positionOptions: {
+        enableHighAccuracy: true
+    },
+    trackUserLocation: true
+}));
+
+// Add Navigation Controller
+map.addControl(new mapboxgl.NavigationControl());
+
+// Add Full screen BUtton
+map.addControl(new mapboxgl.FullscreenControl());
+
+</script>
