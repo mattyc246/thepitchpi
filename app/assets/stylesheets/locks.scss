@@ -195,25 +195,27 @@ min-width: 200px;
 
 // Show Page LOCKED OR UNLOCKED-----------------------------
 .show-status-locked {
-  font-family: "Oswald", sans-serif;
-  font-weight: 300;
-  text-transform: uppercase;
-  font-size: 2.5rem;
-  color: #A6FFFF;
-  margin: auto;
-  margin-bottom: 70px;
+  // font-family: "Oswald", sans-serif;
+  // font-weight: 300;
+  // text-transform: uppercase;
+  font-size: 2.8rem;
+  // color: #A6FFFF;
+  // margin: auto;
+  // margin-left: 1.5vw;
+  // margin-bottom: 70px;
+  margin-top: 3vh;
 }
 
 
-.show-status-unlocked {
-  font-family: "Oswald", sans-serif;
-  font-weight: 300;
-  text-transform: uppercase;
-  font-size: 2.5rem;
-  color: #FF046B;
-  margin: auto;
-  margin-bottom: 70px;
-}
+// .show-status-unlocked {
+//   // font-family: "Oswald", sans-serif;
+//   // font-weight: 300;
+//   // text-transform: uppercase;
+//   // font-size: 2.5rem;
+//   // color: #FF046B;
+//   margin: auto;
+//   margin-bottom: 70px;
+// }
 
 #show-card {
   margin-top: 20px;
