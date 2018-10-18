@@ -16,7 +16,6 @@
 //= require_tree .
 
 
-
 // USER LOCATION AND DISTANCE------------USER LOCATION AND DISTANCE--------------USER LOCATION AND DISTANCE----------------
 
 // detect it is mobile
@@ -61,7 +60,6 @@ $(document).ready(function(){
 			})
 
 }
-
 
 
 // NOT USED---------------NOT USED---------------NOT USED---------------NOT USED---------------

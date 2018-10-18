@@ -85,6 +85,15 @@
   <script>
 
     $(".alert").delay(2000).fadeOut('slow');
+    
+    $('.nav-link').hover(function(){
+      $(this).removeClass('text-lb');
+      $(this).addClass('text-pink')},
+      function(){
+        $(this).removeClass('text-pink');
+        $(this).addClass('text-lb')
+      }
+    )
 
   </script>
 </body>
