@@ -19,11 +19,10 @@ body {
 	margin-top: 100px;
 	color: white;
 	 background: url('backgound_pages.jpg') no-repeat center center fixed;
-    -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
       background-size: cover;
-
 }
 
 #easter-egg{
@@ -193,18 +192,19 @@ body {
 }
 
 @media only screen and (max-width: 425px) {
-	.sign-in {
+  
+  .sign-in {
     width: 80%;
   }
-
+  
   .sign-up {
     width: 80%;
   }
-
+  
 	.w-50 {
-		width: 80%!important;
+    width: 80%!important;
 	}
-
+  
 	.p-3 {
 		padding: 0rem!important;
 
