@@ -180,7 +180,8 @@ geojson.features.forEach(function(marker) {
     if(marker.properties.description == "Locked"){
       el.className = 'marker-locked';
     } else {
-      el.id = 'map_icon';
+      el.className = 'marker-unlocked';
+
     }
 
 
