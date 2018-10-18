@@ -44,7 +44,7 @@
                       <h6 class="btn">Lock around the clock?</h6>
                     <% end %>
                   </div>
-                  
+
               <% end %>
 
 
@@ -64,8 +64,11 @@
 
             </span></small>
             <small>accuracy: <span class = "acc">
-
             </small>
+
+            <div>
+              <a class="btn btn-secondary text-white f-1 form-control w-95 mt-3" href="/users/<%= current_user.id %>/locks/<%= @lock.id %>/edit">EDIT</a>
+            </div>
 
           </div>
       </div>
@@ -117,7 +120,7 @@
 
   $(document).ready(function() {
       $('.slider').click(function(){
-          var slider_id = event.target.id.split('-')[1]    
+          var slider_id = event.target.id.split('-')[1]
 
           $.ajax({
               url: '/locks/toggle_lock',
@@ -171,12 +174,12 @@ geojson.features.forEach(function(marker) {
       var el = document.createElement('div');
       el.className = 'marker-locked';
 
-    // // create a HTML element for each feature
-    // if(marker.properties.description == "Locked"){
-    // } else {
-    //   var el = document.createElement('div');
-    //   el.className = 'marker-unlocked';
-    // }
+    // create a HTML element for each feature
+    if(marker.properties.description == "Locked"){
+    } else {
+      var el = document.createElement('div');
+      el.className = 'marker-unlocked';
+    }
 
 
   // make a marker for each feature and add to the map
@@ -248,7 +251,7 @@ map.addControl(new mapboxgl.GeolocateControl({
 }));
 
 // Add Navigation Controller
-map.addControl(new mapboxgl.NavigationControl(), 'top-left');
+map.addControl(new mapboxgl.NavigationControl());
 
 // Add Full screen BUtton
 map.addControl(new mapboxgl.FullscreenControl());
