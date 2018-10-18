@@ -71,6 +71,12 @@ body {
 
 }
 
+.navbar-toggler {
+
+  background-color: #FF046B!important;
+
+}
+
 #home-view {
 	z-index: 1;
 }
@@ -203,4 +209,11 @@ body {
 		padding: 0rem!important;
 
 	}
+
+  body {
+
+    margin-top: 100px;
+    color: white;
+    background-image: linear-gradient(#7A0266, #310263, #14013A);
+  }
 }
