@@ -16,7 +16,7 @@
 //= require_tree .
 
 
-$(document).load(function(){
+$(document).ready(function(){
 	$('.nav-link').hover(function(){
 		$(this).removeClass('text-lb');
 		$(this).addClass('text-pink')},
