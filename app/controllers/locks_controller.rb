@@ -20,13 +20,12 @@ class LocksController < ApplicationController
   end
 
   def edit
-    # byebug
+
     @lock = Lock.find(params[:id])
 
   end
 
   def update
-    byebug
     @lock = Lock.find(params[:id])
     @lock.update(lock_params)
     redirect_to user_lock_path
