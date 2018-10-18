@@ -130,8 +130,10 @@
 
                   if(data.status == "Locked"){
                       $(`#big-icon`).html('<%= image_tag ("locked_large_color.png"), style:"width: 150px;" %>')
+                      $("#map_icon").removeClass("marker-unlocked").addClass("marker-locked")
                   } else if(data.status == "Unlocked"){
                       $(`#big-icon`).html('<%= image_tag ("unlocked_large_color.png"), style:"width: 150px;" %>')
+                      $("#map_icon").removeClass("marker-locked").addClass("marker-unlocked")
                   }
 
               },
@@ -172,13 +174,13 @@ var geojson = {
 geojson.features.forEach(function(marker) {
 
       var el = document.createElement('div');
-      el.className = 'marker-locked';
+      el.id = 'map_icon';
 
     // create a HTML element for each feature
     if(marker.properties.description == "Locked"){
+      el.className = 'marker-locked';
     } else {
-      var el = document.createElement('div');
-      el.className = 'marker-unlocked';
+      el.id = 'map_icon';
     }
 
 
