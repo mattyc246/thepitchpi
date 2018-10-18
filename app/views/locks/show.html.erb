@@ -24,11 +24,13 @@
 
           </div>
           </div>
-          <div class ="show-status-locked text-uppercase f-1">
+          <div class ="show-status-locked text-uppercase f-1 mx-auto">
 
               <% if @lock.status == "Unlocked" %>
-                  <p class="text-pink">Unlocked</p>
-                  <div id="latc">
+              <div class="mx-auto">
+                  <div class="text-pink showpage-status">Unlocked</div>
+                  </div>
+                  <div id="latc" class="mx-auto">
                     <% if @lock.tracking == true %>
                       <%= image_tag 'lock_around_clock_pink.png', style:"width: 10rem;" %>
                     <% elsif @lock.tracking == false %>
@@ -36,8 +38,10 @@
                     <% end %>
                   </div>
               <% elsif @lock.status == "Locked" %>
-                  <p class="text-lb">Lock On!</p>
-                  <div id="latc">
+              <div class="mx-auto">
+                  <p class="text-lb showpage-status">Lock On!</p>
+                </div>
+                  <div id="latc" class="mx-auto">
                     <% if @lock.tracking == true %>
                       <%= image_tag 'lock_around_clock_pink.png', style:"width: 10rem;" %>
                     <% elsif @lock.tracking == false %>
@@ -131,9 +135,11 @@
                   if(data.status == "Locked"){
                       $(`#big-icon`).html('<%= image_tag ("locked_large_color.png"), style:"width: 150px;" %>')
                       $("#map_icon").removeClass("marker-unlocked").addClass("marker-locked")
+                      $(".showpage-status").html("Lock On!").removeClass("text-pink").addClass("text-lb")
                   } else if(data.status == "Unlocked"){
                       $(`#big-icon`).html('<%= image_tag ("unlocked_large_color.png"), style:"width: 150px;" %>')
                       $("#map_icon").removeClass("marker-locked").addClass("marker-unlocked")
+                      $(".showpage-status").html("Unlocked").removeClass("text-lb").addClass("text-pink")
                   }
 
               },
@@ -268,7 +274,7 @@ $('#latc').click(function(){
     data: { lock_id: lock },
     success: function(data){
       if(data.tracking_set == true){
-        $('#latc').html('<%= image_tag 'lock_around_clock_pink.png', style:"width: 10rem;" %>')
+        $('#latc').html('<%= image_tag 'lock_around_clock_pink.png', style:"height: 4rem;" %>')
       } else if(data.tracking_set == false){
         $('#latc').html('<h6 class="btn">Lock around the clock?</h6>')
       }
