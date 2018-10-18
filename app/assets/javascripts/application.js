@@ -16,17 +16,6 @@
 //= require_tree .
 
 
-$(document).ready(function(){
-	$('.nav-link').hover(function(){
-		$(this).removeClass('text-lb');
-		$(this).addClass('text-pink')},
-		function(){
-			$(this).removeClass('text-pink');
-			$(this).addClass('text-lb')
-		}
-	)
-})
-
 // USER LOCATION AND DISTANCE------------USER LOCATION AND DISTANCE--------------USER LOCATION AND DISTANCE----------------
 
 // detect it is mobile
