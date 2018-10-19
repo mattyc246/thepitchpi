@@ -3,7 +3,7 @@
     <div class="col-md-4">
 
       <div class = "div-panel-right">
-        <div class ="d-flex">
+        <div id="lock-status-container" class ="d-flex">
           <div class="show-icon">
             <div class = "show-toggle">
               <!-- Rounded switch -->
@@ -24,7 +24,7 @@
 
           </div>
           </div>
-          <div class ="show-status-locked text-uppercase f-1 my-auto">
+          <div class ="show-status-locked text-uppercase f-1 my-auto mx-auto">
 
               <% if @lock.status == "Unlocked" %>
               <div class="">
