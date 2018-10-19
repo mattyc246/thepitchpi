@@ -66,10 +66,29 @@ class LocksController < ApplicationController
                 Twilio::REST::Client.new.messages.create({
                 from: ENV['twilio_phone_number'],
                 to: '+60102362993',
-                body: "Your #{@lock.group}, #{@lock.lock_name}, is UNLOCKED and you are more than 150 meters way. Lock it? https://locknroll.herokuapp.com/users/#{@lock.user_id}/locks/#{@lock.id}"
+                body: "Your #{@lock.group}, #{@lock.lock_name}, is UNLOCKED and you are more than 150 meters way. We have locked it for you!"
                 })
 
                 @user.update(in_range: false)
+
+                Net::SSH.start(host, user, password: password, port: port) do |ssh|
+
+                    output = ssh.exec!("cd Desktop; python lock_controller.py lock")
+
+                    status = output.split
+
+                    if status[0].to_s == "Locked"
+
+                      render json: { status: lock.status, notice: "#{lock.group}'s #{lock.lock_name} has been locked" }
+
+                    else
+
+                      render json: { status: lock.status, notice: "#{lock.group}'s #{lock.lock_name} has been left open! Close the door!" }
+
+                    end
+
+
+                end
             end
           else
             if @distance < radius
