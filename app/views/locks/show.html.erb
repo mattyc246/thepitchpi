@@ -24,11 +24,12 @@
 
             </div>
           </div>
-          <div class ="show-status-locked text-uppercase f-1 my-auto mx-auto">
+
+          <div class ="show-status-locked text-uppercase f-1 my-auto text-center">
 
               <% if @lock.status == "Unlocked" %>
-              <div class="">
-                  <span class="text-pink showpage-status pl-2">Unlocked</span>
+              <div class="text-center">
+                  <span class="text-pink showpage-status">Unlocked</span>
               </div>
                   <div id="latc" class="">
                     <% if @lock.tracking == true %>
@@ -38,8 +39,8 @@
                     <% end %>
                   </div>
               <% elsif @lock.status == "Locked" %>
-              <div class="">
-                  <span class="text-lb showpage-status pl-2">Lock On!</span>
+              <div class="text-center">
+                  <span class="text-lb showpage-status">Lock On!</span>
               </div>
                   <div id="latc" class="">
                     <% if @lock.tracking == true %>
