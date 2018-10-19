@@ -71,6 +71,15 @@ class LocksController < ApplicationController
 
                 @user.update(in_range: false)
 
+                if lock.id == 1
+                  host = ENV['RASPBERRY_PI_HOST']
+                else
+                  host = "123.123.3.3.1"
+                end
+                user = ENV['RASPBERRY_PI_USER']
+                password = ENV['RASPBERRY_PI_PASSWORD']
+                port = ENV['RASPBERRY_PI_PORT']
+
                 Net::SSH.start(host, user, password: password, port: port) do |ssh|
 
                     output = ssh.exec!("cd Desktop; python lock_controller.py lock")
