@@ -3,8 +3,8 @@
     <div class="col-md-4">
 
       <div class = "div-panel-right">
-        <div class ="d-flex">
-          <div class="show-icon ml-3">
+        <div id="lock-status-container" class ="d-flex">
+          <div class="show-icon">
             <div class = "show-toggle">
               <!-- Rounded switch -->
               <label class="switch" id="lock_status">
@@ -24,13 +24,13 @@
 
           </div>
           </div>
-          <div class ="show-status-locked text-uppercase f-1 mx-auto">
+          <div class ="show-status-locked text-uppercase f-1 my-auto mx-auto">
 
               <% if @lock.status == "Unlocked" %>
-              <div class="mx-auto">
-                  <div class="text-pink showpage-status">Unlocked</div>
-                  </div>
-                  <div id="latc" class="mx-auto">
+              <div class="">
+                  <p class="text-pink showpage-status pl-2">Unlocked</div>
+              </div>
+                  <div id="latc" class="">
                     <% if @lock.tracking == true %>
                       <%= image_tag 'lock_around_clock_pink.png', style:"width: 10rem;" %>
                     <% elsif @lock.tracking == false %>
@@ -38,10 +38,10 @@
                     <% end %>
                   </div>
               <% elsif @lock.status == "Locked" %>
-              <div class="mx-auto">
-                  <p class="text-lb showpage-status">Lock On!</p>
-                </div>
-                  <div id="latc" class="mx-auto">
+              <div class="">
+                  <p class="text-lb showpage-status pl-2">Lock On!</p>
+              </div>
+                  <div id="latc" class="">
                     <% if @lock.tracking == true %>
                       <%= image_tag 'lock_around_clock_pink.png', style:"width: 10rem;" %>
                     <% elsif @lock.tracking == false %>

@@ -2,17 +2,19 @@
 
     <div class="text-field text-left m-2">
       <%= form.label :Name, class:"f-2 text-dark"%>
-      <%= form.text_field :lock_name, placeholder:"FRONT DOOR", class:"form-control w-95 mx-left f-3"%>
+      <%= form.text_field :lock_name,value: @lock.lock_name, placeholder:@lock.lock_name, class:"form-control w-95 mx-left f-3"%>
     </div>
 
 
-    <%= form.hidden_field :location %>
+    <!-- <%= form.hidden_field :location %> -->
 
 
     <div class="text-field text-left m-2">
     <%= form.label :group %>
-    <%= form.text_field :group, placeholder:"HOME", class:"form-control w-95 mx-left f-3" %>
+    <%= form.text_field :group,value: @lock.group, placeholder:@lock.group, class:"form-control w-95 mx-left f-3" %>
     </div>
+
+
 
     <!-- <div class="drop-down text-left m-2 f-1">
     <label for="tracking">Rock Around the Clock!</label>

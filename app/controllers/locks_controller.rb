@@ -20,12 +20,12 @@ class LocksController < ApplicationController
   end
 
   def edit
-    # byebug
+
     @lock = Lock.find(params[:id])
+
   end
 
   def update
-    # byebug
     @lock = Lock.find(params[:id])
     @lock.update(lock_params)
     redirect_to user_lock_path
@@ -66,10 +66,38 @@ class LocksController < ApplicationController
                 Twilio::REST::Client.new.messages.create({
                 from: ENV['twilio_phone_number'],
                 to: '+60102362993',
-                body: "Your #{@lock.group}, #{@lock.lock_name}, is UNLOCKED and you are more than 150 meters way. Lock it? https://locknroll.herokuapp.com/users/#{@lock.user_id}/locks/#{@lock.id}"
+                body: "Your #{@lock.group}, #{@lock.lock_name}, is UNLOCKED and you are more than 150 meters way. We have locked it for you! https://locknroll.herokuapp.com/users/#{@lock.user_id}/locks/#{@lock.id}"
                 })
 
                 @user.update(in_range: false)
+
+                if @lock.id == 1
+                  host = ENV['RASPBERRY_PI_HOST']
+                else
+                  host = "123.123.3.3.1"
+                end
+                user = ENV['RASPBERRY_PI_USER']
+                password = ENV['RASPBERRY_PI_PASSWORD']
+                port = ENV['RASPBERRY_PI_PORT']
+
+                Net::SSH.start(host, user, password: password, port: port) do |ssh|
+
+                    output = ssh.exec!("cd Desktop; python lock_controller.py lock")
+
+                    status = output.split
+
+                    if status[0].to_s == "Locked"
+
+                      render json: { status: @lock.status, notice: "#{lock.group}'s #{lock.lock_name} has been locked" }
+
+                    else
+
+                      render json: { status: @lock.status, notice: "#{lock.group}'s #{lock.lock_name} has been left open! Close the door!" }
+
+                    end
+
+
+                end
             end
           else
             if @distance < radius
