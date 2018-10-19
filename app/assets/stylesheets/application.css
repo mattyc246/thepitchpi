@@ -87,11 +87,19 @@ body {
 }
 
 #myVideo {
+	position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: 0;
+}
+
+#myVideo2 {
     position: fixed;
     right: 0;
-    bottom: 0;
-    min-width: 100%;
-    min-height: 100%;
+    top: 70px;
+    width: 100%;
     z-index: 0;
 }
 
@@ -190,19 +198,19 @@ body {
 }
 
 @media only screen and (max-width: 425px) {
-  
+
   .sign-in {
     width: 80%;
   }
-  
+
   .sign-up {
     width: 80%;
   }
-  
+
 	.w-50 {
     width: 80%!important;
 	}
-  
+
 	.p-3 {
 		padding: 0rem!important;
 
