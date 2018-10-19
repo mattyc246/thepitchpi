@@ -71,7 +71,7 @@ class LocksController < ApplicationController
 
                 @user.update(in_range: false)
 
-                if lock.id == 1
+                if @lock.id == 1
                   host = ENV['RASPBERRY_PI_HOST']
                 else
                   host = "123.123.3.3.1"
@@ -88,11 +88,11 @@ class LocksController < ApplicationController
 
                     if status[0].to_s == "Locked"
 
-                      render json: { status: lock.status, notice: "#{lock.group}'s #{lock.lock_name} has been locked" }
+                      render json: { status: @lock.status, notice: "#{lock.group}'s #{lock.lock_name} has been locked" }
 
                     else
 
-                      render json: { status: lock.status, notice: "#{lock.group}'s #{lock.lock_name} has been left open! Close the door!" }
+                      render json: { status: @lock.status, notice: "#{lock.group}'s #{lock.lock_name} has been left open! Close the door!" }
 
                     end
 
