@@ -87,7 +87,7 @@ class LocksController < ApplicationController
                     status = output.split
 
                     if status[0].to_s == "Locked"
-
+                      @lock.update(status: "Locked")
                       render json: { status: @lock.status, notice: "#{lock.group}'s #{lock.lock_name} has been locked" }
 
                     else
