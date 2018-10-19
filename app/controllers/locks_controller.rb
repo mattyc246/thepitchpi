@@ -66,7 +66,7 @@ class LocksController < ApplicationController
                 Twilio::REST::Client.new.messages.create({
                 from: ENV['twilio_phone_number'],
                 to: '+60102362993',
-                body: "Your #{@lock.group}, #{@lock.lock_name}, is UNLOCKED and you are more than 150 meters way. We have locked it for you!"
+                body: "Your #{@lock.group}, #{@lock.lock_name}, is UNLOCKED and you are more than 150 meters way. We have locked it for you! https://locknroll.herokuapp.com/users/#{@lock.user_id}/locks/#{@lock.id}"
                 })
 
                 @user.update(in_range: false)
