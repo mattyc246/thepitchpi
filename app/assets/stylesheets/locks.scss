@@ -12,6 +12,14 @@
   border: 1px solid black;
  }
 
+ #map-menu {
+     position: absolute;
+     background: black;
+     bottom: 20px;
+     right: 20px;
+     padding: 0px;
+ }
+
  /* lock map css */
  .marker-locked {
    background-image: url('locked_map.png');

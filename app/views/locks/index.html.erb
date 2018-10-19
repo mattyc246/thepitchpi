@@ -67,6 +67,13 @@
             <div id='map' class="lock-page-map"></div>
         </div>
     </div>
+    <div id='map-menu'>
+      <input id='locknrolls-team1/cjn14k39471xh2rs7lmh6r40x' type='radio' name='rtoggle' value='basic' checked='checked'>
+      <label for='basic'>normal</label>
+
+      <input id='mapbox/satellite-v9' type='radio' name='rtoggle' value='satellite'>
+      <label for='satellite'>satellite</label>
+    </div>
 </div>
 
 <script>
@@ -118,6 +125,22 @@ var map = new mapboxgl.Map({
     zoom: 15 // starting zoom
 
 });
+
+
+
+// satellite map---------------------------------------------
+var layerList = document.getElementById('map-menu');
+var inputs = layerList.getElementsByTagName('input');
+
+function switchLayer(layer) {
+    var layerId = layer.target.id;
+    map.setStyle('mapbox://styles/' + layerId);
+}
+
+for (var i = 0; i < inputs.length; i++) {
+    inputs[i].onclick = switchLayer;
+}
+
 
 // load 3D building to map----------------------------------------------------
 map.on('load', function() {
@@ -242,7 +265,7 @@ $(".flygroup").click(function(e) {
             [data.lngmin, data.latmin]
           ];
           map.fitBounds(bbox, {
-            padding: {top: 200, bottom:200, left: 200, right: 200}
+            padding: {top: 150, bottom:150, left: 150, right: 150}
           });
       },
       error: function(error) {
