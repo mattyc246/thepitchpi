@@ -22,13 +22,14 @@
                       <%= image_tag ("locked_large_color.png"), style:"width: 150px;" %>
                   <% end %>
 
+            </div>
           </div>
-          </div>
-          <div class ="show-status-locked text-uppercase f-1 my-auto mx-auto">
+
+          <div class ="show-status-locked text-uppercase f-1 my-auto text-center">
 
               <% if @lock.status == "Unlocked" %>
-              <div class="">
-                  <p class="text-pink showpage-status pl-2">Unlocked</div>
+              <div class="text-center">
+                  <span class="text-pink showpage-status">Unlocked</span>
               </div>
                   <div id="latc" class="">
                     <% if @lock.tracking == true %>
@@ -38,14 +39,14 @@
                     <% end %>
                   </div>
               <% elsif @lock.status == "Locked" %>
-              <div class="">
-                  <p class="text-lb showpage-status pl-2">Lock On!</p>
+              <div class="text-center">
+                  <span class="text-lb showpage-status">Lock On!</span>
               </div>
                   <div id="latc" class="">
                     <% if @lock.tracking == true %>
                       <%= image_tag 'lock_around_clock_pink.png', style:"width: 10rem;" %>
                     <% elsif @lock.tracking == false %>
-                      <h6 class="btn">Lock around the clock?</h6>
+                      <span class="btn">Lock around the clock?</span>
                     <% end %>
                   </div>
 
